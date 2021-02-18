@@ -48,10 +48,26 @@ class Profile : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
 
-        view.findViewById<ImageView>(R.id.imageView2).setOnClickListener {
-
+        view.findViewById<ImageView>(R.id.profile_image1).setOnClickListener {
             (activity as MainActivity).makeCurrentFragment(Playlist())
-
+        }
+        view.findViewById<ImageView>(R.id.profile_image2).setOnClickListener {
+            (activity as MainActivity).makeCurrentFragment(Playlist())
+        }
+        view.findViewById<ImageView>(R.id.profile_image3).setOnClickListener {
+            (activity as MainActivity).makeCurrentFragment(Playlist())
+        }
+        view.findViewById<ImageView>(R.id.profile_image4).setOnClickListener {
+            (activity as MainActivity).makeCurrentFragment(Playlist())
+        }
+        view.findViewById<ImageView>(R.id.profile_image5).setOnClickListener {
+            (activity as MainActivity).makeCurrentFragment(Playlist())
+        }
+        view.findViewById<ImageView>(R.id.profile_image6).setOnClickListener {
+            (activity as MainActivity).makeCurrentFragment(Playlist())
+        }
+        view.findViewById<ImageView>(R.id.profile_image7).setOnClickListener {
+            (activity as MainActivity).makeCurrentFragment(Playlist())
         }
     }
 

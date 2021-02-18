@@ -5,6 +5,8 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
+import com.example.myapplication.MainActivity
 import com.example.myapplication.R
 
 // TODO: Rename parameter arguments, choose names that match
@@ -36,6 +38,48 @@ class Homepage : Fragment() {
     ): View? {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_homepage, container, false)
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        view.findViewById<ImageView>(R.id.home_image5).setOnClickListener {
+            (activity as MainActivity).makeCurrentFragment(Playlist())
+        }
+        view.findViewById<ImageView>(R.id.home_image6).setOnClickListener {
+            (activity as MainActivity).makeCurrentFragment(Playlist())
+        }
+        view.findViewById<ImageView>(R.id.home_image7).setOnClickListener {
+            (activity as MainActivity).makeCurrentFragment(Playlist())
+        }
+        view.findViewById<ImageView>(R.id.home_image8).setOnClickListener {
+            (activity as MainActivity).makeCurrentFragment(Playlist())
+        }
+
+        view.findViewById<ImageView>(R.id.home_image1).setOnClickListener {
+            (activity as MainActivity).makeCurrentFragment(Playing_now())
+        }
+        view.findViewById<ImageView>(R.id.home_image2).setOnClickListener {
+            (activity as MainActivity).makeCurrentFragment(Playing_now())
+        }
+        view.findViewById<ImageView>(R.id.home_image3).setOnClickListener {
+            (activity as MainActivity).makeCurrentFragment(Playing_now())
+        }
+        view.findViewById<ImageView>(R.id.home_image4).setOnClickListener {
+            (activity as MainActivity).makeCurrentFragment(Playing_now())
+        }
+        view.findViewById<ImageView>(R.id.home_image9).setOnClickListener {
+            (activity as MainActivity).makeCurrentFragment(Playing_now())
+        }
+        view.findViewById<ImageView>(R.id.home_image10).setOnClickListener {
+            (activity as MainActivity).makeCurrentFragment(Playing_now())
+        }
+        view.findViewById<ImageView>(R.id.home_image11).setOnClickListener {
+            (activity as MainActivity).makeCurrentFragment(Playing_now())
+        }
+        view.findViewById<ImageView>(R.id.home_image12).setOnClickListener {
+            (activity as MainActivity).makeCurrentFragment(Playing_now())
+        }
     }
 
     companion object {

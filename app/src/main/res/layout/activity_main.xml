@@ -19,7 +19,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="300dp"
         android:layout_marginLeft="300dp"
-        android:layout_marginTop="40dp"
+        android:layout_marginTop="20dp"
         android:text="Feel me"
         android:textColor="#FAF6F6"
         android:textColorHighlight="@color/white"

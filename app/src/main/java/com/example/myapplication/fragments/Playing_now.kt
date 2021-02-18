@@ -1,10 +1,11 @@
 package com.example.myapplication.fragments
 
 import android.os.Bundle
+import android.view.*
+import android.widget.Toast
+import androidx.core.view.GestureDetectorCompat
 import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import com.example.myapplication.MainActivity
 import com.example.myapplication.R
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -16,7 +17,11 @@ private const val ARG_PARAM2 = "param2"
  * Use the [Playing_now.newInstance] factory method to
  * create an instance of this fragment.
  */
+
+
 class Playing_now : Fragment() {
+
+    lateinit var detector: GestureDetectorCompat
     // TODO: Rename and change types of parameters
     private var param1: String? = null
     private var param2: String? = null
@@ -32,7 +37,13 @@ class Playing_now : Fragment() {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
         // Inflate the layout for this fragment
+        detector = GestureDetectorCompat(activity as MainActivity, GestureListener())
         return inflater.inflate(R.layout.fragment_playing_now, container, false)
+    }
+
+
+    public fun onTouchEvent(event: MotionEvent?): Boolean {
+        return detector.onTouchEvent(event)
     }
 
     companion object {
@@ -53,4 +64,77 @@ class Playing_now : Fragment() {
                     }
                 }
     }
+
+    inner class GestureListener : GestureDetector.SimpleOnGestureListener(){
+
+        private val SWIPE_THESHOLD = 100
+        private val SWIPE_VELOVITY_THRESHOLD = 100
+
+        override fun onFling(
+                downEvent: MotionEvent?,
+                moveEvent: MotionEvent?,
+                velocityX: Float,
+                velocityY: Float
+        ): Boolean {
+
+            var diffX=moveEvent?.x?.minus(downEvent!!.x) ?: 0.0F
+            var diffY=moveEvent?.y?.minus(downEvent!!.y) ?: 0.0F
+
+            return if (Math.abs(diffX)>Math.abs(diffY)){
+                //left or right swipe
+                if (Math.abs(diffX)>SWIPE_THESHOLD && Math.abs(velocityX)>SWIPE_VELOVITY_THRESHOLD){
+                    if (diffX>0) {
+                        //right swipe
+                        this@Playing_now.onSwipeRight()
+                    }
+                    else {
+                        //right swipe
+                        this@Playing_now.onSwipeLeft()
+                    }
+                    true
+                }
+                else {
+                    super.onFling(downEvent, moveEvent, velocityX, velocityY)
+                }
+            }
+            else{
+                //up or down swipe
+                if (Math.abs(diffY)>SWIPE_THESHOLD && Math.abs(velocityY)>SWIPE_VELOVITY_THRESHOLD){
+                    if (diffY>0) {
+                        //swipe down
+                        this@Playing_now.onSwipeTop()
+                    }
+                    else {
+                        //swipe up
+                        this@Playing_now.onSwipeBottom()
+                    }
+                    true
+                }
+                else {
+                    super.onFling(downEvent, moveEvent, velocityX, velocityY)
+                }
+
+            }
+
+
+        }
+    }
+    private fun onSwipeBottom() {
+        Toast.makeText(activity as MainActivity, "Bottom swipe", Toast.LENGTH_LONG).show()
+        (activity as MainActivity).makeCurrentFragment(Playlist())
+    }
+
+    private fun onSwipeTop() {
+        Toast.makeText(activity as MainActivity, "Top swipe", Toast.LENGTH_LONG).show()
+    }
+
+    private fun onSwipeLeft() {
+        Toast.makeText(activity as MainActivity, "Left swipe", Toast.LENGTH_LONG).show()
+    }
+
+    private fun onSwipeRight() {
+        Toast.makeText(activity as MainActivity, "Right swipe", Toast.LENGTH_LONG).show()
+    }
+
+
 }
