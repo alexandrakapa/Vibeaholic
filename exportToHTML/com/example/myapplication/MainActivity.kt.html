@@ -1,0 +1,160 @@
+<html>
+<head>
+<title>MainActivity.kt</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.s0 { color: #cc7832;}
+.s1 { color: #a9b7c6;}
+.s2 { color: #6897bb;}
+.s3 { color: #808080;}
+.s4 { color: #6a8759;}
+</style>
+</head>
+<body bgcolor="#2b2b2b">
+<table CELLSPACING=0 CELLPADDING=5 COLS=1 WIDTH="100%" BGCOLOR="#606060" >
+<tr><td><center>
+<font face="Arial, Helvetica" color="#000000">
+MainActivity.kt</font>
+</center></td></tr></table>
+<pre><span class="s0">package </span><span class="s1">com.example.myapplication</span>
+
+<span class="s1">import android.os.Bundle</span>
+<span class="s1">import android.view.GestureDetector</span>
+<span class="s1">import com.google.android.material.floatingactionbutton.FloatingActionButton</span>
+<span class="s1">import com.google.android.material.snackbar.Snackbar</span>
+<span class="s1">import androidx.appcompat.app.AppCompatActivity</span>
+<span class="s1">import android.view.Menu</span>
+<span class="s1">import android.view.MenuItem</span>
+<span class="s1">import android.view.MotionEvent</span>
+<span class="s1">import android.widget.Toast</span>
+<span class="s1">import androidx.core.view.GestureDetectorCompat</span>
+<span class="s1">import androidx.fragment.app.Fragment</span>
+<span class="s1">import com.example.myapplication.fragments.*</span>
+<span class="s1">import kotlinx.android.synthetic.main.activity_main.*</span>
+
+
+<span class="s0">class </span><span class="s1">MainActivity : AppCompatActivity() {</span>
+
+
+    <span class="s1">private lateinit </span><span class="s0">var </span><span class="s1">detector: GestureDetectorCompat</span>
+
+    <span class="s1">override </span><span class="s0">fun </span><span class="s1">onCreate(savedInstanceState: Bundle?) {</span>
+        <span class="s0">super</span><span class="s1">.onCreate(savedInstanceState)</span>
+        <span class="s1">setContentView(R.layout.activity_main)</span>
+
+        <span class="s0">val </span><span class="s1">homepage=Homepage()</span>
+        <span class="s0">val </span><span class="s1">search=Search()</span>
+        <span class="s0">val </span><span class="s1">playing=Playing_now()</span>
+        <span class="s0">val </span><span class="s1">profile=Profile()</span>
+        <span class="s0">val </span><span class="s1">dj=DJ()</span>
+
+        <span class="s1">makeCurrentFragment(homepage)</span>
+
+
+        <span class="s1">bottom_navigation.setOnNavigationItemSelectedListener {</span>
+            <span class="s0">when </span><span class="s1">(it.itemId){</span>
+                <span class="s1">R.id.ic_home -&gt; makeCurrentFragment(homepage)</span>
+                <span class="s1">R.id.ic_search -&gt; makeCurrentFragment(search)</span>
+                <span class="s1">R.id.ic_play_now -&gt; makeCurrentFragment(playing)</span>
+                <span class="s1">R.id.ic_profile -&gt; makeCurrentFragment(profile)</span>
+                <span class="s1">R.id.ic_dj-&gt;makeCurrentFragment(dj)</span>
+
+            <span class="s1">}</span>
+            <span class="s0">true</span>
+        <span class="s1">}</span>
+
+    <span class="s1">detector = GestureDetectorCompat(</span><span class="s0">this, </span><span class="s1">GestureListener())</span>
+
+    <span class="s1">}</span>
+
+    <span class="s1">override </span><span class="s0">fun </span><span class="s1">onTouchEvent(event: MotionEvent?): Boolean {</span>
+        <span class="s0">return if </span><span class="s1">(detector.onTouchEvent(event)){</span>
+            <span class="s0">true</span>
+        <span class="s1">}</span>
+        <span class="s0">else </span><span class="s1">{</span>
+            <span class="s0">super</span><span class="s1">.onTouchEvent(event)</span>
+        <span class="s1">}</span>
+    <span class="s1">}</span>
+
+     <span class="s0">fun </span><span class="s1">makeCurrentFragment(fragment: Fragment) =</span>
+        <span class="s1">supportFragmentManager.beginTransaction().apply {</span>
+            <span class="s1">replace(R.id.fl_wrapper</span><span class="s0">, </span><span class="s1">fragment)</span>
+            <span class="s1">commit()</span>
+        <span class="s1">}</span>
+
+    <span class="s1">inner </span><span class="s0">class </span><span class="s1">GestureListener : GestureDetector.SimpleOnGestureListener(){</span>
+
+        <span class="s1">private </span><span class="s0">val </span><span class="s1">SWIPE_THESHOLD = </span><span class="s2">100</span>
+        <span class="s1">private </span><span class="s0">val </span><span class="s1">SWIPE_VELOVITY_THRESHOLD = </span><span class="s2">100</span>
+
+        <span class="s1">override </span><span class="s0">fun </span><span class="s1">onFling(</span>
+            <span class="s1">downEvent: MotionEvent?</span><span class="s0">,</span>
+            <span class="s1">moveEvent: MotionEvent?</span><span class="s0">,</span>
+            <span class="s1">velocityX: Float</span><span class="s0">,</span>
+            <span class="s1">velocityY: Float</span>
+        <span class="s1">): Boolean {</span>
+
+            <span class="s0">var </span><span class="s1">diffX=moveEvent?.x?.minus(downEvent!!.x) ?: </span><span class="s2">0.0F</span>
+            <span class="s0">var </span><span class="s1">diffY=moveEvent?.y?.minus(downEvent!!.y) ?: </span><span class="s2">0.0F</span>
+
+           <span class="s0">return if </span><span class="s1">(Math.abs(diffX)&gt;Math.abs(diffY)){</span>
+               <span class="s3">//left or right swipe</span>
+                <span class="s0">if </span><span class="s1">(Math.abs(diffX)&gt;SWIPE_THESHOLD &amp;&amp; Math.abs(velocityX)&gt;SWIPE_VELOVITY_THRESHOLD){</span>
+                    <span class="s0">if </span><span class="s1">(diffX&gt;</span><span class="s2">0</span><span class="s1">) {</span>
+                        <span class="s3">//right swipe</span>
+                        <span class="s0">this</span><span class="s1">@MainActivity.onSwipeRight()</span>
+                    <span class="s1">}</span>
+                    <span class="s0">else </span><span class="s1">{</span>
+                        <span class="s3">//right swipe</span>
+                        <span class="s0">this</span><span class="s1">@MainActivity.onSwipeLeft()</span>
+                    <span class="s1">}</span>
+                    <span class="s0">true</span>
+                <span class="s1">}</span>
+                <span class="s0">else </span><span class="s1">{</span>
+                    <span class="s0">super</span><span class="s1">.onFling(downEvent</span><span class="s0">, </span><span class="s1">moveEvent</span><span class="s0">, </span><span class="s1">velocityX</span><span class="s0">, </span><span class="s1">velocityY)</span>
+                <span class="s1">}</span>
+            <span class="s1">}</span>
+            <span class="s0">else</span><span class="s1">{</span>
+                <span class="s3">//up or down swipe</span>
+                <span class="s0">if </span><span class="s1">(Math.abs(diffY)&gt;SWIPE_THESHOLD &amp;&amp; Math.abs(velocityY)&gt;SWIPE_VELOVITY_THRESHOLD){</span>
+                    <span class="s0">if </span><span class="s1">(diffY&gt;</span><span class="s2">0</span><span class="s1">) {</span>
+                        <span class="s3">//swipe down</span>
+                        <span class="s0">this</span><span class="s1">@MainActivity.onSwipeTop()</span>
+                    <span class="s1">}</span>
+                    <span class="s0">else </span><span class="s1">{</span>
+                        <span class="s3">//swipe up</span>
+                        <span class="s0">this</span><span class="s1">@MainActivity.onSwipeBottom()</span>
+                    <span class="s1">}</span>
+                    <span class="s0">true</span>
+                <span class="s1">}</span>
+                <span class="s0">else </span><span class="s1">{</span>
+                    <span class="s0">super</span><span class="s1">.onFling(downEvent</span><span class="s0">, </span><span class="s1">moveEvent</span><span class="s0">, </span><span class="s1">velocityX</span><span class="s0">, </span><span class="s1">velocityY)</span>
+                <span class="s1">}</span>
+
+            <span class="s1">}</span>
+
+
+        <span class="s1">}</span>
+    <span class="s1">}</span>
+
+
+    <span class="s1">private </span><span class="s0">fun </span><span class="s1">onSwipeBottom() {</span>
+        <span class="s1">Toast.makeText(</span><span class="s0">this, </span><span class="s4">&quot;Bottom swipe&quot;</span><span class="s0">, </span><span class="s1">Toast.LENGTH_LONG).show()</span>
+
+    <span class="s1">}</span>
+
+    <span class="s1">private </span><span class="s0">fun </span><span class="s1">onSwipeTop() {</span>
+        <span class="s1">Toast.makeText(</span><span class="s0">this, </span><span class="s4">&quot;Top swipe&quot;</span><span class="s0">, </span><span class="s1">Toast.LENGTH_LONG).show()</span>
+    <span class="s1">}</span>
+
+    <span class="s1">private </span><span class="s0">fun </span><span class="s1">onSwipeLeft() {</span>
+        <span class="s1">Toast.makeText(</span><span class="s0">this, </span><span class="s4">&quot;Left swipe&quot;</span><span class="s0">, </span><span class="s1">Toast.LENGTH_LONG).show()</span>
+    <span class="s1">}</span>
+
+    <span class="s1">private </span><span class="s0">fun </span><span class="s1">onSwipeRight() {</span>
+        <span class="s1">Toast.makeText(</span><span class="s0">this, </span><span class="s4">&quot;Right swipe&quot;</span><span class="s0">, </span><span class="s1">Toast.LENGTH_LONG).show()</span>
+    <span class="s1">}</span>
+
+<span class="s1">}</span></pre>
+</body>
+</html>

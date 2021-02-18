@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/Homepage">
+
+    <fragment
+        android:id="@+id/Homepage"
+        android:name="com.example.myapplication.fragments.Homepage"
+        android:label="@string/first_fragment_label"
+        tools:layout="@layout/fragment_homepage">
+
+        <action
+            android:id="@+id/action_FirstFragment_to_SecondFragment"
+            app:destination="@id/Playing_now" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/Playing_now"
+        android:name="com.example.myapplication.fragments.Playing_now"
+        android:label="Playing_now"
+        tools:layout="@layout/fragment_playing_now">
+
+        <action
+            android:id="@+id/action_SecondFragment_to_FirstFragment"
+            app:destination="@id/Homepage" />
+
+
+    </fragment>
+
+    <fragment
+        android:id="@+id/search"
+        android:name="com.example.myapplication.fragments.Search"
+        android:label="fragment_search"
+        tools:layout="@layout/fragment_search" />
+
+    <fragment
+        android:id="@+id/profile"
+        android:name="com.example.myapplication.fragments.Profile"
+        android:label="fragment_profile"
+        tools:layout="@layout/fragment_profile">
+    <action
+        android:id="@+id/action_Profile_to_Playlist"
+        app:destination="@id/playlist" />
+
+    </fragment>
+
+    <fragment
+        android:id="@+id/playlist"
+        android:name="com.example.myapplication.fragments.Playlist"
+        android:label="fragment_playlist"
+        tools:layout="@layout/fragment_playlist" />
+
+
+</navigation>

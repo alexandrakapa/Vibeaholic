@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/black"
+    tools:context=".MainActivity">
+
+    <FrameLayout
+        android:id="@+id/fl_wrapper"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+
+
+        <ImageView
+            android:id="@+id/imageView"
+            android:layout_width="322dp"
+            android:layout_height="294dp"
+            android:layout_marginStart="50dp"
+            android:layout_marginLeft="50dp"
+            android:layout_marginTop="90dp"
+            app:srcCompat="@android:drawable/gallery_thumb"
+            tools:src="@tools:sample/backgrounds/scenic" />
+
+        <ProgressBar
+            android:id="@+id/progressBar"
+            style="?android:attr/progressBarStyleHorizontal"
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="60dp"
+            android:layout_marginLeft="60dp"
+            android:layout_marginTop="520dp"
+            android:progressDrawable="@android:drawable/progress_horizontal" />
+
+        <TextView
+            android:id="@+id/editTextTextPersonName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="580dp"
+            android:text="^^ Ultraviolence: Lana Del Ray"
+            android:textColor="@android:color/white" />
+
+        <Button
+            android:id="@+id/button2"
+            android:layout_width="46dp"
+            android:layout_height="40dp"
+            android:layout_marginStart="5dp"
+            android:layout_marginLeft="5dp"
+            android:layout_marginTop="25dp"
+            android:clickable="false"
+            android:text="@string/Menu"
+            app:backgroundTint="#101010"
+            app:icon="@android:drawable/ic_menu_sort_by_size" />
+
+        <Button
+            android:id="@+id/button3"
+            android:layout_width="49dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="120dp"
+            android:background="#0B0A0A"
+            android:clickable="false"
+            app:backgroundTint="#100F0F"
+            app:icon="@android:drawable/ic_menu_share" />
+
+        <Button
+            android:id="@+id/button4"
+            android:layout_width="55dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="180dp"
+            android:layout_marginLeft="180dp"
+            android:layout_marginTop="450dp"
+            android:background="#100F0F"
+            app:backgroundTint="#1B1A1A"
+            app:icon="@android:drawable/ic_media_play" />
+
+        <TextView
+            android:id="@+id/editTextTextPersonName2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="60dp"
+            android:layout_marginLeft="60dp"
+            android:layout_marginTop="390dp"
+            android:text="@string/song_title"
+            android:textColor="#EEF4F6" />
+
+        <TextView
+            android:id="@+id/editTextTextPersonName3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="60dp"
+            android:layout_marginLeft="60dp"
+            android:layout_marginTop="420dp"
+            android:text="@string/artist"
+            android:textColor="#FBF3F3" />
+
+        <Button
+            android:id="@+id/button5"
+            android:layout_width="53dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="75dp"
+            app:backgroundTint="#0C0C0C"
+            app:icon="@android:drawable/ic_dialog_info" />
+
+        <TextView
+            android:id="@+id/editTextTextPersonName4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="560dp"
+            android:text="@string/playlist_new"
+            android:textColor="@android:color/white" />
+
+        <Button
+            android:id="@+id/button6"
+            android:layout_width="55dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="165dp"
+            android:background="#1B1A1A"
+            android:clickable="false"
+            app:backgroundTint="#191818"
+            app:icon="@android:drawable/ic_input_add"
+            app:rippleColor="#151515" />
+
+        <Button
+            android:id="@+id/button7"
+            android:layout_width="53dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="210dp"
+            app:backgroundTint="#121111"
+            app:icon="@android:drawable/star_off" />
+
+        <TextView
+            android:id="@+id/gesture"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="Gesture Detector" />
+
+    </FrameLayout>
+
+
+</RelativeLayout>
