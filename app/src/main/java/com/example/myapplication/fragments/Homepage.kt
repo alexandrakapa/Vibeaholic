@@ -10,6 +10,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.OrientationHelper
 import androidx.recyclerview.widget.RecyclerView
 import com.example.myapplication.MainActivity
+import com.example.myapplication.PlaylistAdapter
 import com.example.myapplication.PostsAdapter
 import com.example.myapplication.R
 import kotlinx.android.synthetic.main.fragment_homepage.*
@@ -61,7 +62,7 @@ class Homepage : Fragment() {
         val mRecyclerView2: RecyclerView
         mRecyclerView2 = view.findViewById(R.id.recyclerView2)
         mRecyclerView2.layoutManager = LinearLayoutManager(activity as MainActivity, RecyclerView.HORIZONTAL, false)
-        mRecyclerView2.adapter= PostsAdapter(playlists, activity as MainActivity)
+        mRecyclerView2.adapter= PlaylistAdapter(playlists, activity as MainActivity)
 
         val playlists2: ArrayList<String> = ArrayList()
         for (i in 1..100){
