@@ -8,9 +8,12 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.ImageView
 import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.example.myapplication.MainActivity
+import com.example.myapplication.PlaylistAdapter
 import com.example.myapplication.R
-
+import java.util.ArrayList
 
 
 // TODO: Rename parameter arguments, choose names that match
@@ -41,7 +44,18 @@ class Profile : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_profile, container, false)
+        val view = inflater.inflate(R.layout.fragment_profile, container, false)
+
+        val playlists: ArrayList<String> = ArrayList()
+        for (i in 1..100){
+            playlists.add("Playlist # $i")
+        }
+        val mRecyclerView2: RecyclerView
+        mRecyclerView2 = view.findViewById(R.id.recyclerView_profile)
+        mRecyclerView2.layoutManager = LinearLayoutManager(activity as MainActivity, RecyclerView.HORIZONTAL, false)
+        mRecyclerView2.adapter= PlaylistAdapter(playlists, activity as MainActivity)
+
+        return view
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -57,6 +71,7 @@ class Profile : Fragment() {
         view.findViewById<ImageView>(R.id.profile_image3).setOnClickListener {
             (activity as MainActivity).makeCurrentFragment(Playlist())
         }
+        /*
         view.findViewById<ImageView>(R.id.profile_image4).setOnClickListener {
             (activity as MainActivity).makeCurrentFragment(Playlist())
         }
@@ -69,6 +84,9 @@ class Profile : Fragment() {
         view.findViewById<ImageView>(R.id.profile_image7).setOnClickListener {
             (activity as MainActivity).makeCurrentFragment(Playlist())
         }
+
+
+        */
     }
 
     companion object {
