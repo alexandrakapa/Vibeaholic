@@ -2,17 +2,18 @@ package com.example.myapplication
 
 import android.os.Bundle
 import android.view.GestureDetector
-import com.google.android.material.floatingactionbutton.FloatingActionButton
-import com.google.android.material.snackbar.Snackbar
-import androidx.appcompat.app.AppCompatActivity
-import android.view.Menu
-import android.view.MenuItem
 import android.view.MotionEvent
+import android.view.View
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.GestureDetectorCompat
 import androidx.fragment.app.Fragment
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.example.myapplication.fragments.*
 import kotlinx.android.synthetic.main.activity_main.*
+import kotlinx.android.synthetic.main.fragment_homepage.*
+import java.util.*
 
 
 class MainActivity : AppCompatActivity() {
@@ -47,6 +48,21 @@ class MainActivity : AppCompatActivity() {
 
     detector = GestureDetectorCompat(this, GestureListener())
 
+       // val posts: ArrayList<String> = ArrayList()
+       // for (i in 1..100){
+       //     posts.add("Post # $i")
+       // }
+      // val mRecyclerView: RecyclerView
+
+       // val view : View
+        //view = View.inflate(R.layout.fragment_homepage, this, false)
+        //mRecyclerView = view.findViewById(R.id.recyclerView)
+      // mRecyclerView = findViewById<RecyclerView> (R.id.recyclerView);
+        //mRecyclerView.layoutManager = LinearLayoutManager(this)
+        //mRecyclerView.adapter= PostsAdapter(posts)
+        //recyclerView.layoutManager = LinearLayoutManager(this)
+        //recyclerView.adapter=PostsAdapter(posts)
+
     }
 
     override fun onTouchEvent(event: MotionEvent?): Boolean {
@@ -58,7 +74,7 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-     fun makeCurrentFragment(fragment: Fragment) =
+    public fun makeCurrentFragment(fragment: Fragment) =
         supportFragmentManager.beginTransaction().apply {
             replace(R.id.fl_wrapper, fragment)
             commit()

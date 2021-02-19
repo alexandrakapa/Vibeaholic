@@ -6,8 +6,14 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.OrientationHelper
+import androidx.recyclerview.widget.RecyclerView
 import com.example.myapplication.MainActivity
+import com.example.myapplication.PostsAdapter
 import com.example.myapplication.R
+import kotlinx.android.synthetic.main.fragment_homepage.*
+import java.util.ArrayList
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -37,12 +43,54 @@ class Homepage : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_homepage, container, false)
+        val view = inflater.inflate(R.layout.fragment_homepage, container, false)
+
+        val posts: ArrayList<String> = ArrayList()
+        for (i in 1..100){
+            posts.add("Song # $i")
+        }
+        val mRecyclerView: RecyclerView
+        mRecyclerView = view.findViewById(R.id.recyclerView)
+        mRecyclerView.layoutManager = LinearLayoutManager(activity as MainActivity, RecyclerView.HORIZONTAL, false)
+        mRecyclerView.adapter= PostsAdapter(posts, activity as MainActivity)
+
+        val playlists: ArrayList<String> = ArrayList()
+        for (i in 1..100){
+            playlists.add("Playlist # $i")
+        }
+        val mRecyclerView2: RecyclerView
+        mRecyclerView2 = view.findViewById(R.id.recyclerView2)
+        mRecyclerView2.layoutManager = LinearLayoutManager(activity as MainActivity, RecyclerView.HORIZONTAL, false)
+        mRecyclerView2.adapter= PostsAdapter(playlists, activity as MainActivity)
+
+        val playlists2: ArrayList<String> = ArrayList()
+        for (i in 1..100){
+            playlists2.add("Playlist # $i")
+        }
+        val mRecyclerView3: RecyclerView
+        mRecyclerView3 = view.findViewById(R.id.recyclerView3)
+        mRecyclerView3.layoutManager = LinearLayoutManager(activity as MainActivity, RecyclerView.HORIZONTAL, false)
+        mRecyclerView3.adapter= PostsAdapter(playlists2, activity as MainActivity)
+
+        val playlists3: ArrayList<String> = ArrayList()
+        for (i in 1..100){
+            playlists3.add("Playlist # $i")
+        }
+        val mRecyclerView4: RecyclerView
+        mRecyclerView4 = view.findViewById(R.id.recyclerView4)
+        mRecyclerView4.layoutManager = LinearLayoutManager(activity as MainActivity, RecyclerView.HORIZONTAL, false)
+        mRecyclerView4.adapter= PostsAdapter(playlists3, activity as MainActivity)
+
+
+        return view
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+
+
+        /*
         view.findViewById<ImageView>(R.id.home_image5).setOnClickListener {
             (activity as MainActivity).makeCurrentFragment(Playlist())
         }
@@ -93,6 +141,8 @@ class Homepage : Fragment() {
         view.findViewById<ImageView>(R.id.home_image16).setOnClickListener {
             (activity as MainActivity).makeCurrentFragment(Playing_now())
         }
+
+        */
     }
 
     companion object {
