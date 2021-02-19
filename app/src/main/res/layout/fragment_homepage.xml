@@ -11,7 +11,18 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
+
+
         <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="178dp"
+            android:layout_marginTop="35dp"
+            android:text="@string/welcome"
+            android:textColor="@color/white" />
+
+        <TextView
+            android:id="@+id/text1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="80dp"
@@ -19,14 +30,7 @@
             android:textColor="@color/white" />
 
         <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="180dp"
-            android:layout_marginTop="35dp"
-            android:text="@string/welcome"
-            android:textColor="@color/white" />
-
-        <TextView
+            android:id="@+id/text2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="230dp"
@@ -34,11 +38,21 @@
             android:textColor="@color/white" />
 
         <TextView
+            android:id="@+id/text3"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="380dp"
             android:text="@string/suggested_songs"
             android:textColor="@color/white" />
+
+        <TextView
+            android:id="@+id/text4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="530dp"
+            android:text="@string/trending_now"
+            android:textColor="@color/white" />
+
 
         <Button
             android:id="@+id/homepage_menu"
@@ -144,6 +158,7 @@
             tools:src="@tools:sample/backgrounds/scenic" />
 
 
+
         <ImageView
             android:id="@+id/home_image9"
             android:layout_width="96dp"
@@ -187,6 +202,53 @@
             android:clickable="true"
             app:srcCompat="@android:drawable/gallery_thumb"
             tools:src="@tools:sample/backgrounds/scenic" />
+
+
+
+        <ImageView
+            android:id="@+id/home_image13"
+            android:layout_width="96dp"
+            android:layout_height="80dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginLeft="5dp"
+            android:layout_marginTop="570dp"
+            android:clickable="true"
+            app:srcCompat="@android:drawable/gallery_thumb"
+            tools:src="@tools:sample/backgrounds/scenic" />
+
+        <ImageView
+            android:id="@+id/home_image14"
+            android:layout_width="96dp"
+            android:layout_height="80dp"
+            android:layout_marginStart="111dp"
+            android:layout_marginLeft="105dp"
+            android:layout_marginTop="570dp"
+            android:clickable="true"
+            app:srcCompat="@android:drawable/gallery_thumb"
+            tools:src="@tools:sample/backgrounds/scenic" />
+
+        <ImageView
+            android:id="@+id/home_image15"
+            android:layout_width="96dp"
+            android:layout_height="80dp"
+            android:layout_marginStart="210dp"
+            android:layout_marginLeft="205dp"
+            android:layout_marginTop="570dp"
+            android:clickable="true"
+            app:srcCompat="@android:drawable/gallery_thumb"
+            tools:src="@tools:sample/backgrounds/scenic" />
+
+        <ImageView
+            android:id="@+id/home_image16"
+            android:layout_width="96dp"
+            android:layout_height="80dp"
+            android:layout_marginStart="310dp"
+            android:layout_marginLeft="305dp"
+            android:layout_marginTop="570dp"
+            android:clickable="true"
+            app:srcCompat="@android:drawable/gallery_thumb"
+            tools:src="@tools:sample/backgrounds/scenic" />
+
     </RelativeLayout>
 
 

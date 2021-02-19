@@ -1,12 +1,17 @@
 package com.example.myapplication.fragments
 
+import android.annotation.SuppressLint
+import android.graphics.Color
 import android.os.Bundle
 import android.view.*
+import android.widget.Button
 import android.widget.Toast
 import androidx.core.view.GestureDetectorCompat
 import androidx.fragment.app.Fragment
 import com.example.myapplication.MainActivity
 import com.example.myapplication.R
+
+
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
 private const val ARG_PARAM1 = "param1"
@@ -45,7 +50,28 @@ class Playing_now : Fragment() {
     public fun onTouchEvent(event: MotionEvent?): Boolean {
         return detector.onTouchEvent(event)
     }
+/*
 
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        val myIcon = resources.getDrawable(R.drawable.ic_dj)
+        val myIcon2 = resources.getDrawable(R.drawable.ic_home)
+        view.findViewById<Button>(R.id.play_button).setOnClickListener {
+            if (view.findViewById<Button>(R.id.play_button).background == myIcon2)
+            {
+                view.findViewById<Button>(R.id.play_button).background = myIcon
+                //view.findViewById<Button>(R.id.play_button).setBackgroundColor(17170451)
+                view.findViewById<Button>(R.id.play_button).setBackgroundColor(Color.CYAN);
+
+            }
+            else {
+                view.findViewById<Button>(R.id.play_button).background = myIcon2
+                view.findViewById<Button>(R.id.play_button).setBackgroundColor(Color.GRAY)
+
+            }
+        }
+    }
+*/
     companion object {
         /**
          * Use this factory method to create a new instance of

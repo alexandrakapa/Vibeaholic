@@ -45,18 +45,17 @@
         <Button
             android:id="@+id/button2"
             android:layout_width="46dp"
-            android:layout_height="40dp"
+            android:layout_height="32dp"
             android:layout_marginStart="5dp"
             android:layout_marginLeft="5dp"
             android:layout_marginTop="25dp"
             android:clickable="false"
-            android:text="@string/Menu"
             app:backgroundTint="#101010"
             app:icon="@android:drawable/ic_menu_sort_by_size" />
 
         <Button
             android:id="@+id/button3"
-            android:layout_width="49dp"
+            android:layout_width="53dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="120dp"
             android:background="#0B0A0A"
@@ -65,8 +64,8 @@
             app:icon="@android:drawable/ic_menu_share" />
 
         <Button
-            android:id="@+id/button4"
-            android:layout_width="55dp"
+            android:id="@+id/play_button"
+            android:layout_width="61dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="180dp"
             android:layout_marginLeft="180dp"
@@ -97,7 +96,7 @@
 
         <Button
             android:id="@+id/button5"
-            android:layout_width="53dp"
+            android:layout_width="55dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="75dp"
             app:backgroundTint="#0C0C0C"
@@ -108,7 +107,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="560dp"
-            android:text="@string/playlist_new"
+            android:text="@string/playlist"
             android:textColor="@android:color/white" />
 
         <Button
@@ -128,14 +127,10 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="210dp"
             app:backgroundTint="#121111"
-            app:icon="@android:drawable/star_off" />
+            app:icon="@android:drawable/star_off"
+            />
 
-        <TextView
-            android:id="@+id/gesture"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:text="Gesture Detector" />
+
 
     </FrameLayout>
 

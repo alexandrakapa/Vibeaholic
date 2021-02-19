@@ -122,7 +122,7 @@ class MainActivity : AppCompatActivity() {
 
     private fun onSwipeBottom() {
         Toast.makeText(this, "Bottom swipe", Toast.LENGTH_LONG).show()
-
+        makeCurrentFragment(Playlist())
     }
 
     private fun onSwipeTop() {

@@ -80,6 +80,19 @@ class Homepage : Fragment() {
         view.findViewById<ImageView>(R.id.home_image12).setOnClickListener {
             (activity as MainActivity).makeCurrentFragment(Playing_now())
         }
+
+        view.findViewById<ImageView>(R.id.home_image13).setOnClickListener {
+            (activity as MainActivity).makeCurrentFragment(Playing_now())
+        }
+        view.findViewById<ImageView>(R.id.home_image14).setOnClickListener {
+            (activity as MainActivity).makeCurrentFragment(Playing_now())
+        }
+        view.findViewById<ImageView>(R.id.home_image15).setOnClickListener {
+            (activity as MainActivity).makeCurrentFragment(Playing_now())
+        }
+        view.findViewById<ImageView>(R.id.home_image16).setOnClickListener {
+            (activity as MainActivity).makeCurrentFragment(Playing_now())
+        }
     }
 
     companion object {

@@ -23,7 +23,7 @@
             android:textColor="#F1EEEE" />
 
         <ImageView
-            android:id="@+id/imageView"
+            android:id="@+id/profile_image"
             android:layout_width="196dp"
             android:layout_height="216dp"
             android:layout_marginStart="10dp"
@@ -33,22 +33,22 @@
             tools:src="@tools:sample/backgrounds/scenic" />
 
         <ImageView
-            android:id="@+id/imageView10"
+            android:id="@+id/mood_stats_1"
             android:layout_width="184dp"
             android:layout_height="188dp"
             android:layout_marginStart="10dp"
             android:layout_marginLeft="10dp"
-            android:layout_marginTop="620dp"
+            android:layout_marginTop="640dp"
             app:srcCompat="@android:drawable/gallery_thumb"
             tools:src="@tools:sample/backgrounds/scenic" />
 
         <ImageView
-            android:id="@+id/imageView11"
+            android:id="@+id/mood_stats_2"
             android:layout_width="184dp"
             android:layout_height="188dp"
             android:layout_marginStart="10dp"
             android:layout_marginLeft="10dp"
-            android:layout_marginTop="820dp"
+            android:layout_marginTop="850dp"
             app:srcCompat="@android:drawable/gallery_thumb"
             tools:src="@tools:sample/backgrounds/scenic" />
 
@@ -59,19 +59,19 @@
             android:layout_marginStart="10dp"
             android:layout_marginLeft="10dp"
             android:layout_marginTop="365dp"
-            app:srcCompat="@android:drawable/gallery_thumb"
             android:clickable="true"
+            app:srcCompat="@android:drawable/gallery_thumb"
             tools:src="@tools:sample/backgrounds/scenic" />
 
         <ImageView
             android:id="@+id/profile_image2"
-            android:layout_width="81dp"
-            android:layout_height="79dp"
+            android:layout_width="78dp"
+            android:layout_height="78dp"
             android:layout_marginStart="10dp"
             android:layout_marginLeft="10dp"
             android:layout_marginTop="485dp"
-            app:srcCompat="@android:drawable/gallery_thumb"
             android:clickable="true"
+            app:srcCompat="@android:drawable/gallery_thumb"
             tools:src="@tools:sample/backgrounds/scenic" />
 
         <ImageView
@@ -103,8 +103,8 @@
             android:layout_marginStart="187dp"
             android:layout_marginLeft="187dp"
             android:layout_marginTop="365dp"
-            app:srcCompat="@android:drawable/gallery_thumb"
             android:clickable="true"
+            app:srcCompat="@android:drawable/gallery_thumb"
             tools:src="@tools:sample/backgrounds/scenic" />
 
         <ImageView
@@ -130,38 +130,66 @@
             tools:src="@tools:sample/backgrounds/scenic" />
 
         <TextView
-            android:id="@+id/editTextTextPersonName6"
+            android:id="@+id/my_playlists"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="318dp"
+            android:layout_marginTop="325dp"
             android:text="@string/my_playlists"
+            android:textColor="#FBF8F8" />
+
+        <TextView
+            android:id="@+id/favourites"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="445dp"
+            android:text="@string/favourites"
+            android:textColor="#FBF8F8" />
+
+        <TextView
+            android:id="@+id/listen_later"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="100dp"
+            android:layout_marginTop="445dp"
+            android:text="@string/listen_later"
+            android:textColor="#FBF8F8" />
+
+
+        <TextView
+            android:id="@+id/recently_played"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="187dp"
+            android:layout_marginTop="445dp"
+            android:text="@string/recently_played"
             android:textColor="#FBF8F8" />
 
         <TextView
             android:id="@+id/editTextTextPersonName7"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="575dp"
+            android:layout_marginTop="600dp"
             android:text="@string/mood_statisitcs"
             android:textColor="#03A9F4" />
 
         <TextView
-            android:id="@+id/editTextTextPersonName8"
+            android:id="@+id/last_week_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="220dp"
             android:layout_marginLeft="220dp"
-            android:layout_marginTop="620dp"
+            android:layout_marginTop="640dp"
             android:text="Last week:"
             android:textColor="#FFFFFF" />
 
         <TextView
-            android:id="@+id/editTextTextPersonName9"
+            android:id="@+id/last_month_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="220dp"
             android:layout_marginLeft="220dp"
-            android:layout_marginTop="820dp"
+            android:layout_marginTop="850dp"
             android:text="Last month:"
             android:textColor="#FFFFFF" />
 
@@ -177,7 +205,38 @@
             app:backgroundTint="#101010"
             app:icon="@android:drawable/ic_menu_sort_by_size" />
 
-
+        <TextView
+            android:id="@+id/playlist_title1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="565dp"
+            android:textColor="#FFFFFF"
+            android:text="TextView" />
+        <TextView
+            android:id="@+id/playlist_title2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="100dp"
+            android:layout_marginTop="565dp"
+            android:textColor="#FFFFFF"
+            android:text="TextView" />
+        <TextView
+            android:id="@+id/playlist_title3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="187dp"
+            android:layout_marginTop="565dp"
+            android:textColor="#FFFFFF"
+            android:text="TextView" />
+        <TextView
+            android:id="@+id/playlist_title4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="272dp"
+            android:layout_marginTop="565dp"
+            android:textColor="#FFFFFF"
+            android:text="TextView" />
 
 
     </RelativeLayout>
