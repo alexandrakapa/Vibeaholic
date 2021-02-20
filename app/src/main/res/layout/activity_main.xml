@@ -26,6 +26,15 @@
         android:textColorHint="@color/black"
         android:textColorLink="@color/white" />
 
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="248dp"
+        android:layout_height="258dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bottom_navigation"
         android:layout_width="match_parent"
