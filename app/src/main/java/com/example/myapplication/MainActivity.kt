@@ -1,12 +1,16 @@
 package com.example.myapplication
 
+import android.app.Dialog
 import android.content.Intent
 import android.os.Bundle
 import android.provider.MediaStore
 import android.view.GestureDetector
 import android.view.MotionEvent
 import android.view.View
+import android.view.Window
+import android.widget.Button
 import android.widget.Switch
+import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.GestureDetectorCompat
@@ -21,7 +25,9 @@ import java.util.*
 
 class MainActivity : AppCompatActivity() {
     val REQUEST_IMAGE_CAPTURE = 1
-    internal lateinit var btnSwitch: Switch
+    internal lateinit var myDialog : Dialog
+    internal lateinit var txt : TextView
+    internal lateinit var btnSwitch : Switch
 
     private lateinit var detector: GestureDetectorCompat
 
@@ -29,6 +35,12 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+
+        btnSwitch = findViewById<View>(R.id.switch1) as Switch
+        btnSwitch.setOnClickListener {
+            ShowDialog()
+        }
+/*
         btnSwitch = findViewById<View>(R.id.switch1) as Switch
 
         btnSwitch.setOnClickListener{
@@ -40,7 +52,8 @@ class MainActivity : AppCompatActivity() {
             else {
                 Toast.makeText(this@MainActivity,"Camera OFF",Toast.LENGTH_LONG).show()
             }
-        }
+        }*/
+
 
         val homepage=Homepage()
         val search=Search()
@@ -80,6 +93,21 @@ class MainActivity : AppCompatActivity() {
         //recyclerView.layoutManager = LinearLayoutManager(this)
         //recyclerView.adapter=PostsAdapter(posts)
 
+    }
+
+    fun ShowDialog() {
+        myDialog = Dialog(this)
+        myDialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
+        myDialog.setContentView(R.layout.dialog_activity)
+        myDialog.setTitle("My First Dialog box")
+
+        txt = myDialog.findViewById<View>(R.id.button_ok) as TextView
+        txt.isEnabled = true
+        txt.setOnClickListener{
+            Toast.makeText(applicationContext, "THanks for pressing",Toast.LENGTH_LONG).show()
+            myDialog.cancel()
+        }
+        myDialog.show()
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {

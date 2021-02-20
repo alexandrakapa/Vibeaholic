@@ -26,4 +26,17 @@
     <string name="trending_now">Trending now</string>
     <string name="favourites">Favourites</string>
     <string name="listen_later">Listen later</string>
+    <string name="text1_popup">Now the application will be able to detect your mood and automatically
+    create the perfect playlist that matches your vibe!</string>
+    <string name="text2_popup">But First:</string>
+    <string name="text3_popup">Activate the camera and look straight at it for 5 seconds because as we all know our mood is always written
+    all over our face!</string>
+    <string name="text4_popup">Give the application access to your microphone since the tone of your voice
+    also reveals your feelings!</string>
+    <string name="text5_popup">Allow access to your microphone:</string>
+    <string name="text6_popup">Allow access to your camera:</string>
+    <string name="text7_popup">Connect the application to your smart-watch as your heartbeat will provide useful information
+    for your current state!</string>
+    <string name="text8_popup">Connect your smart-watch:</string>
+    <string name="text9_popup">Are you ready to enjoy this unique experience?</string>
 </resources>

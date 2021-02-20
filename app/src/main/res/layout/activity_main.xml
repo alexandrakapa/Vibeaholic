@@ -26,6 +26,7 @@
         android:textColorHint="@color/black"
         android:textColorLink="@color/white" />
 
+
     <ImageView
         android:id="@+id/imageView"
         android:layout_width="248dp"
