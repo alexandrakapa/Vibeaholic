@@ -66,7 +66,7 @@ class Homepage : Fragment() {
 
         val playlists2: ArrayList<String> = ArrayList()
         for (i in 1..100){
-            playlists2.add("Playlist # $i")
+            playlists2.add("Song # $i")
         }
         val mRecyclerView3: RecyclerView
         mRecyclerView3 = view.findViewById(R.id.recyclerView3)
@@ -75,7 +75,7 @@ class Homepage : Fragment() {
 
         val playlists3: ArrayList<String> = ArrayList()
         for (i in 1..100){
-            playlists3.add("Playlist # $i")
+            playlists3.add("Song # $i")
         }
         val mRecyclerView4: RecyclerView
         mRecyclerView4 = view.findViewById(R.id.recyclerView4)
