@@ -2,14 +2,10 @@ package com.example.myapplication
 
 import android.app.Dialog
 import android.content.Intent
-import android.graphics.Camera
 import android.os.Bundle
-import android.os.Handler
 import android.provider.MediaStore
-import android.view.GestureDetector
-import android.view.MotionEvent
-import android.view.View
-import android.view.Window
+import android.view.*
+import android.widget.Button
 import android.widget.Switch
 import android.widget.TextView
 import android.widget.Toast
@@ -17,10 +13,11 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.GestureDetectorCompat
 import androidx.fragment.app.Fragment
 import com.example.myapplication.fragments.*
+import com.google.android.material.navigation.NavigationView
 import kotlinx.android.synthetic.main.activity_main.*
 
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity(){
     val REQUEST_IMAGE_CAPTURE = 1
     var isItFirstTime = true
     internal lateinit var myDialog : Dialog
@@ -29,6 +26,7 @@ class MainActivity : AppCompatActivity() {
     internal lateinit var btnSwitch2 : Switch
     internal lateinit var btnSwitch3 : Switch
     internal lateinit var btnSwitch4 : Switch
+    internal lateinit var btnmenu : Button
 
     private lateinit var detector: GestureDetectorCompat
 
@@ -36,7 +34,7 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-
+        btnmenu=findViewById<View>(R.id.homepage_menu) as Button
 
 
         btnSwitch = findViewById<View>(R.id.switch1) as Switch
@@ -95,6 +93,9 @@ class MainActivity : AppCompatActivity() {
         //recyclerView.adapter=PostsAdapter(posts)
 
     }
+
+
+
 
     fun ShowDialog() {
         myDialog = Dialog(this)

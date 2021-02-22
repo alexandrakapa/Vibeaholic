@@ -43,17 +43,6 @@
             android:textColor="@android:color/white" />
 
         <Button
-            android:id="@+id/button2"
-            android:layout_width="46dp"
-            android:layout_height="32dp"
-            android:layout_marginStart="5dp"
-            android:layout_marginLeft="5dp"
-            android:layout_marginTop="25dp"
-            android:clickable="false"
-            app:backgroundTint="#101010"
-            app:icon="@android:drawable/ic_menu_sort_by_size" />
-
-        <Button
             android:id="@+id/button3"
             android:layout_width="53dp"
             android:layout_height="wrap_content"

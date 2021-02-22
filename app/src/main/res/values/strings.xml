@@ -39,4 +39,14 @@
     for your current state!</string>
     <string name="text8_popup">Connect your smart-watch:</string>
     <string name="text9_popup">Are you ready to enjoy this unique experience?</string>
+    <string name="let_me">Let me listen</string>
+    <string name="search">Search song here</string>
+    <string-array name="event_type">
+        <item>Full-on Party</item>
+        <item>Date</item>
+        <item>Informal Gathering</item>
+        <item>Formal Gathering</item>
+    </string-array>
+    <string name="more_party">Hip Hop party!</string>
+    <string name="party_type">Party type:Full-on party</string>
 </resources>
