@@ -1,19 +1,58 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/black"
     tools:context=".fragments.Search">
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Search" />
+        <EditText
+            android:layout_width="310dp"
+            android:layout_height="50dp"
+            android:layout_marginLeft="60dp"
+            android:layout_marginTop="150dp"
+            android:width="1dp"
+            android:color="#00000000"
+            android:hint="@string/search"
+            android:inputType="text"
+            android:singleLine="true"
+            android:textColor="@color/white"
+            android:textColorHint="@color/white"
+            android:drawableRight="@drawable/ic_baseline_mic_24"/>
+
+
+        <Button
+            style="@style/Widget.MaterialComponents.ExtendedFloatingActionButton"
+            android:layout_width="220dp"
+            android:layout_height="220dp"
+            android:layout_marginLeft="110dp"
+            android:layout_marginTop="270dp"
+            android:color="@color/white"
+            android:radius="1000dp"
+            android:shape="rectangle"
+            android:text="@string/let_me"
+            android:textColor="@android:color/black"
+            android:textSize="22sp"
+            android:textStyle="bold"
+            app:cornerRadius="300dp" />
+
+        <SearchView
+            android:id="@+id/search_icon"
+            android:layout_width="50dp"
+            android:layout_height="39dp"
+            android:layout_marginLeft="277dp"
+            android:layout_marginTop="153dp"
+            android:visibility="visible"
+            android:background="#03DAC5"
+            />
+
 
     </RelativeLayout>
 
 </FrameLayout>
+

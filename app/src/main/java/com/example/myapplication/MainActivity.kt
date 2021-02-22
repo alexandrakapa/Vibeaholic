@@ -1,29 +1,58 @@
 package com.example.myapplication
 
+import android.app.Dialog
+import android.content.Intent
 import android.os.Bundle
-import android.view.GestureDetector
-import android.view.MotionEvent
-import android.view.View
+import android.provider.MediaStore
+import android.view.*
+import android.widget.Button
+import android.widget.Switch
+import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.GestureDetectorCompat
 import androidx.fragment.app.Fragment
-import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import com.example.myapplication.fragments.*
+import com.google.android.material.navigation.NavigationView
 import kotlinx.android.synthetic.main.activity_main.*
-import kotlinx.android.synthetic.main.fragment_homepage.*
-import java.util.*
 
 
-class MainActivity : AppCompatActivity() {
-
+class MainActivity : AppCompatActivity(){
+    val REQUEST_IMAGE_CAPTURE = 1
+    var isItFirstTime = true
+    internal lateinit var myDialog : Dialog
+    internal lateinit var txt : TextView
+    internal lateinit var btnSwitch : Switch
+    internal lateinit var btnSwitch2 : Switch
+    internal lateinit var btnSwitch3 : Switch
+    internal lateinit var btnSwitch4 : Switch
+    internal lateinit var btnmenu : Button
 
     private lateinit var detector: GestureDetectorCompat
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
+        btnmenu=findViewById<View>(R.id.homepage_menu) as Button
+
+
+        btnSwitch = findViewById<View>(R.id.switch1) as Switch
+        btnSwitch.setOnClickListener {
+            if(btnSwitch.isChecked) {
+                if (isItFirstTime) {
+                    isItFirstTime = false
+                    ShowDialog()
+                }
+                else {
+                    val takePicture = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
+                    startActivityForResult(takePicture, REQUEST_IMAGE_CAPTURE)
+
+                    Toast.makeText(this@MainActivity, "Camera is on", Toast.LENGTH_SHORT).show()
+                }
+            }
+        }
+
 
         val homepage=Homepage()
         val search=Search()
@@ -63,6 +92,81 @@ class MainActivity : AppCompatActivity() {
         //recyclerView.layoutManager = LinearLayoutManager(this)
         //recyclerView.adapter=PostsAdapter(posts)
 
+    }
+
+
+
+
+    fun ShowDialog() {
+        myDialog = Dialog(this)
+        myDialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
+        myDialog.setContentView(R.layout.dialog_activity)
+        myDialog.setTitle("My First Dialog box")
+        btnSwitch2 = myDialog.findViewById<View>(R.id.switch2) as Switch
+        btnSwitch3 = myDialog.findViewById<View>(R.id.switch3) as Switch
+        btnSwitch4 = myDialog.findViewById<View>(R.id.switch4) as Switch
+        btnSwitch2.setOnClickListener {
+            if (btnSwitch2.isChecked) {
+                btnSwitch2.setText("Yes")
+            }
+            else {
+                btnSwitch2.setText("No")
+            }
+        }
+        btnSwitch3.setOnClickListener {
+            if (btnSwitch3.isChecked) {
+                btnSwitch3.setText("Yes")
+            }
+            else {
+                btnSwitch3.setText("No")
+            }
+        }
+        btnSwitch4.setOnClickListener {
+            if (btnSwitch4.isChecked) {
+                btnSwitch4.setText("Yes")
+            }
+            else {
+                btnSwitch4.setText("No")
+            }
+        }
+        txt = myDialog.findViewById<View>(R.id.button_go) as TextView
+        txt.isEnabled = true
+        txt.setOnClickListener{
+            if(btnSwitch2.isChecked) {
+                val takePicture = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
+                startActivityForResult(takePicture, REQUEST_IMAGE_CAPTURE)
+
+                Toast.makeText(this@MainActivity, "Camera is on", Toast.LENGTH_SHORT).show()
+
+           }
+            else {
+                Toast.makeText(this@MainActivity, "Camera is off", Toast.LENGTH_SHORT).show()
+            }
+            if(btnSwitch3.isChecked) {
+                Toast.makeText(applicationContext, "Microphone is on", Toast.LENGTH_LONG).show()
+            }
+            else {
+                Toast.makeText(this@MainActivity, "Microphone is off", Toast.LENGTH_SHORT).show()
+            }
+            if(btnSwitch4.isChecked) {
+                Toast.makeText(applicationContext, "Smart-watch is connected", Toast.LENGTH_LONG).show()
+            }
+            else {
+                Toast.makeText(this@MainActivity, "Smart-watch is not connected", Toast.LENGTH_SHORT).show()
+            }
+                myDialog.cancel()
+        }
+        myDialog.show()
+    }
+
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+
+       // if (requestCode == REQUEST_IMAGE_CAPTURE && resultCode == RESULT_OK) {
+            //val imageBitmap = data!!.extras!!.get("data") as Bitmap
+            //findViewById<ImageView>(R.id.imageView).setImageBitmap(imageBitmap)
+       // }
     }
 
     override fun onTouchEvent(event: MotionEvent?): Boolean {

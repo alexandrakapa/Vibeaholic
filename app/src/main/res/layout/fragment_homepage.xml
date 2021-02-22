@@ -29,6 +29,13 @@
             android:text="@string/recently_played"
             android:textColor="@color/white" />
 
+        <View
+            android:id="@+id/divider2"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginTop="105dp"
+            android:background="#03A9F4" />
+
         <TextView
             android:id="@+id/text2"
             android:layout_width="wrap_content"
@@ -37,6 +44,13 @@
             android:text="@string/suggested_albums"
             android:textColor="@color/white" />
 
+        <View
+            android:id="@+id/divider3"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginTop="260dp"
+            android:background="#03A9F4" />
+
         <TextView
             android:id="@+id/text3"
             android:layout_width="wrap_content"
@@ -44,6 +58,13 @@
             android:layout_marginTop="390dp"
             android:text="@string/suggested_songs"
             android:textColor="@color/white" />
+
+        <View
+            android:id="@+id/divider4"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginTop="415dp"
+            android:background="#03A9F4"  />
 
         <TextView
             android:id="@+id/text4"
@@ -54,19 +75,12 @@
             android:textColor="@color/white" />
 
 
-        <Button
-            android:id="@+id/homepage_menu"
-            android:layout_width="46dp"
-            android:layout_height="40dp"
-            android:layout_marginStart="5dp"
-            android:layout_marginLeft="5dp"
-            android:layout_marginTop="25dp"
-            android:clickable="false"
-            android:text="@string/Menu"
-            app:backgroundTint="#101010"
-            app:icon="@android:drawable/ic_menu_sort_by_size" />
-
-
+        <View
+            android:id="@+id/divider5"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginTop="570dp"
+            android:background="#03A9F4"/>
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recyclerView"

@@ -18,8 +18,10 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="5dp"
             android:layout_marginLeft="5dp"
-            android:layout_marginTop="69dp"
+            android:layout_marginTop="40dp"
             android:text="@string/profile"
+            android:textSize="40sp"
+            android:textStyle="bold"
             android:textColor="#F1EEEE" />
 
         <ImageView
@@ -31,6 +33,13 @@
             android:layout_marginTop="98dp"
             app:srcCompat="@android:drawable/gallery_thumb"
             tools:src="@tools:sample/backgrounds/scenic" />
+
+        <View
+            android:id="@+id/divider6"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginTop="90dp"
+            android:background="#03A9F4" />
 
         <ImageView
             android:id="@+id/mood_stats_1"
@@ -95,11 +104,20 @@
             android:id="@+id/my_playlists"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="325dp"
+            android:layout_marginTop="315dp"
             android:layout_marginStart="5dp"
             android:layout_marginLeft="5dp"
             android:text="@string/my_playlists"
+            android:textStyle="bold"
+            android:textSize="20dp"
             android:textColor="#FBF8F8" />
+
+        <View
+            android:id="@+id/divider7"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginTop="345dp"
+            android:background="#03A9F4" />
 
         <TextView
             android:id="@+id/favourites"
@@ -137,7 +155,16 @@
             android:layout_marginStart="5dp"
             android:layout_marginLeft="5dp"
             android:text="@string/mood_statisitcs"
+            android:textSize="20dp"
+            android:textStyle="bold"
             android:textColor="#03A9F4" />
+
+        <View
+            android:id="@+id/divider8"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginTop="650dp"
+            android:background="#03A9F4" />
 
         <TextView
             android:id="@+id/last_week_title"
@@ -159,18 +186,6 @@
             android:layout_marginTop="870dp"
             android:text="Last month:"
             android:textColor="#FFFFFF" />
-
-
-        <Button
-            android:id="@+id/menu"
-            android:layout_width="46dp"
-            android:layout_height="40dp"
-            android:layout_marginStart="5dp"
-            android:layout_marginLeft="5dp"
-            android:layout_marginTop="25dp"
-            android:clickable="true"
-            app:backgroundTint="#101010"
-            app:icon="@android:drawable/ic_menu_sort_by_size" />
 
 
         <androidx.recyclerview.widget.RecyclerView

@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/black">
+
+        <Spinner
+            android:id="@+id/spinner"
+            android:layout_width="283dp"
+            android:layout_height="30dp"
+            android:layout_marginLeft="90dp"
+            android:layout_marginTop="240dp"
+             />
+
+        <EditText
+            android:id="@+id/editTextNumber"
+            android:layout_width="283dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="60dp"
+            android:layout_marginTop="290dp"
+            android:ems="10"
+            android:hint="Insert number of participants"
+            android:inputType="number"
+            android:textAlignment="center"
+            android:textColorHint="@color/white"
+            android:gravity="center_horizontal" />
+
+        <Button
+            android:id="@+id/button"
+            android:layout_width="wrap_content"
+            android:layout_height="80dp"
+            android:layout_marginLeft="90dp"
+            android:layout_marginTop="380dp"
+            android:text="Import Existing Playlist" />
+
+        <Button
+            android:id="@+id/button2"
+            android:layout_width="wrap_content"
+            android:layout_height="70dp"
+            android:layout_marginLeft="170dp"
+            android:layout_marginTop="500dp"
+            android:text="Start" />
+
+
+    </RelativeLayout>
+
+</FrameLayout>
