@@ -5,7 +5,13 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
+import com.example.myapplication.MainActivity
+import com.example.myapplication.Playlist_page_adapter
+import com.example.myapplication.PostsAdapter
 import com.example.myapplication.R
+import java.util.ArrayList
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -35,7 +41,19 @@ class Playlist : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_playlist, container, false)
+
+        val view = inflater.inflate(R.layout.fragment_playlist, container, false)
+
+        val posts: ArrayList<String> = ArrayList() //this will change
+        for (i in 1..100){
+            posts.add("Song # $i")
+        }
+        val mRecyclerView: RecyclerView
+        mRecyclerView = view.findViewById(R.id.recyclerView_playlist)
+        mRecyclerView.layoutManager = LinearLayoutManager(activity as MainActivity, RecyclerView.VERTICAL, false)
+        mRecyclerView.adapter= Playlist_page_adapter(posts, activity as MainActivity)
+
+        return view
     }
 
     companion object {

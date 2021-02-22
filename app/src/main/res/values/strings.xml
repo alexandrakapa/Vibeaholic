@@ -26,6 +26,7 @@
     <string name="trending_now">Trending now</string>
     <string name="favourites">Favourites</string>
     <string name="listen_later">Listen later</string>
+
     <string name="text1_popup">Now the application will be able to detect your mood and automatically
     create the perfect playlist that matches your vibe!</string>
     <string name="text2_popup">But First:</string>
@@ -49,4 +50,14 @@
     </string-array>
     <string name="more_party">Hip Hop party!</string>
     <string name="party_type">Party type:Full-on party</string>
+
+    <string name="playlist_title">Playlist</string>
+
+    <string name="home_menu">Home</string>
+    <string name="search_menu">Search</string>
+    <string name="listening_now_menu">Listening now</string>
+    <string name="profile_menu">Profile</string>
+    <string name="DJ_menu">DJ</string>
+
+
 </resources>

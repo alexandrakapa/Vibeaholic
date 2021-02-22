@@ -64,7 +64,7 @@
             app:icon="@android:drawable/ic_media_play" />
 
         <TextView
-            android:id="@+id/editTextTextPersonName2"
+            android:id="@+id/song_title_playing"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="60dp"
@@ -76,7 +76,7 @@
         <TextView
             android:id="@+id/editTextTextPersonName3"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="13dp"
             android:layout_marginStart="60dp"
             android:layout_marginLeft="60dp"
             android:layout_marginTop="420dp"
