@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "124790210851",
+    "firebase_url": "https://hci-vibeaholic-default-rtdb.firebaseio.com",
+    "project_id": "hci-vibeaholic",
+    "storage_bucket": "hci-vibeaholic.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:124790210851:android:3923562583627fe483cc96",
+        "android_client_info": {
+          "package_name": "com.example.myapplication"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "124790210851-piqgqvrltfr4ka25fdn022dlo64616gt.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAgrsTeHHqRt2MG5GaL8DAHm2YI7bwlxTw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "124790210851-piqgqvrltfr4ka25fdn022dlo64616gt.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
