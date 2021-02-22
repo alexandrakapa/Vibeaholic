@@ -5,6 +5,7 @@ import android.graphics.Color
 import android.os.Bundle
 import android.view.*
 import android.widget.Button
+import android.widget.TextView
 import android.widget.Toast
 import androidx.core.view.GestureDetectorCompat
 import androidx.fragment.app.Fragment
@@ -43,7 +44,12 @@ class Playing_now : Fragment() {
                               savedInstanceState: Bundle?): View? {
         // Inflate the layout for this fragment
         detector = GestureDetectorCompat(activity as MainActivity, GestureListener())
-        return inflater.inflate(R.layout.fragment_playing_now, container, false)
+        val vw=inflater.inflate(R.layout.fragment_playing_now, container, false)
+        val bundle=arguments
+        val sngtxt=vw.findViewById<TextView>(R.id.song_title_playing)
+        sngtxt.text = bundle?.getString("song")
+       // sngtxt.text="Hello"
+        return vw
     }
 
 

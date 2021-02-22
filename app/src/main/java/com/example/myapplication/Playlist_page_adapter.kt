@@ -1,6 +1,8 @@
 package com.example.myapplication
 
 import android.app.Activity
+import android.os.Bundle
+import android.telecom.Call
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -33,10 +35,19 @@ class Playlist_page_adapter(val posts: ArrayList<String>, val activity: MainActi
     override fun onBindViewHolder(holder:Playlist_page_adapter.Viewholder, position: Int) {
         holder.txt.text = posts[position]
 
-        val view1 : CardView
-        view1=holder.view1.findViewById((R.id.song_area))
-        view1.setOnClickListener {
-            activity.makeCurrentFragment(Playing_now())
+        val view2 : CardView
+        view2=holder.view1.findViewById((R.id.song_area))
+        view2.setOnClickListener {
+            val bundle = Bundle()
+            //var details = Call.Details()
+            bundle.putString("song", posts[position])
+           val playing=Playing_now()
+            playing.arguments=bundle
+
+            activity.makeCurrentFragment(playing)
+            //activity.findViewById<TextView>(R.id.song_title_playing).text = "posts[position]"
+
+
         }
     }
 }
