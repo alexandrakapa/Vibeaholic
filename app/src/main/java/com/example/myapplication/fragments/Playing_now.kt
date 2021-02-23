@@ -5,6 +5,7 @@ import android.graphics.Color
 import android.os.Bundle
 import android.view.*
 import android.widget.Button
+import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
 import androidx.core.view.GestureDetectorCompat
@@ -55,6 +56,15 @@ class Playing_now : Fragment() {
 
     public fun onTouchEvent(event: MotionEvent?): Boolean {
         return detector.onTouchEvent(event)
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+
+        view.findViewById<Button>(R.id.button5).setOnClickListener {
+            (activity as MainActivity).makeCurrentFragment(Song_details())
+        }
     }
 /*
 

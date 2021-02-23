@@ -20,6 +20,7 @@ import kotlinx.android.synthetic.main.activity_main.*
 class MainActivity : AppCompatActivity(){
     val REQUEST_IMAGE_CAPTURE = 1
     var isItFirstTime = true
+    var cameraOn = false
     internal lateinit var myDialog : Dialog
     internal lateinit var txt : TextView
     internal lateinit var btnSwitch : Switch
@@ -45,10 +46,12 @@ class MainActivity : AppCompatActivity(){
                     ShowDialog()
                 }
                 else {
-                    val takePicture = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
-                    startActivityForResult(takePicture, REQUEST_IMAGE_CAPTURE)
+                    if (cameraOn) {
+                        val takePicture = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
+                        startActivityForResult(takePicture, REQUEST_IMAGE_CAPTURE)
 
-                    Toast.makeText(this@MainActivity, "Camera is on", Toast.LENGTH_SHORT).show()
+                        Toast.makeText(this@MainActivity, "Camera is on", Toast.LENGTH_SHORT).show()
+                    }
                 }
             }
         }
@@ -107,26 +110,27 @@ class MainActivity : AppCompatActivity(){
         btnSwitch4 = myDialog.findViewById<View>(R.id.switch4) as Switch
         btnSwitch2.setOnClickListener {
             if (btnSwitch2.isChecked) {
-                btnSwitch2.setText("Yes")
+                btnSwitch2.text = "Yes"
+                cameraOn = true
             }
             else {
-                btnSwitch2.setText("No")
+                btnSwitch2.text = "No"
             }
         }
         btnSwitch3.setOnClickListener {
             if (btnSwitch3.isChecked) {
-                btnSwitch3.setText("Yes")
+                btnSwitch3.text = "Yes"
             }
             else {
-                btnSwitch3.setText("No")
+                btnSwitch3.text = "No"
             }
         }
         btnSwitch4.setOnClickListener {
             if (btnSwitch4.isChecked) {
-                btnSwitch4.setText("Yes")
+                btnSwitch4.text = "Yes"
             }
             else {
-                btnSwitch4.setText("No")
+                btnSwitch4.text = "No"
             }
         }
         txt = myDialog.findViewById<View>(R.id.button_go) as TextView
