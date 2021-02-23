@@ -37,5 +37,6 @@ class PostsAdapter(val posts: ArrayList<String>, val activity: MainActivity) :  
         }
 
 
+
     }
 }
