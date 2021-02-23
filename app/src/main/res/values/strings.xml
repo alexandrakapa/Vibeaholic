@@ -67,6 +67,9 @@
     <string name="about">About</string>
     <string name="sign_out">Sign out</string>
     <string name="settings">Settings</string>
+    <string name="songs">Songs</string>
+    <string name="artists">Artists</string>
+    <string name="playlists">Playlists</string>
 
 
 </resources>

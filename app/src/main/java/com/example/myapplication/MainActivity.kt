@@ -16,8 +16,8 @@ import androidx.fragment.app.Fragment
 import com.example.myapplication.fragments.*
 import com.google.android.material.navigation.NavigationView
 import kotlinx.android.synthetic.main.activity_main.*
-
-
+import kotlinx.android.synthetic.main.fragment_search_results.*
+import kotlinx.android.synthetic.main.search_results.*
 
 
 class MainActivity : AppCompatActivity(){
@@ -125,8 +125,20 @@ class MainActivity : AppCompatActivity(){
             .commit()
     }
 
+/*
+     fun setUpTabs() {
+        val adapter1 = ViewPagerAdapter(supportFragmentManager)
+        adapter1.addFragment(search_songs(), "Songs")
+        adapter1.addFragment(search_artists(), "Artists")
+        adapter1.addFragment(search_playlists(), "Playlists")
+       viewpager.adapter=adapter1
+        tablayout.setupWithViewPager(viewpager)
 
 
+    }
+
+
+ */
 
     fun ShowDialog() {
         myDialog = Dialog(this)

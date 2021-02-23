@@ -4,10 +4,17 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import androidx.fragment.app.Fragment
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
+import com.example.myapplication.MainActivity
+import com.example.myapplication.Playlist_page_adapter
 import com.example.myapplication.R
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayout.OnTabSelectedListener
+import kotlinx.android.synthetic.main.fragment_playing_now.*
+import java.util.ArrayList
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -40,21 +47,46 @@ class Search_results : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.search_results, container, false)
+        val view =inflater.inflate(R.layout.search_results, container, false)
+
+
+        val posts: ArrayList<String> = ArrayList() //this will change
+        for (i in 1..100){
+            posts.add("Song # $i")
+        }
+        val mRecyclerView: RecyclerView
+        mRecyclerView = view.findViewById(R.id.recyclerView_results)
+        mRecyclerView.layoutManager = LinearLayoutManager(activity as MainActivity, RecyclerView.VERTICAL, false)
+        mRecyclerView.adapter= Playlist_page_adapter(posts, activity as MainActivity)
+        // Inflate the layout for this fragment
+
+        return view
 
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        //(activity as MainActivity).setUpTabs()
         super.onViewCreated(view, savedInstanceState)
         //var TabSong = view.findViewById<TabItem>(R.id.tabSongs)
 
-     /*   view.findViewById<Button>(R.id.some).setOnClickListener {
-            (activity as MainActivity).makeCurrentFragment(Song_details())
-        }*/
+        view.findViewById<Button>(R.id.song_button).setOnClickListener {
+            (activity as MainActivity).makeCurrentFragment(Search_results())
+        }
+
+        view.findViewById<Button>(R.id.artists_button).setOnClickListener {
+            (activity as MainActivity).makeCurrentFragment(search_artists())
+        }
+
+        view.findViewById<Button>(R.id.playlists_button).setOnClickListener {
+            (activity as MainActivity).makeCurrentFragment(search_playlists())
+        }
 
 
 
     }
+
+
+
 
     companion object {
         /**
