@@ -16,7 +16,7 @@ import androidx.fragment.app.Fragment
 import com.example.myapplication.fragments.*
 import com.google.android.material.navigation.NavigationView
 import kotlinx.android.synthetic.main.activity_main.*
-import kotlinx.android.synthetic.main.app_bar_main.*
+
 
 
 
