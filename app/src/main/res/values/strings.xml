@@ -66,6 +66,7 @@
     <string name="permissions">Permissions</string>
     <string name="about">About</string>
     <string name="sign_out">Sign out</string>
+    <string name="settings">Settings</string>
 
 
 </resources>

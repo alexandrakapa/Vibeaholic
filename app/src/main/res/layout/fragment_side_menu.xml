@@ -5,7 +5,7 @@
     android:layout_height="680dp"
     android:layout_marginTop="25dp"
     android:background="@color/black"
-    tools:context=".fragments.menu_test">
+    tools:context=".fragments.side_menu">
 
     <TextView
         android:layout_width="wrap_content"
@@ -120,7 +120,7 @@
         android:layout_marginStart="5dp"
         android:layout_marginLeft="5dp"
         android:layout_marginTop="325dp"
-        android:text="@string/about"
+        android:text="@string/settings"
         android:textColor="@color/white"
         android:textSize="20sp">
 
@@ -133,12 +133,31 @@
         android:layout_marginTop="370dp"
         android:background="#60686C" />
 
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="5dp"
+        android:layout_marginLeft="5dp"
+        android:layout_marginTop="385dp"
+        android:text="@string/about"
+        android:textColor="@color/white"
+        android:textSize="20sp">
+
+    </TextView>
+
+    <View
+        android:id="@+id/divider_menu6"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginTop="430dp"
+        android:background="#60686C" />
+
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textSize="20sp"
         android:text="@string/sign_out"
-        android:layout_marginTop="465dp"
+        android:layout_marginTop="480dp"
         android:layout_marginLeft="105dp"
         android:layout_marginStart="105dp">
 
