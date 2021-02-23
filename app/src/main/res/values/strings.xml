@@ -58,6 +58,15 @@
     <string name="listening_now_menu">Listening now</string>
     <string name="profile_menu">Profile</string>
     <string name="DJ_menu">DJ</string>
+    <string name="menu">MENU</string>
+    <string name="dark_mode">Dark mode</string>
+    <string name="equalizer">Equalizer</string>
+    <string name="connected_devices">Connected devices</string>
+    <string name="social_media">Link your social media accounts</string>
+    <string name="permissions">Permissions</string>
+    <string name="about">About</string>
+    <string name="sign_out">Sign out</string>
+    <string name="settings">Settings</string>
 
 
 </resources>

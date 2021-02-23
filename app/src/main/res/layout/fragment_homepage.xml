@@ -33,7 +33,7 @@
             android:id="@+id/divider2"
             android:layout_width="match_parent"
             android:layout_height="1dp"
-            android:layout_marginTop="105dp"
+            android:layout_marginTop="98dp"
             android:background="#03A9F4" />
 
         <TextView
@@ -48,7 +48,7 @@
             android:id="@+id/divider3"
             android:layout_width="match_parent"
             android:layout_height="1dp"
-            android:layout_marginTop="260dp"
+            android:layout_marginTop="253dp"
             android:background="#03A9F4" />
 
         <TextView
@@ -63,7 +63,7 @@
             android:id="@+id/divider4"
             android:layout_width="match_parent"
             android:layout_height="1dp"
-            android:layout_marginTop="415dp"
+            android:layout_marginTop="408dp"
             android:background="#03A9F4"  />
 
         <TextView
@@ -79,7 +79,7 @@
             android:id="@+id/divider5"
             android:layout_width="match_parent"
             android:layout_height="1dp"
-            android:layout_marginTop="570dp"
+            android:layout_marginTop="563dp"
             android:background="#03A9F4"/>
 
         <androidx.recyclerview.widget.RecyclerView

@@ -5,6 +5,9 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
+import android.widget.SearchView
+import com.example.myapplication.MainActivity
 import com.example.myapplication.R
 
 // TODO: Rename parameter arguments, choose names that match
@@ -36,6 +39,20 @@ class DJ : Fragment() {
     ): View? {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_d_j, container, false)
+
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+
+        view.findViewById<Button>(R.id.button_create).setOnClickListener {
+            (activity as MainActivity).makeCurrentFragment(Party_spec())
+        }
+
+        view.findViewById<Button>(R.id.button_join).setOnClickListener {
+            (activity as MainActivity).makeCurrentFragment(Enter_event_code())
+        }
     }
 
     companion object {

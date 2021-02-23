@@ -1,14 +1,13 @@
 package com.example.myapplication.fragments
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
-import android.widget.SearchView
-import com.example.myapplication.MainActivity
+import androidx.fragment.app.Fragment
 import com.example.myapplication.R
+import com.google.android.material.tabs.TabLayout
+import com.google.android.material.tabs.TabLayout.OnTabSelectedListener
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -17,10 +16,10 @@ private const val ARG_PARAM2 = "param2"
 
 /**
  * A simple [Fragment] subclass.
- * Use the [Search.newInstance] factory method to
+ * Use the [Search_results.newInstance] factory method to
  * create an instance of this fragment.
  */
-class Search : Fragment() {
+class Search_results : Fragment() {
     // TODO: Rename and change types of parameters
     private var param1: String? = null
     private var param2: String? = null
@@ -28,11 +27,11 @@ class Search : Fragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
         arguments?.let {
             param1 = it.getString(ARG_PARAM1)
             param2 = it.getString(ARG_PARAM2)
         }
-
 
     }
 
@@ -41,16 +40,20 @@ class Search : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_search, container, false)
+        return inflater.inflate(R.layout.search_results, container, false)
+
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        //var TabSong = view.findViewById<TabItem>(R.id.tabSongs)
+
+     /*   view.findViewById<Button>(R.id.some).setOnClickListener {
+            (activity as MainActivity).makeCurrentFragment(Song_details())
+        }*/
 
 
-        view.findViewById<SearchView>(R.id.search_icon).setOnSearchClickListener {
-            (activity as MainActivity).makeCurrentFragment(Search_results())
-        }
+
     }
 
     companion object {
@@ -60,12 +63,12 @@ class Search : Fragment() {
          *
          * @param param1 Parameter 1.
          * @param param2 Parameter 2.
-         * @return A new instance of fragment Search.
+         * @return A new instance of fragment Search_results.
          */
         // TODO: Rename and change types and number of parameters
         @JvmStatic
         fun newInstance(param1: String, param2: String) =
-            Search().apply {
+            Search_results().apply {
                 arguments = Bundle().apply {
                     putString(ARG_PARAM1, param1)
                     putString(ARG_PARAM2, param2)
