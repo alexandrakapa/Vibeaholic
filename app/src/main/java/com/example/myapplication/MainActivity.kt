@@ -1,20 +1,23 @@
 package com.example.myapplication
 
+import android.app.ActionBar
 import android.app.Dialog
 import android.content.Intent
+import android.os.Build
 import android.os.Bundle
 import android.provider.MediaStore
 import android.view.*
-import android.widget.Button
-import android.widget.Switch
-import android.widget.TextView
-import android.widget.Toast
+import android.widget.*
+import androidx.annotation.RequiresApi
+import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.GestureDetectorCompat
 import androidx.fragment.app.Fragment
 import com.example.myapplication.fragments.*
 import com.google.android.material.navigation.NavigationView
 import kotlinx.android.synthetic.main.activity_main.*
+import kotlinx.android.synthetic.main.app_bar_main.*
+
 
 
 class MainActivity : AppCompatActivity(){
@@ -28,8 +31,13 @@ class MainActivity : AppCompatActivity(){
     internal lateinit var btnSwitch4 : Switch
     internal lateinit var btnmenu : Button
 
+    var ismenuopen=false
+    lateinit var prevfrag : Fragment
+
+
     private lateinit var detector: GestureDetectorCompat
 
+    @RequiresApi(Build.VERSION_CODES.LOLLIPOP)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -91,7 +99,27 @@ class MainActivity : AppCompatActivity(){
         //mRecyclerView.adapter= PostsAdapter(posts)
         //recyclerView.layoutManager = LinearLayoutManager(this)
         //recyclerView.adapter=PostsAdapter(posts)
+        findViewById<Button>(R.id.homepage_menu).setOnClickListener {
+            if (!ismenuopen){
+                ismenuopen=true
+                openmenu()
+            }
+            else{
+                ismenuopen=false
+                makeCurrentFragment(prevfrag)
+            }
+        }
 
+
+    }
+
+   // @RequiresApi(Build.VERSION_CODES.LOLLIPOP)
+    fun openmenu( ) {
+        val frag= side_menu()
+        //frag.enterTransition = android.R.transition.slide_bottom;
+        supportFragmentManager.beginTransaction()
+            .add(R.id.fl_wrapper, frag)
+            .commit()
     }
 
 
@@ -178,11 +206,14 @@ class MainActivity : AppCompatActivity(){
         }
     }
 
-    public fun makeCurrentFragment(fragment: Fragment) =
+    public fun makeCurrentFragment(fragment: Fragment) {
+
+        prevfrag = fragment
         supportFragmentManager.beginTransaction().apply {
             replace(R.id.fl_wrapper, fragment)
             commit()
         }
+    }
 
     inner class GestureListener : GestureDetector.SimpleOnGestureListener(){
 
