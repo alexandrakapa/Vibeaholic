@@ -46,8 +46,12 @@ class Side_menu_dj_mode : Fragment() {
         view.findViewById<Button>(R.id.exit).setOnClickListener {
             (activity as MainActivity).onDj = false
             (activity as MainActivity).ismenuopen = false
-            (activity as MainActivity).makeCurrentFragment((activity as MainActivity).prevfrag)
-        }
+
+            (activity as MainActivity).searchtext = "Search song here"
+            (activity as MainActivity).makeCurrentFragment(Homepage())
+
+            }
+
 
         view.findViewById<TextView>(R.id.more).setOnClickListener {
             (activity as MainActivity).makeCurrentFragment(More_about_party())

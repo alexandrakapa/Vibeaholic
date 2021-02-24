@@ -41,27 +41,12 @@ class side_menu : Fragment() {
     }
 
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
 
-
-        view.findViewById<Button>(R.id.exit).setOnClickListener {
-           if ((activity as MainActivity).onDj) {
-               (activity as MainActivity).onDj = false
-               (activity as MainActivity).ismenuopen = false
-               (activity as MainActivity).searchtext = "Search song here"
-               (activity as MainActivity).makeCurrentFragment(Homepage())
-
-           }
-            else {
-               Toast.makeText(activity, "Not currently in party.", Toast.LENGTH_LONG).show()
-           }
-        }
 
       //  view.findViewById<TextView>(R.id.more).setOnClickListener {
        //    (activity as MainActivity).makeCurrentFragment(More_about_party())
       // }
-    }
+
 
 
     companion object {

@@ -56,6 +56,9 @@ class Add_Suggest_song_page : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        view.findViewById<Button>(R.id.details_party).setOnClickListener {
+            (activity as MainActivity).makeCurrentFragment(Song_details())
+        }
 
         view.findViewById<Button>(R.id.addorsuggestbutton).setOnClickListener {
             if ((activity as MainActivity).onCreate){
@@ -81,15 +84,12 @@ class Add_Suggest_song_page : Fragment() {
 
     }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
 
 
-        view.findViewById<Button>(R.id.details_party).setOnClickListener {
-            (activity as MainActivity).makeCurrentFragment(Song_details())
-        }
 
-    }
+
+
+
 
     companion object {
         /**
