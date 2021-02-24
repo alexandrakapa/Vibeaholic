@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    tools:context=".fragments.More_about_party"
     android:background="@color/black">
 
     <RelativeLayout
@@ -77,5 +78,34 @@
 
 
         </TableLayout>
+
+        <TextView
+            android:layout_width="300dp"
+            android:layout_height="50dp"
+            android:layout_marginTop="500dp"
+            android:layout_marginLeft="30dp"
+            android:text="@string/more_party2"
+            android:textColor="@color/white"
+            android:textSize="19sp"
+            android:textStyle="bold" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginTop="530dp"
+            android:background="#03A9F4" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="680dp"
+            android:layout_marginLeft="30dp"
+            android:text="@string/more_party3"
+            android:textSize="30sp"
+            android:textStyle="bold"
+            android:textColor="@color/white"/>
+
+
     </RelativeLayout>
+
 </ScrollView>

@@ -48,10 +48,12 @@ class DJ : Fragment() {
 
         view.findViewById<Button>(R.id.button_create).setOnClickListener {
             (activity as MainActivity).makeCurrentFragment(Party_spec())
+            (activity as MainActivity).onDj = true
         }
 
         view.findViewById<Button>(R.id.button_join).setOnClickListener {
             (activity as MainActivity).makeCurrentFragment(Enter_event_code())
+            (activity as MainActivity).onDj = true
         }
     }
 

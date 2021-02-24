@@ -1,23 +1,24 @@
 package com.example.myapplication
 
-import android.app.ActionBar
 import android.app.Dialog
 import android.content.Intent
 import android.os.Build
 import android.os.Bundle
 import android.provider.MediaStore
-import android.view.*
-import android.widget.*
+import android.view.GestureDetector
+import android.view.MotionEvent
+import android.view.View
+import android.view.Window
+import android.widget.Button
+import android.widget.Switch
+import android.widget.TextView
+import android.widget.Toast
 import androidx.annotation.RequiresApi
-import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.GestureDetectorCompat
 import androidx.fragment.app.Fragment
 import com.example.myapplication.fragments.*
-import com.google.android.material.navigation.NavigationView
 import kotlinx.android.synthetic.main.activity_main.*
-
-
 
 
 class MainActivity : AppCompatActivity(){
@@ -31,7 +32,7 @@ class MainActivity : AppCompatActivity(){
     internal lateinit var btnSwitch3 : Switch
     internal lateinit var btnSwitch4 : Switch
     internal lateinit var btnmenu : Button
-
+    var onDj = false
     var ismenuopen=false
     lateinit var prevfrag : Fragment
 
@@ -42,6 +43,7 @@ class MainActivity : AppCompatActivity(){
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
 
         btnmenu=findViewById<View>(R.id.homepage_menu) as Button
 
@@ -68,20 +70,32 @@ class MainActivity : AppCompatActivity(){
         val homepage=Homepage()
         val search=Search()
         val playing=Playing_now()
+        val partyPlaying = Party_playing_now()
         val profile=Profile()
         val dj=DJ()
+        val searchWithRecommendations = Search_with_recommendations()
 
         makeCurrentFragment(homepage)
 
 
         bottom_navigation.setOnNavigationItemSelectedListener {
             when (it.itemId){
-                R.id.ic_home -> makeCurrentFragment(homepage)
-                R.id.ic_search -> makeCurrentFragment(search)
-                R.id.ic_play_now -> makeCurrentFragment(playing)
+                R.id.ic_home -> {
+                    if (!onDj)makeCurrentFragment(homepage)
+                    else makeCurrentFragment(homepage)
+                }
+                R.id.ic_search -> {
+                    if (!onDj) makeCurrentFragment(search)
+                    else makeCurrentFragment(searchWithRecommendations)
+                }
+                R.id.ic_play_now -> {
+                    if (!onDj) makeCurrentFragment(playing)
+                    else makeCurrentFragment(partyPlaying)
+                }
                 R.id.ic_profile -> makeCurrentFragment(profile)
-                R.id.ic_dj->makeCurrentFragment(dj)
-
+                R.id.ic_dj-> {
+                    makeCurrentFragment(dj)
+                }
             }
             true
         }
@@ -123,6 +137,7 @@ class MainActivity : AppCompatActivity(){
         supportFragmentManager.beginTransaction()
             .add(R.id.fl_wrapper, frag)
             .commit()
+
     }
 
 

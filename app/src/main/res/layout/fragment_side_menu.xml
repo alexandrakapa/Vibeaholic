@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="330dp"
     android:layout_height="680dp"
@@ -142,7 +143,6 @@
         android:text="@string/about"
         android:textColor="@color/white"
         android:textSize="20sp">
-
     </TextView>
 
     <View
@@ -152,15 +152,47 @@
         android:layout_marginTop="430dp"
         android:background="#60686C" />
 
+    <TextView
+        android:id="@+id/more"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="5dp"
+        android:layout_marginLeft="5dp"
+        android:layout_marginTop="445dp"
+        android:text="@string/more"
+        android:textColor="@color/white"
+        android:textSize="20sp">
+    </TextView>
+
+    <View
+        android:id="@+id/divider_menu7"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginTop="490dp"
+        android:background="#60686C" />
+
     <Button
+        android:id="@+id/exit"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="20sp"
+        android:text="@string/exit"
+        android:layout_marginTop="520dp"
+        android:layout_marginStart="78dp"
+        android:layout_marginLeft="80dp">
+
+    </Button>
+
+    <Button
+        android:id="@+id/sign_out"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textSize="20sp"
         android:text="@string/sign_out"
-        android:layout_marginTop="480dp"
+        android:layout_marginTop="590dp"
         android:layout_marginLeft="105dp"
         android:layout_marginStart="105dp">
 
     </Button>
 
-</FrameLayout>
+</RelativeLayout>

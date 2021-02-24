@@ -98,9 +98,9 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="20dp"
             android:layout_marginLeft="5dp"
-            android:layout_marginTop="450dp"
-            android:text="Recommendations"
-            android:textSize="30sp"
+            android:layout_marginTop="460dp"
+            android:text="@string/rec"
+            android:textSize="25sp"
             android:textColor="#03A9F4" />
 
         <View
