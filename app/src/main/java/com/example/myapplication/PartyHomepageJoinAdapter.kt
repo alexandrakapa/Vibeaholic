@@ -12,20 +12,25 @@ import androidx.appcompat.view.menu.ActionMenuItemView
 import androidx.cardview.widget.CardView
 import androidx.recyclerview.widget.RecyclerView
 import androidx.fragment.app.Fragment
-import com.example.myapplication.fragments.*
+import com.example.myapplication.fragments.Add_Suggest_song_page
+import com.example.myapplication.fragments.Party_playing_now
+import com.example.myapplication.fragments.Playing_now
+import com.example.myapplication.fragments.Playlist
 
 //used for user playlist and for search with recommendations
 
-class Playlist_page_adapter(val posts: ArrayList<String>, val activity: MainActivity) :  RecyclerView.Adapter<Playlist_page_adapter.Viewholder>(){
+class PartyHomepageJoinAdapter(val posts: ArrayList<String>, val activity: MainActivity) :  RecyclerView.Adapter<PartyHomepageJoinAdapter.Viewholder>(){
 
     class Viewholder(itemView: View, activity: MainActivity) : RecyclerView.ViewHolder(itemView){
-        val txt : TextView = itemView.findViewById(R.id.song_title)
+        val txt : TextView = itemView.findViewById(R.id.song_title_home_join)
         val view1= itemView
         val activity1 = activity
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): Playlist_page_adapter.Viewholder {
-        val view: View = LayoutInflater.from(parent.context).inflate(R.layout.playlist_song, parent, false)
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int):PartyHomepageJoinAdapter.Viewholder {
+
+        val view: View = LayoutInflater.from(parent.context).inflate(R.layout.party_homepage_join_song_view, parent, false)
+
         return Viewholder(view , activity)
     }
 
@@ -33,24 +38,20 @@ class Playlist_page_adapter(val posts: ArrayList<String>, val activity: MainActi
 
 
 
-    override fun onBindViewHolder(holder:Playlist_page_adapter.Viewholder, position: Int) {
+    override fun onBindViewHolder(holder:PartyHomepageJoinAdapter.Viewholder, position: Int) {
         holder.txt.text = posts[position]
 
         val view2 : CardView
-        view2=holder.view1.findViewById((R.id.song_area))
+        view2=holder.view1.findViewById((R.id.song_area_home_join))
         view2.setOnClickListener {
             val bundle = Bundle()
             //var details = Call.Details()
             bundle.putString("song", posts[position])
-            val playing = Playing_now()
 
-            playing.arguments = bundle
+            val partyplaying=Party_playing_now()
+            partyplaying.arguments=bundle
 
-
-            activity.makeCurrentFragment(playing)
-
-            //activity.findViewById<TextView>(R.id.song_title_playing).text = "posts[position]"
-
+            activity.makeCurrentFragment(partyplaying)
 
         }
     }

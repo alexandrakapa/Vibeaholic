@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView
+    android:id="@+id/song_area_dj_search"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="80dp"
+    android:layout_marginTop="0dp"
+    app:cardBackgroundColor="@color/black">
+
+    <ImageView
+        android:id="@+id/touch_area"
+        android:layout_width="298dp"
+        android:layout_height="match_parent">
+
+
+    </ImageView>
+
+    <ImageView
+        android:id="@+id/song_image_dj_search"
+        android:layout_width="70dp"
+        android:layout_height="70dp"
+        app:srcCompat="@android:drawable/gallery_thumb" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <TextView
+            android:id="@+id/song_title_dj_search"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="25dp"
+            android:layout_marginLeft="100dp"
+            android:text="@string/textview"
+            android:textColor="@color/white" />
+
+        <Button
+            android:id="@+id/button_addsuggest"
+            android:layout_width="48dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="345dp"
+            android:layout_marginTop="15dp"
+            android:backgroundTint="@color/black"
+            app:icon="@drawable/ic_add" />
+
+        <Button
+            android:id="@+id/button_favourites"
+            android:layout_width="48dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:layout_marginLeft="300dp"
+            android:backgroundTint="@color/black"
+            app:icon="@android:drawable/star_off" />
+
+        <Button
+            android:id="@+id/button_cancel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="300dp"
+            android:layout_marginTop="15dp"
+            android:backgroundTint="@color/black"
+            android:visibility="gone"
+            android:text="@string/cancel" />
+
+    </RelativeLayout>
+
+</androidx.cardview.widget.CardView>

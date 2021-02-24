@@ -37,7 +37,48 @@ class Add_Suggest_song_page : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_add__suggest_song_page, container, false)
+        val view = inflater.inflate(R.layout.fragment_add__suggest_song_page, container, false)
+
+        if ((activity as MainActivity).onCreate){
+            val but=view.findViewById<Button>(R.id.addorsuggestbutton)
+            but.text="Add "
+
+        }
+        else {
+            val but=view.findViewById<Button>(R.id.addorsuggestbutton)
+            but.text="Suggest"
+
+        }
+
+        return view
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+
+        view.findViewById<Button>(R.id.addorsuggestbutton).setOnClickListener {
+            if ((activity as MainActivity).onCreate){
+                val but=view.findViewById<Button>(R.id.addorsuggestbutton)
+                if (but.text=="Add "){
+                    but.text="Cancel"
+                }
+                else{
+                    but.text="Add "
+                }
+            }
+            else {
+                val but=view.findViewById<Button>(R.id.addorsuggestbutton)
+                if (but.text=="Suggest"){
+                    but.text="Cancel"
+                }
+                else{
+                    but.text="Suggest"
+                }
+            }
+
+        }
+
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {

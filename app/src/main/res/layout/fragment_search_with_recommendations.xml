@@ -8,6 +8,7 @@
     android:background="@color/black">
 
     <EditText
+        android:id="@+id/search_text_dj"
         android:layout_width="310dp"
         android:layout_height="50dp"
         android:layout_marginLeft="60dp"
@@ -23,7 +24,7 @@
 
     <Button
 
-        android:id="@+id/search_icon"
+        android:id="@+id/search_icon_dj"
         style="@style/Widget.MaterialComponents.ExtendedFloatingActionButton"
         android:layout_width="59dp"
         android:layout_height="39dp"

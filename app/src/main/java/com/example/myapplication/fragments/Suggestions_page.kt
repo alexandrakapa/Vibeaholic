@@ -10,6 +10,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.myapplication.MainActivity
 import com.example.myapplication.Playlist_page_adapter
 import com.example.myapplication.R
+import com.example.myapplication.SuggestionsAdapter
 import java.util.ArrayList
 
 // TODO: Rename parameter arguments, choose names that match
@@ -48,7 +49,7 @@ class Suggestions_page : Fragment() {
         val mRecyclerViewParty: RecyclerView
         mRecyclerViewParty = view.findViewById(R.id.recyclerView_suggestion_playlist)
         mRecyclerViewParty.layoutManager = LinearLayoutManager(activity as MainActivity, RecyclerView.VERTICAL, false)
-        mRecyclerViewParty.adapter= Playlist_page_adapter(posts, activity as MainActivity)
+        mRecyclerViewParty.adapter= SuggestionsAdapter(posts, activity as MainActivity)
 
         return view
     }

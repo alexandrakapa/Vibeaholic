@@ -8,9 +8,7 @@ import android.view.ViewGroup
 import android.widget.Button
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.example.myapplication.MainActivity
-import com.example.myapplication.Playlist_page_adapter
-import com.example.myapplication.R
+import com.example.myapplication.*
 import java.util.ArrayList
 
 // TODO: Rename parameter arguments, choose names that match
@@ -50,7 +48,7 @@ class Party_playlist_suggestion : Fragment() {
         val mRecyclerView_sug: RecyclerView
         mRecyclerView_sug = view.findViewById(R.id.recyclerView_party_playlist_sug)
         mRecyclerView_sug.layoutManager = LinearLayoutManager(activity as MainActivity, RecyclerView.VERTICAL, false)
-        mRecyclerView_sug.adapter= Playlist_page_adapter(posts, activity as MainActivity)
+        mRecyclerView_sug.adapter= PartyHomepageJoinAdapter(posts, activity as MainActivity)
 
         return view
     }
