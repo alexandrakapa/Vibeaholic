@@ -1,17 +1,14 @@
 package com.example.myapplication.fragments
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ArrayAdapter
-import android.widget.Button
-import android.widget.Spinner
-import android.widget.Toast
+import android.widget.*
+import androidx.fragment.app.Fragment
 import com.example.myapplication.MainActivity
 import com.example.myapplication.R
-import kotlinx.android.synthetic.main.fragment_party_spec.*
+
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -53,8 +50,30 @@ class Party_spec : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        val events=resources.getStringArray(R.array.event_type)
+        val spinner = view.findViewById<Spinner>(R.id.spinner)
+        if (spinner != null) {
+            val adapter = activity?.let {
+                ArrayAdapter(
+                    it,
+                    android.R.layout.simple_spinner_item, events)
+            }
+            spinner.adapter = adapter
+            spinner.onItemSelectedListener = object :
+                AdapterView.OnItemSelectedListener {
+                override fun onItemSelected(parent: AdapterView<*>,
+                                            view: View, position: Int, id: Long) {
 
-        view.findViewById<Button>(R.id.button_start).setOnClickListener {
+                }
+                override fun onNothingSelected(parent: AdapterView<*>) {
+                    // write code to perform some action
+                }
+            }
+        }
+
+
+
+    view.findViewById<Button>(R.id.button_start).setOnClickListener {
             (activity as MainActivity).makeCurrentFragment(Party_playlist())
             (activity as MainActivity).onDj = true
         }

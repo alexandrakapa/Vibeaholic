@@ -65,6 +65,11 @@ class Playing_now : Fragment() {
         view.findViewById<Button>(R.id.button5).setOnClickListener {
             (activity as MainActivity).makeCurrentFragment(Song_details())
         }
+
+        view.findViewById<Button>(R.id.play_button).setOnClickListener {
+            if((activity as MainActivity).onDj)
+            Toast.makeText(activity, "You can't hear a song on DJ mode!", Toast.LENGTH_SHORT).show()
+        }
     }
 /*
 
