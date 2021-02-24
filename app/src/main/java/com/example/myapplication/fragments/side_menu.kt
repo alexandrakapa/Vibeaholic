@@ -40,25 +40,6 @@ class side_menu : Fragment() {
         return inflater.inflate(R.layout.fragment_side_menu, container, false)
     }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-
-
-        view.findViewById<Button>(R.id.exit).setOnClickListener {
-           if ((activity as MainActivity).onDj) {
-               (activity as MainActivity).onDj = false
-               (activity as MainActivity).ismenuopen = false
-               (activity as MainActivity).makeCurrentFragment((activity as MainActivity).prevfrag)
-           }
-            else {
-               Toast.makeText(activity, "Test", Toast.LENGTH_LONG).show()
-           }
-        }
-
-      //  view.findViewById<TextView>(R.id.more).setOnClickListener {
-       //    (activity as MainActivity).makeCurrentFragment(More_about_party())
-      // }
-    }
 
     companion object {
         /**

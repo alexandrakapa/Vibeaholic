@@ -42,12 +42,15 @@
     <string name="text9_popup">Are you ready to enjoy this unique experience?</string>
     <string name="let_me">Let me listen</string>
     <string name="search">Search song here</string>
+
     <string-array name="event_type">
+        <item>Choose event types</item>
         <item>Full-on Party</item>
         <item>Date</item>
         <item>Informal Gathering</item>
         <item>Formal Gathering</item>
     </string-array>
+
     <string name="more_party">Hip Hop party!</string>
     <string name="party_type">Party type:Full-on party</string>
 
@@ -80,7 +83,8 @@
     <string name="songs">Songs</string>
     <string name="artists">Artists</string>
     <string name="playlists">Playlists</string>
-
-
-
+    <string name="insert">Insert number of participants</string>
+    <string name="import_play">Import Existing Playlist</string>
+    <string name="selected_item">Selected item:</string>
+    <string name="feel">You activated FEEL ME mode</string>
 </resources>

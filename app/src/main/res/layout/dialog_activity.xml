@@ -8,16 +8,17 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="wrap_content">
     <TextView
         android:layout_width="match_parent"
         android:layout_height="30dp"
         android:layout_marginLeft="50dp"
         android:layout_marginTop="30dp"
-        android:text="You activated FEEL ME mode"
+        android:text="@string/feel"
         android:textSize="20sp"
         android:textStyle="bold"
-        android:textColor="@color/white"/>
+        android:textColor="@color/white"
+        android:layout_marginStart="50dp" />
 
     <TextView
         android:layout_width="match_parent"

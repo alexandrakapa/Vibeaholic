@@ -53,31 +53,30 @@ class Search : Fragment() {
 
         view.findViewById<Button>(R.id.search_icon).setOnClickListener {
 
-     //   view.findViewById<Button>(R.id.search_icon).setOnClickListener {
-     //       (activity as MainActivity).makeCurrentFragment(Search_results())
-      //  }
+            //   view.findViewById<Button>(R.id.search_icon).setOnClickListener {
+            //       (activity as MainActivity).makeCurrentFragment(Search_results())
+            //  }
 
-        val showButton = view.findViewById<Button>(R.id.search_icon)
-        val editText = view.findViewById<EditText>(R.id.search_text)
-
-
-
-        // Setting On Click Listener
-        showButton.setOnClickListener {
-
-            // Getting the user input
-            val txt = editText.text
-
-            //(activity as MainActivity).print(txt.toString())
-
-            (activity as MainActivity).searchtext = txt.toString()
+            val showButton = view.findViewById<Button>(R.id.search_icon)
+            val editText = view.findViewById<EditText>(R.id.search_text)
 
 
-            (activity as MainActivity).makeCurrentFragment(Search_results())
+            // Setting On Click Listener
+            showButton.setOnClickListener {
+
+                // Getting the user input
+                val txt = editText.text
+
+                //(activity as MainActivity).print(txt.toString())
+
+                (activity as MainActivity).searchtext = txt.toString()
+
+
+                (activity as MainActivity).makeCurrentFragment(Search_results())
+            }
+
         }
-
     }
-
     companion object {
         /**
          * Use this factory method to create a new instance of
