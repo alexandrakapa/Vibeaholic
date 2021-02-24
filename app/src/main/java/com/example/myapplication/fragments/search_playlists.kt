@@ -1,6 +1,7 @@
 package com.example.myapplication.fragments
 
 import android.os.Bundle
+import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -8,15 +9,11 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.ImageButton
 import android.widget.SearchView
-import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.myapplication.MainActivity
 import com.example.myapplication.Playlist_page_adapter
 import com.example.myapplication.R
-import com.google.android.material.tabs.TabLayout
-import com.google.android.material.tabs.TabLayout.OnTabSelectedListener
-import kotlinx.android.synthetic.main.fragment_playing_now.*
 import java.util.ArrayList
 
 // TODO: Rename parameter arguments, choose names that match
@@ -26,23 +23,20 @@ private const val ARG_PARAM2 = "param2"
 
 /**
  * A simple [Fragment] subclass.
- * Use the [Search_results.newInstance] factory method to
+ * Use the [search_playlists.newInstance] factory method to
  * create an instance of this fragment.
  */
-class Search_results : Fragment() {
+class search_playlists : Fragment() {
     // TODO: Rename and change types of parameters
     private var param1: String? = null
     private var param2: String? = null
 
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
         arguments?.let {
             param1 = it.getString(ARG_PARAM1)
             param2 = it.getString(ARG_PARAM2)
         }
-
     }
 
     override fun onCreateView(
@@ -50,22 +44,19 @@ class Search_results : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        val view =inflater.inflate(R.layout.search_results, container, false)
 
-
+        val view = inflater.inflate(R.layout.fragment_search_playlists, container, false)
         val posts: ArrayList<String> = ArrayList() //this will change
         for (i in 1..100){
-            posts.add("Song # $i")
+            posts.add("Playlist # $i")
         }
         val mRecyclerView: RecyclerView
-        mRecyclerView = view.findViewById(R.id.recyclerView_results)
+        mRecyclerView = view.findViewById(R.id.recyclerView_results_playlists)
         mRecyclerView.layoutManager = LinearLayoutManager(activity as MainActivity, RecyclerView.VERTICAL, false)
         mRecyclerView.adapter= Playlist_page_adapter(posts, activity as MainActivity)
         // Inflate the layout for this fragment
 
-
-
-        val editText = view.findViewById<EditText>(R.id.searchbar_songs)
+        val editText = view.findViewById<EditText>(R.id.searchbar_playlists)
 
         editText.setText((activity as MainActivity).searchtext)
 
@@ -74,46 +65,36 @@ class Search_results : Fragment() {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        //(activity as MainActivity).setUpTabs()
         super.onViewCreated(view, savedInstanceState)
-        //var TabSong = view.findViewById<TabItem>(R.id.tabSongs)
 
-        view.findViewById<Button>(R.id.song_button).setOnClickListener {
+        view.findViewById<Button>(R.id.song_button3).setOnClickListener {
             (activity as MainActivity).makeCurrentFragment(Search_results())
         }
 
-        view.findViewById<Button>(R.id.artists_button).setOnClickListener {
+        view.findViewById<Button>(R.id.artists_button3).setOnClickListener {
             (activity as MainActivity).makeCurrentFragment(search_artists())
         }
 
-        view.findViewById<Button>(R.id.playlists_button).setOnClickListener {
+        view.findViewById<Button>(R.id.playlists_button3).setOnClickListener {
             (activity as MainActivity).makeCurrentFragment(search_playlists())
         }
 
-        val showButton = view.findViewById<Button>(R.id.search_icon_songs)
-        val editText = view.findViewById<EditText>(R.id.searchbar_songs)
+        val showButton = view.findViewById<Button>(R.id.search_icon_playlists)
+        val editText = view.findViewById<EditText>(R.id.searchbar_playlists)
 
-
-
-        // Setting On Click Listener
         showButton.setOnClickListener {
 
             // Getting the user input
             val txt = editText.text
 
-            //(activity as MainActivity).print(txt.toString())
+           // (activity as MainActivity).print((activity as MainActivity).searchtext)
 
             (activity as MainActivity).searchtext=txt.toString()
 
             // Showing the user input
 
         }
-
-
     }
-
-
-
 
     companion object {
         /**
@@ -122,12 +103,12 @@ class Search_results : Fragment() {
          *
          * @param param1 Parameter 1.
          * @param param2 Parameter 2.
-         * @return A new instance of fragment Search_results.
+         * @return A new instance of fragment search_playlists.
          */
         // TODO: Rename and change types and number of parameters
         @JvmStatic
         fun newInstance(param1: String, param2: String) =
-            Search_results().apply {
+            search_playlists().apply {
                 arguments = Bundle().apply {
                     putString(ARG_PARAM1, param1)
                     putString(ARG_PARAM2, param2)

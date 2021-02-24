@@ -11,20 +11,21 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
+
         <EditText
+            android:id="@+id/search_text"
             android:layout_width="310dp"
             android:layout_height="50dp"
             android:layout_marginLeft="60dp"
             android:layout_marginTop="150dp"
             android:width="1dp"
             android:color="#00000000"
+            android:drawableRight="@drawable/ic_baseline_mic_24"
             android:hint="@string/search"
             android:inputType="text"
             android:singleLine="true"
             android:textColor="@color/white"
-            android:textColorHint="@color/white"
-            android:drawableRight="@drawable/ic_baseline_mic_24"/>
-
+            android:textColorHint="@color/white" />
 
         <Button
             style="@style/Widget.MaterialComponents.ExtendedFloatingActionButton"
@@ -41,6 +42,7 @@
             android:textStyle="bold"
             app:cornerRadius="300dp" />
 
+
         <Button
 
             android:id="@+id/search_icon"
@@ -54,6 +56,7 @@
             android:contentDescription="TODO"
             android:visibility="visible"
             app:icon="@drawable/ic_search" />
+
 
 
     </RelativeLayout>

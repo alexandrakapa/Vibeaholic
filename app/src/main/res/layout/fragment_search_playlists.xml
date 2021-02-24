@@ -3,21 +3,20 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/tabBar"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:layout_marginTop="50dp"
     android:background="@color/black">
 
     <View
-        android:id="@+id/divider_songs"
+        android:id="@+id/divider_playlists"
         android:layout_width="match_parent"
         android:layout_height="1dp"
         android:layout_marginTop="130dp"
         android:background="#60686C" />
 
     <Button
-        android:id="@+id/song_button"
+        android:id="@+id/song_button3"
         android:layout_width="120dp"
         android:layout_height="50dp"
         android:layout_marginTop="80dp"
@@ -28,7 +27,7 @@
     </Button>
 
     <Button
-        android:id="@+id/artists_button"
+        android:id="@+id/artists_button3"
         android:layout_width="120dp"
         android:layout_height="50dp"
         android:layout_marginTop="80dp"
@@ -41,20 +40,22 @@
     </Button>
 
     <Button
-        android:id="@+id/playlists_button"
+        android:id="@+id/playlists_button3"
         android:layout_width="120dp"
         android:layout_height="50dp"
         android:layout_marginTop="80dp"
         android:layout_marginLeft="290dp"
+        android:text="@string/playlists"
         android:backgroundTint="@color/black"
         tools:targetApi="lollipop"
-        android:text="@string/playlists"
         android:layout_marginStart="290dp">
 
     </Button>
 
+
+
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recyclerView_results"
+        android:id="@+id/recyclerView_results_playlists"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginLeft="10dp"
@@ -62,23 +63,25 @@
 
 
     <EditText
-        android:id="@+id/searchbar_songs"
+        android:id="@+id/searchbar_playlists"
         android:layout_width="310dp"
         android:layout_height="50dp"
         android:layout_marginLeft="60dp"
         android:layout_marginTop="15dp"
         android:width="1dp"
         android:color="#00000000"
-        android:drawableRight="@drawable/ic_baseline_mic_24"
         android:hint="@string/search"
         android:inputType="text"
         android:singleLine="true"
         android:textColor="@color/white"
-        android:textColorHint="@color/white" />
+        android:textColorHint="@color/white"
+        android:drawableRight="@drawable/ic_baseline_mic_24"/>
+
+
 
 
     <Button
-        android:id="@+id/search_icon_songs"
+        android:id="@+id/search_icon_playlists"
         android:layout_width="50dp"
         android:layout_height="39dp"
         android:layout_marginLeft="277dp"
@@ -87,6 +90,8 @@
         android:contentDescription="TODO"
         android:visibility="visible"
         app:icon="@drawable/ic_search" />
+
+
 
 
 </RelativeLayout>
