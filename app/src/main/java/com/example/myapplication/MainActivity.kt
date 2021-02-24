@@ -36,7 +36,7 @@ class MainActivity : AppCompatActivity(){
     var ismenuopen=false
     lateinit var prevfrag : Fragment
 
-   // var searchtext = "Hello"
+    var searchtext = "Hello"
 
 
     private lateinit var detector: GestureDetectorCompat
@@ -287,6 +287,11 @@ class MainActivity : AppCompatActivity(){
 
 
         }
+    }
+
+
+    fun print (what : String){
+        Toast.makeText(this, what, Toast.LENGTH_LONG).show()
     }
 
 

@@ -6,6 +6,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import android.widget.EditText
+import android.widget.ImageButton
 import android.widget.SearchView
 import com.example.myapplication.MainActivity
 import com.example.myapplication.R
@@ -48,10 +50,27 @@ class Search : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
 
-        view.findViewById<SearchView>(R.id.search_icon).setOnSearchClickListener {
+     //   view.findViewById<Button>(R.id.search_icon).setOnClickListener {
+     //       (activity as MainActivity).makeCurrentFragment(Search_results())
+      //  }
+
+        val showButton = view.findViewById<Button>(R.id.search_icon)
+        val editText = view.findViewById<EditText>(R.id.search_text)
+
+
+
+        // Setting On Click Listener
+        showButton.setOnClickListener {
+
+            // Getting the user input
+            val txt = editText.text
+
+            //(activity as MainActivity).print(txt.toString())
+
+            (activity as MainActivity).searchtext = txt.toString()
+
             (activity as MainActivity).makeCurrentFragment(Search_results())
         }
-
 
     }
 

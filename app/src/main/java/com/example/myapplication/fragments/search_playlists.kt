@@ -6,6 +6,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import android.widget.EditText
+import android.widget.ImageButton
+import android.widget.SearchView
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.myapplication.MainActivity
@@ -52,6 +55,11 @@ class search_playlists : Fragment() {
         mRecyclerView.layoutManager = LinearLayoutManager(activity as MainActivity, RecyclerView.VERTICAL, false)
         mRecyclerView.adapter= Playlist_page_adapter(posts, activity as MainActivity)
         // Inflate the layout for this fragment
+
+        val editText = view.findViewById<EditText>(R.id.searchbar_playlists)
+
+        editText.setText((activity as MainActivity).searchtext)
+
         return view
 
     }
@@ -69,6 +77,22 @@ class search_playlists : Fragment() {
 
         view.findViewById<Button>(R.id.playlists_button3).setOnClickListener {
             (activity as MainActivity).makeCurrentFragment(search_playlists())
+        }
+
+        val showButton = view.findViewById<Button>(R.id.search_icon_playlists)
+        val editText = view.findViewById<EditText>(R.id.searchbar_playlists)
+
+        showButton.setOnClickListener {
+
+            // Getting the user input
+            val txt = editText.text
+
+           // (activity as MainActivity).print((activity as MainActivity).searchtext)
+
+            (activity as MainActivity).searchtext=txt.toString()
+
+            // Showing the user input
+
         }
     }
 

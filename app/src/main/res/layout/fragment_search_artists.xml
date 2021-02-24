@@ -82,15 +82,18 @@
         android:drawableRight="@drawable/ic_baseline_mic_24"/>
 
 
-    <SearchView
+
+
+    <Button
         android:id="@+id/search_icon_artists"
         android:layout_width="50dp"
         android:layout_height="39dp"
         android:layout_marginLeft="277dp"
         android:layout_marginTop="15dp"
-        android:visibility="visible"
         android:background="#03DAC5"
-        />
+        android:contentDescription="TODO"
+        android:visibility="visible"
+        app:icon="@drawable/ic_search" />
 
 
 
