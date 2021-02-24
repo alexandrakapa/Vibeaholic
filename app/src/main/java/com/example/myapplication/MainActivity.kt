@@ -17,6 +17,7 @@ import com.example.myapplication.fragments.*
 import com.google.android.material.navigation.NavigationView
 import kotlinx.android.synthetic.main.activity_main.*
 
+import kotlinx.android.synthetic.main.search_results.*
 
 
 
@@ -34,6 +35,8 @@ class MainActivity : AppCompatActivity(){
 
     var ismenuopen=false
     lateinit var prevfrag : Fragment
+
+    var searchtext = "Hello"
 
 
     private lateinit var detector: GestureDetectorCompat
@@ -125,8 +128,20 @@ class MainActivity : AppCompatActivity(){
             .commit()
     }
 
+/*
+     fun setUpTabs() {
+        val adapter1 = ViewPagerAdapter(supportFragmentManager)
+        adapter1.addFragment(search_songs(), "Songs")
+        adapter1.addFragment(search_artists(), "Artists")
+        adapter1.addFragment(search_playlists(), "Playlists")
+       viewpager.adapter=adapter1
+        tablayout.setupWithViewPager(viewpager)
 
 
+    }
+
+
+ */
 
     fun ShowDialog() {
         myDialog = Dialog(this)
@@ -272,6 +287,11 @@ class MainActivity : AppCompatActivity(){
 
 
         }
+    }
+
+
+    fun print (what : String){
+        Toast.makeText(this, what, Toast.LENGTH_LONG).show()
     }
 
 
