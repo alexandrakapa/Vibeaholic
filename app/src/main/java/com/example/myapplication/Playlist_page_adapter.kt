@@ -14,6 +14,10 @@ import androidx.recyclerview.widget.RecyclerView
 import androidx.fragment.app.Fragment
 import com.example.myapplication.fragments.Playing_now
 import com.example.myapplication.fragments.Playlist
+import com.google.firebase.database.DatabaseReference
+import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.database.ktx.database
+import com.google.firebase.ktx.Firebase
 
 class Playlist_page_adapter(val posts: ArrayList<String>, val activity: MainActivity) :  RecyclerView.Adapter<Playlist_page_adapter.Viewholder>(){
 
@@ -31,7 +35,6 @@ class Playlist_page_adapter(val posts: ArrayList<String>, val activity: MainActi
     override fun getItemCount()=posts.size
 
 
-
     override fun onBindViewHolder(holder:Playlist_page_adapter.Viewholder, position: Int) {
         holder.txt.text = posts[position]
 
@@ -46,7 +49,6 @@ class Playlist_page_adapter(val posts: ArrayList<String>, val activity: MainActi
 
             activity.makeCurrentFragment(playing)
             //activity.findViewById<TextView>(R.id.song_title_playing).text = "posts[position]"
-
 
         }
     }

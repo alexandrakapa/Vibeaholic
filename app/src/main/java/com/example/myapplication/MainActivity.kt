@@ -17,9 +17,6 @@ import com.example.myapplication.fragments.*
 import com.google.android.material.navigation.NavigationView
 import kotlinx.android.synthetic.main.activity_main.*
 
-
-
-
 class MainActivity : AppCompatActivity(){
     val REQUEST_IMAGE_CAPTURE = 1
     var isItFirstTime = true
@@ -34,7 +31,6 @@ class MainActivity : AppCompatActivity(){
 
     var ismenuopen=false
     lateinit var prevfrag : Fragment
-
 
     private lateinit var detector: GestureDetectorCompat
 
