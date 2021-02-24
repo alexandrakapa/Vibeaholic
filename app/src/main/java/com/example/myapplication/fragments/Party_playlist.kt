@@ -9,6 +9,7 @@ import android.widget.Button
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.myapplication.MainActivity
+import com.example.myapplication.PartyHomepageAdapter
 import com.example.myapplication.Playlist_page_adapter
 import com.example.myapplication.R
 import com.google.android.material.floatingactionbutton.FloatingActionButton
@@ -49,7 +50,7 @@ class Party_playlist : Fragment() {
         val mRecyclerViewParty: RecyclerView
         mRecyclerViewParty = view.findViewById(R.id.recyclerView_party_playlist)
         mRecyclerViewParty.layoutManager = LinearLayoutManager(activity as MainActivity, RecyclerView.VERTICAL, false)
-        mRecyclerViewParty.adapter= Playlist_page_adapter(posts, activity as MainActivity)
+        mRecyclerViewParty.adapter= PartyHomepageAdapter(posts, activity as MainActivity)
 
         return view
     }

@@ -48,10 +48,12 @@ class side_menu : Fragment() {
            if ((activity as MainActivity).onDj) {
                (activity as MainActivity).onDj = false
                (activity as MainActivity).ismenuopen = false
-               (activity as MainActivity).makeCurrentFragment((activity as MainActivity).prevfrag)
+               (activity as MainActivity).searchtext = "Search song here"
+               (activity as MainActivity).makeCurrentFragment(Homepage())
+
            }
             else {
-               Toast.makeText(activity, "Test", Toast.LENGTH_LONG).show()
+               Toast.makeText(activity, "Not currently in party.", Toast.LENGTH_LONG).show()
            }
         }
 

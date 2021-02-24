@@ -34,10 +34,11 @@ class MainActivity : AppCompatActivity(){
     internal lateinit var btnSwitch4 : Switch
     internal lateinit var btnmenu : Button
     var onDj = false
+    var onCreate=false
     var ismenuopen=false
     lateinit var prevfrag : Fragment
 
-    var searchtext = "Hello"
+    var searchtext = "Search song here"
 
 
     private lateinit var detector: GestureDetectorCompat
@@ -312,7 +313,18 @@ class MainActivity : AppCompatActivity(){
 
     private fun onSwipeBottom() {
         Toast.makeText(this, "Bottom swipe", Toast.LENGTH_LONG).show()
-        makeCurrentFragment(Playlist())
+        if (prevfrag !is Playing_now && prevfrag !is Party_playing_now) {
+            return
+        }
+        if (!onDj) {
+            makeCurrentFragment(Playlist())
+        }
+        else if (onDj && onCreate) {
+            makeCurrentFragment(Party_playlist())
+        }
+        else {
+            makeCurrentFragment(Party_playlist_suggestion())
+        }
     }
 
     private fun onSwipeTop() {

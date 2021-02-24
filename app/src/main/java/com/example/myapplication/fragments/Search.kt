@@ -39,8 +39,8 @@ class Search : Fragment() {
     }
 
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
+            inflater: LayoutInflater, container: ViewGroup?,
+            savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_search, container, false)
@@ -53,29 +53,29 @@ class Search : Fragment() {
 
         view.findViewById<Button>(R.id.search_icon).setOnClickListener {
 
-     //   view.findViewById<Button>(R.id.search_icon).setOnClickListener {
-     //       (activity as MainActivity).makeCurrentFragment(Search_results())
-      //  }
+            //   view.findViewById<Button>(R.id.search_icon).setOnClickListener {
+            //       (activity as MainActivity).makeCurrentFragment(Search_results())
+            //  }
 
-        val showButton = view.findViewById<Button>(R.id.search_icon)
-        val editText = view.findViewById<EditText>(R.id.search_text)
-
-
-
-        // Setting On Click Listener
-        showButton.setOnClickListener {
-
-            // Getting the user input
-            val txt = editText.text
-
-            //(activity as MainActivity).print(txt.toString())
-
-            (activity as MainActivity).searchtext = txt.toString()
+            val showButton = view.findViewById<Button>(R.id.search_icon)
+            val editText = view.findViewById<EditText>(R.id.search_text)
 
 
-            (activity as MainActivity).makeCurrentFragment(Search_results())
+            // Setting On Click Listener
+            showButton.setOnClickListener {
+
+                // Getting the user input
+                val txt = editText.text
+
+                //(activity as MainActivity).print(txt.toString())
+
+                (activity as MainActivity).searchtext = txt.toString()
+
+
+                (activity as MainActivity).makeCurrentFragment(Search_results())
+            }
+
         }
-
     }
 
     companion object {
@@ -90,11 +90,12 @@ class Search : Fragment() {
         // TODO: Rename and change types and number of parameters
         @JvmStatic
         fun newInstance(param1: String, param2: String) =
-            Search().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
+                Search().apply {
+                    arguments = Bundle().apply {
+                        putString(ARG_PARAM1, param1)
+                        putString(ARG_PARAM2, param2)
+                    }
                 }
-            }
     }
+
 }

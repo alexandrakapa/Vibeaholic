@@ -5,6 +5,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.TextView
 import com.example.myapplication.R
 
 // TODO: Rename parameter arguments, choose names that match
@@ -33,7 +34,13 @@ class Party_playing_now : Fragment() {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_party_playing_now, container, false)
+
+        val vw=inflater.inflate(R.layout.fragment_party_playing_now, container, false)
+        val bundle=arguments
+        val sngtxt=vw.findViewById<TextView>(R.id.song_title_playing_party)
+        sngtxt.text = bundle?.getString("song")
+
+        return vw
     }
 
     companion object {

@@ -9,10 +9,10 @@ import android.widget.Button
 import android.widget.EditText
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.myapplication.DJSearchSongsResultsAdapter
 import com.example.myapplication.MainActivity
 import com.example.myapplication.Playlist_page_adapter
 import com.example.myapplication.R
-import com.example.myapplication.SearchWithRecommendationsAdapter
 import java.util.ArrayList
 
 // TODO: Rename parameter arguments, choose names that match
@@ -22,10 +22,10 @@ private const val ARG_PARAM2 = "param2"
 
 /**
  * A simple [Fragment] subclass.
- * Use the [Search_with_recommendations.newInstance] factory method to
+ * Use the [dj_create_search_songs.newInstance] factory method to
  * create an instance of this fragment.
  */
-class Search_with_recommendations : Fragment() {
+class dj_create_search_songs : Fragment() {
     // TODO: Rename and change types of parameters
     private var param1: String? = null
     private var param2: String? = null
@@ -44,53 +44,68 @@ class Search_with_recommendations : Fragment() {
     ): View? {
         // Inflate the layout for this fragment
 
-        val view = inflater.inflate(R.layout.fragment_search_with_recommendations, container, false)
+        val view =inflater.inflate(R.layout.fragment_dj_create_search_songs, container, false)
+
 
         val posts: ArrayList<String> = ArrayList() //this will change
-        for (i in 1..20){
+        for (i in 1..100){
             posts.add("Song # $i")
         }
-        val mRecyclerViewParty: RecyclerView
-        mRecyclerViewParty = view.findViewById(R.id.recyclerView_recommendations)
-        mRecyclerViewParty.layoutManager = LinearLayoutManager(activity as MainActivity, RecyclerView.VERTICAL, false)
-        mRecyclerViewParty.adapter= SearchWithRecommendationsAdapter(posts, activity as MainActivity)
+        val mRecyclerView: RecyclerView
+        mRecyclerView = view.findViewById(R.id.recyclerView_results_dj)
+        mRecyclerView.layoutManager = LinearLayoutManager(activity as MainActivity, RecyclerView.VERTICAL, false)
+        mRecyclerView.adapter= DJSearchSongsResultsAdapter(posts, activity as MainActivity)
+        // Inflate the layout for this fragment
+
+
+
+        val editText = view.findViewById<EditText>(R.id.searchbar_songs_dj)
+
+        editText.setText((activity as MainActivity).searchtext)
 
         return view
+
     }
 
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        //(activity as MainActivity).setUpTabs()
         super.onViewCreated(view, savedInstanceState)
+        //var TabSong = view.findViewById<TabItem>(R.id.tabSongs)
+
+        view.findViewById<Button>(R.id.song_button_dj).setOnClickListener {
+            (activity as MainActivity).makeCurrentFragment(dj_create_search_songs())
+        }
+
+        view.findViewById<Button>(R.id.artists_button_dj).setOnClickListener {
+            (activity as MainActivity).makeCurrentFragment(dj_create_search_artists())
+        }
+
+        view.findViewById<Button>(R.id.playlists_button_dj).setOnClickListener {
+            (activity as MainActivity).makeCurrentFragment(dj_create_search_playlists())
+        }
+
+        val showButton = view.findViewById<Button>(R.id.search_icon_songs_dj)
+        val editText = view.findViewById<EditText>(R.id.searchbar_songs_dj)
 
 
 
-        view.findViewById<Button>(R.id.search_icon_dj).setOnClickListener {
+        // Setting On Click Listener
+        showButton.setOnClickListener {
 
-            //   view.findViewById<Button>(R.id.search_icon).setOnClickListener {
-            //       (activity as MainActivity).makeCurrentFragment(Search_results())
-            //  }
+            // Getting the user input
+            val txt = editText.text
 
-            val showButton = view.findViewById<Button>(R.id.search_icon_dj)
-            val editText = view.findViewById<EditText>(R.id.search_text_dj)
+            //(activity as MainActivity).print(txt.toString())
 
+            (activity as MainActivity).searchtext=txt.toString()
 
-            // Setting On Click Listener
-            showButton.setOnClickListener {
-
-                // Getting the user input
-                val txt = editText.text
-
-                //(activity as MainActivity).print(txt.toString())
-
-                (activity as MainActivity).searchtext = txt.toString()
-
-
-                (activity as MainActivity).makeCurrentFragment(dj_create_search_songs())
-            }
+            // Showing the user input
 
         }
-    }
 
+
+    }
 
 
     companion object {
@@ -100,12 +115,12 @@ class Search_with_recommendations : Fragment() {
          *
          * @param param1 Parameter 1.
          * @param param2 Parameter 2.
-         * @return A new instance of fragment Search_with_recommendations.
+         * @return A new instance of fragment dj_create_search_songs.
          */
         // TODO: Rename and change types and number of parameters
         @JvmStatic
         fun newInstance(param1: String, param2: String) =
-            Search_with_recommendations().apply {
+            dj_create_search_songs().apply {
                 arguments = Bundle().apply {
                     putString(ARG_PARAM1, param1)
                     putString(ARG_PARAM2, param2)
