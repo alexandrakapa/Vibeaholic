@@ -67,9 +67,20 @@
     <string name="about">About</string>
     <string name="sign_out">Sign out</string>
     <string name="settings">Settings</string>
+
+    <string name="play_now_title">Playing now in party:</string>
+    <string name="more_party2">How the party has gone so far!</string>
+    <string name="more_party3">Congratulations!Great party!</string>
+    <string name="suggestion_title">Member Suggestions</string>
+    <string name="rec">Recommendations</string>
+    <string name="add">Add song</string>
+    <string name="exit">Exit DJ-mode</string>
+    <string name="more">More about your party</string>
+
     <string name="songs">Songs</string>
     <string name="artists">Artists</string>
     <string name="playlists">Playlists</string>
+
 
 
 </resources>

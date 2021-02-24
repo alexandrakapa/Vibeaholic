@@ -50,6 +50,9 @@ class Search : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
 
+
+        view.findViewById<Button>(R.id.search_icon).setOnClickListener {
+
      //   view.findViewById<Button>(R.id.search_icon).setOnClickListener {
      //       (activity as MainActivity).makeCurrentFragment(Search_results())
       //  }
@@ -68,6 +71,7 @@ class Search : Fragment() {
             //(activity as MainActivity).print(txt.toString())
 
             (activity as MainActivity).searchtext = txt.toString()
+
 
             (activity as MainActivity).makeCurrentFragment(Search_results())
         }

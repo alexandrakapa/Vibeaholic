@@ -6,10 +6,13 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
-import android.widget.TextView
-import android.widget.Toast
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.example.myapplication.MainActivity
+import com.example.myapplication.Playlist_page_adapter
 import com.example.myapplication.R
+import com.google.android.material.floatingactionbutton.FloatingActionButton
+import java.util.ArrayList
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -18,10 +21,10 @@ private const val ARG_PARAM2 = "param2"
 
 /**
  * A simple [Fragment] subclass.
- * Use the [menu_test.newInstance] factory method to
+ * Use the [Party_playlist.newInstance] factory method to
  * create an instance of this fragment.
  */
-class side_menu : Fragment() {
+class Party_playlist : Fragment() {
     // TODO: Rename and change types of parameters
     private var param1: String? = null
     private var param2: String? = null
@@ -37,27 +40,27 @@ class side_menu : Fragment() {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_side_menu, container, false)
+        val view = inflater.inflate(R.layout.fragment_party_playlist, container, false)
+
+        val posts: ArrayList<String> = ArrayList() //this will change
+        for (i in 1..100){
+            posts.add("Song # $i")
+        }
+        val mRecyclerViewParty: RecyclerView
+        mRecyclerViewParty = view.findViewById(R.id.recyclerView_party_playlist)
+        mRecyclerViewParty.layoutManager = LinearLayoutManager(activity as MainActivity, RecyclerView.VERTICAL, false)
+        mRecyclerViewParty.adapter= Playlist_page_adapter(posts, activity as MainActivity)
+
+        return view
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
 
-        view.findViewById<Button>(R.id.exit).setOnClickListener {
-           if ((activity as MainActivity).onDj) {
-               (activity as MainActivity).onDj = false
-               (activity as MainActivity).ismenuopen = false
-               (activity as MainActivity).makeCurrentFragment((activity as MainActivity).prevfrag)
-           }
-            else {
-               Toast.makeText(activity, "Test", Toast.LENGTH_LONG).show()
-           }
+        view.findViewById<FloatingActionButton>(R.id.pending_suggestions).setOnClickListener {
+            (activity as MainActivity).makeCurrentFragment(Suggestions_page())
         }
-
-      //  view.findViewById<TextView>(R.id.more).setOnClickListener {
-       //    (activity as MainActivity).makeCurrentFragment(More_about_party())
-      // }
     }
 
     companion object {
@@ -67,12 +70,12 @@ class side_menu : Fragment() {
          *
          * @param param1 Parameter 1.
          * @param param2 Parameter 2.
-         * @return A new instance of fragment menu_test.
+         * @return A new instance of fragment Party_playlist.
          */
         // TODO: Rename and change types and number of parameters
         @JvmStatic
         fun newInstance(param1: String, param2: String) =
-                side_menu().apply {
+                Party_playlist().apply {
                     arguments = Bundle().apply {
                         putString(ARG_PARAM1, param1)
                         putString(ARG_PARAM2, param2)
