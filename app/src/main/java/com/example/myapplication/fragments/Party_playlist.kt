@@ -62,6 +62,10 @@ class Party_playlist : Fragment() {
         view.findViewById<FloatingActionButton>(R.id.pending_suggestions).setOnClickListener {
             (activity as MainActivity).makeCurrentFragment(Suggestions_page())
         }
+
+        view.findViewById<Button>(R.id.addition).setOnClickListener{
+            (activity as MainActivity).makeCurrentFragment(Search_with_recommendations())
+        }
     }
 
     companion object {

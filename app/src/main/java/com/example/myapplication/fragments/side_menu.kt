@@ -40,6 +40,7 @@ class side_menu : Fragment() {
         return inflater.inflate(R.layout.fragment_side_menu, container, false)
     }
 
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
@@ -61,6 +62,7 @@ class side_menu : Fragment() {
        //    (activity as MainActivity).makeCurrentFragment(More_about_party())
       // }
     }
+
 
     companion object {
         /**

@@ -26,6 +26,8 @@ class MainActivity : AppCompatActivity(){
     val REQUEST_IMAGE_CAPTURE = 1
     var isItFirstTime = true
     var cameraOn = false
+    var micOn = false
+    var smartCon = false
     internal lateinit var myDialog : Dialog
     internal lateinit var txt : TextView
     internal lateinit var btnSwitch : Switch
@@ -36,6 +38,7 @@ class MainActivity : AppCompatActivity(){
     var onDj = false
     var onCreate=false
     var ismenuopen=false
+    var isUserDJ = false
     lateinit var prevfrag : Fragment
 
     var searchtext = "Search song here"
@@ -66,6 +69,11 @@ class MainActivity : AppCompatActivity(){
 
                         Toast.makeText(this@MainActivity, "Camera is on", Toast.LENGTH_SHORT).show()
                     }
+                    else Toast.makeText(this@MainActivity, "Camera is off", Toast.LENGTH_SHORT).show()
+                    if (micOn) Toast.makeText(this@MainActivity, "Microphone is on", Toast.LENGTH_SHORT).show()
+                    else Toast.makeText(this@MainActivity, "Microphone is off", Toast.LENGTH_SHORT).show()
+                    if (smartCon) Toast.makeText(this@MainActivity, "Smart-watch is connected", Toast.LENGTH_SHORT).show()
+                    else Toast.makeText(this@MainActivity, "Smart-watch is not connected", Toast.LENGTH_SHORT).show()
                 }
             }
         }
@@ -78,6 +86,8 @@ class MainActivity : AppCompatActivity(){
         val profile=Profile()
         val dj=DJ()
         val searchWithRecommendations = Search_with_recommendations()
+        val partyPlaylistSuggestion = Party_playlist_suggestion()
+        val partyPlaylist = Party_playlist()
 
         makeCurrentFragment(homepage)
 
@@ -85,8 +95,7 @@ class MainActivity : AppCompatActivity(){
         bottom_navigation.setOnNavigationItemSelectedListener {
             when (it.itemId){
                 R.id.ic_home -> {
-                    if (!onDj)makeCurrentFragment(homepage)
-                    else makeCurrentFragment(homepage)
+                    makeCurrentFragment(homepage)
                 }
                 R.id.ic_search -> {
                     if (!onDj) makeCurrentFragment(search)
@@ -98,7 +107,11 @@ class MainActivity : AppCompatActivity(){
                 }
                 R.id.ic_profile -> makeCurrentFragment(profile)
                 R.id.ic_dj-> {
-                    makeCurrentFragment(dj)
+                    if (!onDj) makeCurrentFragment(dj)
+                    else {
+                        if (isUserDJ) makeCurrentFragment(partyPlaylist)
+                        else makeCurrentFragment(partyPlaylistSuggestion)
+                    }
                 }
             }
             true
@@ -136,12 +149,20 @@ class MainActivity : AppCompatActivity(){
 
    // @RequiresApi(Build.VERSION_CODES.LOLLIPOP)
     fun openmenu( ) {
-        val frag= side_menu()
-        //frag.enterTransition = android.R.transition.slide_bottom;
-        supportFragmentManager.beginTransaction()
-            .add(R.id.fl_wrapper, frag)
-            .commit()
-
+       if (!onDj) {
+           val frag = side_menu()
+           //frag.enterTransition = android.R.transition.slide_bottom;
+           supportFragmentManager.beginTransaction()
+               .add(R.id.fl_wrapper, frag)
+               .commit()
+       }
+       else {
+           val frag = Side_menu_dj_mode()
+           //frag.enterTransition = android.R.transition.slide_bottom;
+           supportFragmentManager.beginTransaction()
+               .add(R.id.fl_wrapper, frag)
+               .commit()
+       }
     }
 
 /*
@@ -179,6 +200,7 @@ class MainActivity : AppCompatActivity(){
         btnSwitch3.setOnClickListener {
             if (btnSwitch3.isChecked) {
                 btnSwitch3.text = "Yes"
+                micOn = true
             }
             else {
                 btnSwitch3.text = "No"
@@ -187,6 +209,7 @@ class MainActivity : AppCompatActivity(){
         btnSwitch4.setOnClickListener {
             if (btnSwitch4.isChecked) {
                 btnSwitch4.text = "Yes"
+                smartCon = true
             }
             else {
                 btnSwitch4.text = "No"
