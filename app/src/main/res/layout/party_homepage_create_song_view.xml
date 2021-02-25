@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView
+    android:id="@+id/song_area_home_create"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="80dp"
+    android:layout_marginTop="0dp"
+    app:cardBackgroundColor="@color/black">
+
+
+
+    <ImageView
+        android:id="@+id/song_image_home_create"
+        android:layout_width="70dp"
+        android:layout_height="70dp"
+        app:srcCompat="@android:drawable/gallery_thumb" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <TextView
+            android:id="@+id/song_title_home_create"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="100dp"
+            android:layout_marginTop="25dp"
+            android:text="@string/textview"
+            android:textColor="@color/white" />
+
+        <Button
+            android:id="@+id/button_remove_home_create"
+            android:layout_width="48dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="345dp"
+            android:layout_marginTop="15dp"
+            android:backgroundTint="@color/black"
+            app:icon="@android:drawable/ic_menu_close_clear_cancel" />
+
+        <Button
+            android:id="@+id/upvote_home_create"
+            android:layout_width="48dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="270dp"
+            android:layout_marginTop="15dp"
+            android:backgroundTint="@color/black"
+            app:icon="@android:drawable/arrow_up_float" />
+
+        <Button
+            android:id="@+id/downvote_home_create"
+            android:layout_width="48dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="310dp"
+            android:layout_marginTop="15dp"
+            android:backgroundTint="@color/black"
+            app:icon="@android:drawable/arrow_down_float" />
+
+
+
+    </RelativeLayout>
+
+</androidx.cardview.widget.CardView>

@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/black"
+    tools:context=".fragments.Party_playing_now">
+
+    <FrameLayout
+        android:id="@+id/fl_wrapper"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <TextView
+            android:layout_width="300dp"
+            android:layout_height="40dp"
+            android:text="@string/play_now_title"
+            android:textColor="@color/teal_200"
+            android:layout_marginTop="30dp"
+            android:textSize="30dp"
+            android:textStyle="bold"
+            android:textAlignment="center"
+            android:layout_gravity="center_horizontal" />
+
+        <ImageView
+            android:id="@+id/imageView_party"
+            android:layout_width="322dp"
+            android:layout_height="294dp"
+            android:layout_marginStart="50dp"
+            android:layout_marginLeft="50dp"
+            android:layout_marginTop="90dp"
+            app:srcCompat="@android:drawable/gallery_thumb"
+            tools:src="@tools:sample/backgrounds/scenic" />
+
+        <ProgressBar
+            android:id="@+id/progressBar_party"
+            style="?android:attr/progressBarStyleHorizontal"
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="60dp"
+            android:layout_marginLeft="60dp"
+            android:layout_marginTop="520dp"
+            android:progressDrawable="@android:drawable/progress_horizontal" />
+
+        <TextView
+            android:id="@+id/editTextTextPersonName_party"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="580dp"
+            android:text="^^ Ultraviolence: Lana Del Ray"
+            android:textColor="@android:color/white" />
+
+        <Button
+            android:id="@+id/button3_party"
+            android:layout_width="53dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="120dp"
+            android:background="#0B0A0A"
+            android:clickable="false"
+            app:backgroundTint="#100F0F"
+            app:icon="@android:drawable/ic_menu_share" />
+
+        <Button
+            android:id="@+id/play_button_party"
+            android:layout_width="61dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="180dp"
+            android:layout_marginLeft="180dp"
+            android:layout_marginTop="450dp"
+            android:background="#100F0F"
+            app:backgroundTint="#1B1A1A"
+            app:icon="@android:drawable/ic_media_play" />
+
+        <TextView
+            android:id="@+id/song_title_playing_party"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="60dp"
+            android:layout_marginLeft="60dp"
+            android:layout_marginTop="390dp"
+            android:text="@string/song_title"
+            android:textColor="#EEF4F6" />
+
+        <TextView
+            android:id="@+id/editTextTextPersonName3_party"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="60dp"
+            android:layout_marginLeft="60dp"
+            android:layout_marginTop="420dp"
+            android:text="@string/artist"
+            android:textColor="#FBF3F3" />
+
+        <Button
+            android:id="@+id/button5_party"
+            android:layout_width="55dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="75dp"
+            app:backgroundTint="#0C0C0C"
+            app:icon="@android:drawable/ic_dialog_info" />
+
+        <TextView
+            android:id="@+id/editTextTextPersonName4_party"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="560dp"
+            android:text="@string/playlist"
+            android:textColor="@android:color/white" />
+
+        <Button
+            android:id="@+id/button6_party"
+            android:layout_width="57dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="165dp"
+            android:background="#1B1A1A"
+            android:clickable="false"
+            app:backgroundTint="#191818"
+            app:icon="@android:drawable/ic_input_add"
+            app:rippleColor="#151515" />
+
+        <Button
+            android:id="@+id/button7_party"
+            android:layout_width="53dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="210dp"
+            app:backgroundTint="#121111"
+            app:icon="@android:drawable/star_off"
+            />
+
+
+
+    </FrameLayout>
+
+
+</RelativeLayout>

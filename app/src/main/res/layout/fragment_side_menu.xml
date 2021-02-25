@@ -1,11 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="330dp"
-    android:layout_height="680dp"
+    android:layout_height="match_parent"
     android:layout_marginTop="25dp"
     android:background="@color/black"
     tools:context=".fragments.side_menu">
+
+
 
     <TextView
         android:layout_width="wrap_content"
@@ -142,7 +145,6 @@
         android:text="@string/about"
         android:textColor="@color/white"
         android:textSize="20sp">
-
     </TextView>
 
     <View
@@ -152,15 +154,19 @@
         android:layout_marginTop="430dp"
         android:background="#60686C" />
 
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textSize="20sp"
-        android:text="@string/sign_out"
-        android:layout_marginTop="480dp"
-        android:layout_marginLeft="105dp"
-        android:layout_marginStart="105dp">
 
-    </Button>
 
-</FrameLayout>
+        <Button
+            android:id="@+id/sign_out"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="20sp"
+            android:text="@string/sign_out"
+            android:layout_marginTop="490dp"
+            android:layout_marginLeft="105dp"
+            android:layout_marginStart="105dp">
+
+        </Button>
+
+
+    </FrameLayout>

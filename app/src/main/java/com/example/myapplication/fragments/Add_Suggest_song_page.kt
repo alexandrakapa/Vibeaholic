@@ -6,7 +6,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
-import android.widget.SearchView
 import com.example.myapplication.MainActivity
 import com.example.myapplication.R
 
@@ -17,10 +16,10 @@ private const val ARG_PARAM2 = "param2"
 
 /**
  * A simple [Fragment] subclass.
- * Use the [DJ.newInstance] factory method to
+ * Use the [Add_Suggest_song_page.newInstance] factory method to
  * create an instance of this fragment.
  */
-class DJ : Fragment() {
+class Add_Suggest_song_page : Fragment() {
     // TODO: Rename and change types of parameters
     private var param1: String? = null
     private var param2: String? = null
@@ -38,27 +37,59 @@ class DJ : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_d_j, container, false)
+        val view = inflater.inflate(R.layout.fragment_add__suggest_song_page, container, false)
 
+        if ((activity as MainActivity).onCreate){
+            val but=view.findViewById<Button>(R.id.addorsuggestbutton)
+            but.text="Add "
+
+        }
+        else {
+            val but=view.findViewById<Button>(R.id.addorsuggestbutton)
+            but.text="Suggest"
+
+        }
+
+        return view
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-
-        view.findViewById<Button>(R.id.button_create).setOnClickListener {
-            (activity as MainActivity).onCreate=true
-            (activity as MainActivity).makeCurrentFragment(Party_spec())
-            (activity as MainActivity).onDj = true
-            (activity as MainActivity).isUserDJ = true
+        view.findViewById<Button>(R.id.details_party).setOnClickListener {
+            (activity as MainActivity).makeCurrentFragment(Song_details())
         }
 
-        view.findViewById<Button>(R.id.button_join).setOnClickListener {
-            (activity as MainActivity).onCreate=false
-            (activity as MainActivity).makeCurrentFragment(Enter_event_code())
-            (activity as MainActivity).onDj = true
+        view.findViewById<Button>(R.id.addorsuggestbutton).setOnClickListener {
+            if ((activity as MainActivity).onCreate){
+                val but=view.findViewById<Button>(R.id.addorsuggestbutton)
+                if (but.text=="Add "){
+                    but.text="Cancel"
+                }
+                else{
+                    but.text="Add "
+                }
+            }
+            else {
+                val but=view.findViewById<Button>(R.id.addorsuggestbutton)
+                if (but.text=="Suggest"){
+                    but.text="Cancel"
+                }
+                else{
+                    but.text="Suggest"
+                }
+            }
+
         }
+
     }
+
+
+
+
+
+
+
 
     companion object {
         /**
@@ -67,12 +98,12 @@ class DJ : Fragment() {
          *
          * @param param1 Parameter 1.
          * @param param2 Parameter 2.
-         * @return A new instance of fragment DJ.
+         * @return A new instance of fragment Add_Suggest_song_page.
          */
         // TODO: Rename and change types and number of parameters
         @JvmStatic
         fun newInstance(param1: String, param2: String) =
-            DJ().apply {
+            Add_Suggest_song_page().apply {
                 arguments = Bundle().apply {
                     putString(ARG_PARAM1, param1)
                     putString(ARG_PARAM2, param2)

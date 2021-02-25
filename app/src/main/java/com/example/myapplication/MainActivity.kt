@@ -1,30 +1,33 @@
 package com.example.myapplication
 
-import android.app.ActionBar
 import android.app.Dialog
 import android.content.Intent
 import android.os.Build
 import android.os.Bundle
 import android.provider.MediaStore
-import android.view.*
-import android.widget.*
+import android.view.GestureDetector
+import android.view.MotionEvent
+import android.view.View
+import android.view.Window
+import android.widget.Button
+import android.widget.Switch
+import android.widget.TextView
+import android.widget.Toast
 import androidx.annotation.RequiresApi
-import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.GestureDetectorCompat
 import androidx.fragment.app.Fragment
 import com.example.myapplication.fragments.*
-import com.google.android.material.navigation.NavigationView
 import kotlinx.android.synthetic.main.activity_main.*
 
 import kotlinx.android.synthetic.main.search_results.*
-
-
 
 class MainActivity : AppCompatActivity(){
     val REQUEST_IMAGE_CAPTURE = 1
     var isItFirstTime = true
     var cameraOn = false
+    var micOn = false
+    var smartCon = false
     internal lateinit var myDialog : Dialog
     internal lateinit var txt : TextView
     internal lateinit var btnSwitch : Switch
@@ -32,11 +35,13 @@ class MainActivity : AppCompatActivity(){
     internal lateinit var btnSwitch3 : Switch
     internal lateinit var btnSwitch4 : Switch
     internal lateinit var btnmenu : Button
-
+    var onDj = false
+    var onCreate=false
     var ismenuopen=false
+    var isUserDJ = false
     lateinit var prevfrag : Fragment
 
-    var searchtext = "Hello"
+    var searchtext = "Search song here"
 
 
     private lateinit var detector: GestureDetectorCompat
@@ -45,6 +50,7 @@ class MainActivity : AppCompatActivity(){
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
 
         btnmenu=findViewById<View>(R.id.homepage_menu) as Button
 
@@ -63,6 +69,11 @@ class MainActivity : AppCompatActivity(){
 
                         Toast.makeText(this@MainActivity, "Camera is on", Toast.LENGTH_SHORT).show()
                     }
+                    else Toast.makeText(this@MainActivity, "Camera is off", Toast.LENGTH_SHORT).show()
+                    if (micOn) Toast.makeText(this@MainActivity, "Microphone is on", Toast.LENGTH_SHORT).show()
+                    else Toast.makeText(this@MainActivity, "Microphone is off", Toast.LENGTH_SHORT).show()
+                    if (smartCon) Toast.makeText(this@MainActivity, "Smart-watch is connected", Toast.LENGTH_SHORT).show()
+                    else Toast.makeText(this@MainActivity, "Smart-watch is not connected", Toast.LENGTH_SHORT).show()
                 }
             }
         }
@@ -71,20 +82,37 @@ class MainActivity : AppCompatActivity(){
         val homepage=Homepage()
         val search=Search()
         val playing=Playing_now()
+        val partyPlaying = Party_playing_now()
         val profile=Profile()
         val dj=DJ()
+        val searchWithRecommendations = Search_with_recommendations()
+        val partyPlaylistSuggestion = Party_playlist_suggestion()
+        val partyPlaylist = Party_playlist()
 
         makeCurrentFragment(homepage)
 
 
         bottom_navigation.setOnNavigationItemSelectedListener {
             when (it.itemId){
-                R.id.ic_home -> makeCurrentFragment(homepage)
-                R.id.ic_search -> makeCurrentFragment(search)
-                R.id.ic_play_now -> makeCurrentFragment(playing)
+                R.id.ic_home -> {
+                    makeCurrentFragment(homepage)
+                }
+                R.id.ic_search -> {
+                    if (!onDj) makeCurrentFragment(search)
+                    else makeCurrentFragment(searchWithRecommendations)
+                }
+                R.id.ic_play_now -> {
+                    if (!onDj) makeCurrentFragment(playing)
+                    else makeCurrentFragment(partyPlaying)
+                }
                 R.id.ic_profile -> makeCurrentFragment(profile)
-                R.id.ic_dj->makeCurrentFragment(dj)
-
+                R.id.ic_dj-> {
+                    if (!onDj) makeCurrentFragment(dj)
+                    else {
+                        if (isUserDJ) makeCurrentFragment(partyPlaylist)
+                        else makeCurrentFragment(partyPlaylistSuggestion)
+                    }
+                }
             }
             true
         }
@@ -121,11 +149,20 @@ class MainActivity : AppCompatActivity(){
 
    // @RequiresApi(Build.VERSION_CODES.LOLLIPOP)
     fun openmenu( ) {
-        val frag= side_menu()
-        //frag.enterTransition = android.R.transition.slide_bottom;
-        supportFragmentManager.beginTransaction()
-            .add(R.id.fl_wrapper, frag)
-            .commit()
+       if (!onDj) {
+           val frag = side_menu()
+           //frag.enterTransition = android.R.transition.slide_bottom;
+           supportFragmentManager.beginTransaction()
+               .add(R.id.fl_wrapper, frag)
+               .commit()
+       }
+       else {
+           val frag = Side_menu_dj_mode()
+           //frag.enterTransition = android.R.transition.slide_bottom;
+           supportFragmentManager.beginTransaction()
+               .add(R.id.fl_wrapper, frag)
+               .commit()
+       }
     }
 
 /*
@@ -163,6 +200,7 @@ class MainActivity : AppCompatActivity(){
         btnSwitch3.setOnClickListener {
             if (btnSwitch3.isChecked) {
                 btnSwitch3.text = "Yes"
+                micOn = true
             }
             else {
                 btnSwitch3.text = "No"
@@ -171,6 +209,7 @@ class MainActivity : AppCompatActivity(){
         btnSwitch4.setOnClickListener {
             if (btnSwitch4.isChecked) {
                 btnSwitch4.text = "Yes"
+                smartCon = true
             }
             else {
                 btnSwitch4.text = "No"
@@ -297,7 +336,18 @@ class MainActivity : AppCompatActivity(){
 
     private fun onSwipeBottom() {
         Toast.makeText(this, "Bottom swipe", Toast.LENGTH_LONG).show()
-        makeCurrentFragment(Playlist())
+        if (prevfrag !is Playing_now && prevfrag !is Party_playing_now) {
+            return
+        }
+        if (!onDj) {
+            makeCurrentFragment(Playlist())
+        }
+        else if (onDj && onCreate) {
+            makeCurrentFragment(Party_playlist())
+        }
+        else {
+            makeCurrentFragment(Party_playlist_suggestion())
+        }
     }
 
     private fun onSwipeTop() {
