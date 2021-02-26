@@ -12,6 +12,7 @@ import androidx.core.view.GestureDetectorCompat
 import androidx.fragment.app.Fragment
 import com.example.myapplication.MainActivity
 import com.example.myapplication.R
+import com.squareup.picasso.Picasso
 
 
 // TODO: Rename parameter arguments, choose names that match
@@ -48,8 +49,11 @@ class Playing_now : Fragment() {
         val vw=inflater.inflate(R.layout.fragment_playing_now, container, false)
         val bundle=arguments
         val sngtxt=vw.findViewById<TextView>(R.id.song_title_playing)
+        val img = vw.findViewById<ImageView>(R.id.song_Image)
+        val url = bundle?.getString("image")
+        val picasso = Picasso.get().load(url).into(img)
         sngtxt.text = bundle?.getString("song")
-       // sngtxt.text="Hello"
+
         return vw
     }
 

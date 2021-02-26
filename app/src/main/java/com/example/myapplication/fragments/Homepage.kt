@@ -51,80 +51,99 @@ class Homepage : Fragment() {
         val view = inflater.inflate(R.layout.fragment_homepage, container, false)
 
         val posts: ArrayList<String> = ArrayList()
+        val posts2: ArrayList<String> = ArrayList()
+        val posts3: ArrayList<String> = ArrayList()
+        val posts4: ArrayList<String> = ArrayList()
         val imageurl: ArrayList<String> = ArrayList()
+        val imageurl2: ArrayList<String> = ArrayList()
+        val imageurl3: ArrayList<String> = ArrayList()
+        val imageurl4: ArrayList<String> = ArrayList()
 
         var database = FirebaseDatabase.getInstance().reference
+
         var getdata = object : ValueEventListener {
             override fun onCancelled(error: DatabaseError) {
             }
 
             override fun onDataChange(snapshot: DataSnapshot) {
-                //Log.d("mytag", "SEE HERE")
                 val recently: ArrayList<String> = ArrayList()
                 for (i in snapshot.child("user1").child("Playlists").child("1").child("SongArray").children){
                     recently.add(i.value.toString())
-                    //Log.d("mytag", i.getValue().toString());
                 }
-                var j=0
+
                 for (i in recently) {
                     var songName= snapshot.child(i).child("Name").value.toString()
                     var songArtist = snapshot.child(i).child("Artist").value.toString()
                     var caption : String = "$songName - $songArtist"
-                    var tr = caption.substring(0,4)
-                    posts.add(tr)
+                    posts.add(caption)
                     var image = snapshot.child(i).child("ImageURL").value.toString()
                     imageurl.add(image)
-                    //Log.d("mytag", posts[j])
-                    j++
-
                 }
+
                 val mRecyclerView: RecyclerView
                 mRecyclerView = view.findViewById(R.id.recyclerView)
                 mRecyclerView.layoutManager = LinearLayoutManager(activity as MainActivity, RecyclerView.HORIZONTAL, false)
-                mRecyclerView.adapter= PostsAdapter(posts, activity as MainActivity)
+                mRecyclerView.adapter= PostsAdapter(posts, imageurl,  activity as MainActivity)
+
+
+                var suggested: ArrayList<String> = ArrayList()
+                var insertions: List<String> = Arrays.asList("playlist1", "playlist2", "playlist5", "playlist3")
+                suggested.addAll(insertions)
+
+                for (i in suggested) {
+                    var PlaylistsName = snapshot.child(i).child("PlaylistName").value.toString()
+                    posts2.add(PlaylistsName)
+                    var firstSong = snapshot.child(i).child("SongArray").child("0").value.toString()
+                    var image =  snapshot.child(firstSong).child("ImageURL").value.toString()
+                    imageurl2.add(image)
+                }
+
+                val mRecyclerView2: RecyclerView
+                mRecyclerView2 = view.findViewById(R.id.recyclerView2)
+                mRecyclerView2.layoutManager = LinearLayoutManager(activity as MainActivity, RecyclerView.HORIZONTAL, false)
+                mRecyclerView2.adapter= PlaylistAdapter(suggested, posts2, imageurl2, activity as MainActivity)
+
+
+                var suggestedsongs: ArrayList<String> = ArrayList()
+                var help: List<String> = Arrays.asList("song21", "song12", "song4", "song10", "song2", "song1")
+                suggestedsongs.addAll(help)
+
+                for (i in suggestedsongs) {
+                    var songName= snapshot.child(i).child("Name").value.toString()
+                    var songArtist = snapshot.child(i).child("Artist").value.toString()
+                    var caption : String = "$songName - $songArtist"
+                    posts3.add(caption)
+                    var image = snapshot.child(i).child("ImageURL").value.toString()
+                    imageurl3.add(image)
+                }
+
+                val mRecyclerView3: RecyclerView
+                mRecyclerView3 = view.findViewById(R.id.recyclerView3)
+                mRecyclerView3.layoutManager = LinearLayoutManager(activity as MainActivity, RecyclerView.HORIZONTAL, false)
+                mRecyclerView3.adapter= PostsAdapter(posts3, imageurl3, activity as MainActivity)
+
+
+                var trending : ArrayList<String> = ArrayList()
+                var input: List<String> = Arrays.asList("song11", "song17", "song13", "song9")
+                trending.addAll(input)
+
+                for (i in trending) {
+                    var songName= snapshot.child(i).child("Name").value.toString()
+                    var songArtist = snapshot.child(i).child("Artist").value.toString()
+                    var caption : String = "$songName - $songArtist"
+                    posts4.add(caption)
+                    var image = snapshot.child(i).child("ImageURL").value.toString()
+                    imageurl4.add(image)
+                }
+
+                val mRecyclerView4: RecyclerView
+                mRecyclerView4 = view.findViewById(R.id.recyclerView4)
+                mRecyclerView4.layoutManager = LinearLayoutManager(activity as MainActivity, RecyclerView.HORIZONTAL, false)
+                mRecyclerView4.adapter= PostsAdapter(posts4, imageurl4, activity as MainActivity)
             }
         }
+
         database.addValueEventListener(getdata)
-
-        //val ref = (activity as MainActivity).posts
-        //Log.d("mytag", ref[0])
-        /*val posts: ArrayList<String> = ArrayList()
-        for (i in 1..100){
-            posts.add("Song # $i")
-        }*/
-        //Log.d("mytag", "SEE HERE")
-        /*val mRecyclerView: RecyclerView
-        mRecyclerView = view.findViewById(R.id.recyclerView)
-        mRecyclerView.layoutManager = LinearLayoutManager(activity as MainActivity, RecyclerView.HORIZONTAL, false)
-        mRecyclerView.adapter= PostsAdapter(ref, activity as MainActivity)*/
-
-        val playlists: ArrayList<String> = ArrayList()
-        for (i in 1..100){
-            playlists.add("Playlist # $i")
-        }
-        val mRecyclerView2: RecyclerView
-        mRecyclerView2 = view.findViewById(R.id.recyclerView2)
-        mRecyclerView2.layoutManager = LinearLayoutManager(activity as MainActivity, RecyclerView.HORIZONTAL, false)
-        mRecyclerView2.adapter= PlaylistAdapter(playlists, activity as MainActivity)
-
-        val playlists2: ArrayList<String> = ArrayList()
-        for (i in 1..100){
-            playlists2.add("Song # $i")
-        }
-        val mRecyclerView3: RecyclerView
-        mRecyclerView3 = view.findViewById(R.id.recyclerView3)
-        mRecyclerView3.layoutManager = LinearLayoutManager(activity as MainActivity, RecyclerView.HORIZONTAL, false)
-        mRecyclerView3.adapter= PostsAdapter(playlists2, activity as MainActivity)
-
-        val playlists3: ArrayList<String> = ArrayList()
-        for (i in 1..100){
-            playlists3.add("Song # $i")
-        }
-        val mRecyclerView4: RecyclerView
-        mRecyclerView4 = view.findViewById(R.id.recyclerView4)
-        mRecyclerView4.layoutManager = LinearLayoutManager(activity as MainActivity, RecyclerView.HORIZONTAL, false)
-        mRecyclerView4.adapter= PostsAdapter(playlists3, activity as MainActivity)
-
 
         return view
     }
@@ -132,7 +151,6 @@ class Homepage : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
 
 
         /*

@@ -1,6 +1,7 @@
 package com.example.myapplication
 
 import android.app.Activity
+import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -11,11 +12,13 @@ import androidx.recyclerview.widget.RecyclerView
 import androidx.fragment.app.Fragment
 import com.example.myapplication.fragments.Playing_now
 import com.example.myapplication.fragments.Playlist
+import com.squareup.picasso.Picasso
 
-class PostsAdapter(val posts: ArrayList<String>, val activity: MainActivity) :  RecyclerView.Adapter<PostsAdapter.Viewholder>(){
+class PostsAdapter(val posts: ArrayList<String>, val imageurl: ArrayList<String>,  val activity: MainActivity) :  RecyclerView.Adapter<PostsAdapter.Viewholder>(){
 
     class Viewholder(itemView: View, activity: MainActivity) : RecyclerView.ViewHolder(itemView){
         val txt : TextView = itemView.findViewById(R.id.firstName)
+        val image : ImageView =itemView.findViewById(R.id.home_image)
         val view1= itemView
         val activity1 = activity
     }
@@ -28,15 +31,20 @@ class PostsAdapter(val posts: ArrayList<String>, val activity: MainActivity) :  
     override fun getItemCount()=posts.size
 
     override fun onBindViewHolder(holder: PostsAdapter.Viewholder, position: Int) {
+        val picasso =Picasso.get().load(imageurl[position]).into(holder.image)
         holder.txt.text = posts[position]
 
         val view1 : ImageView
         view1=holder.view1.findViewById((R.id.home_image))
         view1.setOnClickListener {
-        activity.makeCurrentFragment(Playing_now())
+            val bundle = Bundle()
+
+            bundle.putString("song", posts[position])
+            bundle.putString("image", imageurl[position])
+
+            val playing = Playing_now()
+            playing.arguments = bundle
+            activity.makeCurrentFragment(playing)
         }
-
-
-
     }
 }
