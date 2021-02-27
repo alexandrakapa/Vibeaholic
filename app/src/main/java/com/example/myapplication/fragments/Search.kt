@@ -9,8 +9,16 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.ImageButton
 import android.widget.SearchView
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.example.myapplication.MainActivity
+import com.example.myapplication.Playlist_page_adapter
 import com.example.myapplication.R
+import com.google.firebase.database.DataSnapshot
+import com.google.firebase.database.DatabaseError
+import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.database.ValueEventListener
+import java.util.ArrayList
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -65,8 +73,14 @@ class Search : Fragment() {
                 //(activity as MainActivity).print(txt.toString())
 
                 (activity as MainActivity).searchtext = txt.toString()
+                var mytext = txt.toString()
 
-                (activity as MainActivity).makeCurrentFragment(Search_results())
+                var bundle = Bundle()
+                bundle.putString("searched", mytext)
+                val results = Search_results()
+                results.arguments = bundle
+
+                (activity as MainActivity).makeCurrentFragment(results)
             }
 
         }

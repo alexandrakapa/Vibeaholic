@@ -14,6 +14,10 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.myapplication.MainActivity
 import com.example.myapplication.Playlist_page_adapter
 import com.example.myapplication.R
+import com.google.firebase.database.DataSnapshot
+import com.google.firebase.database.DatabaseError
+import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.database.ValueEventListener
 import java.util.ArrayList
 
 // TODO: Rename parameter arguments, choose names that match
@@ -46,16 +50,46 @@ class search_artists : Fragment() {
         // Inflate the layout for this fragment
 
         val view = inflater.inflate(R.layout.fragment_search_artists, container, false)
-        val posts: ArrayList<String> = ArrayList() //this will change
-        for (i in 1..100){
-            posts.add(" $i")
+
+        val bundle = arguments
+        val insertedText = bundle?.getString("searched").toString().toLowerCase()
+
+        val posts: ArrayList<String> = ArrayList()
+        val imageurl: ArrayList<String> = ArrayList()
+
+        var database = FirebaseDatabase.getInstance().reference
+
+        var getdata = object : ValueEventListener {
+            override fun onCancelled(error: DatabaseError) {
+            }
+
+            override fun onDataChange(snapshot: DataSnapshot) {
+                val songs: ArrayList<String> = ArrayList()
+                for (i in snapshot.children ) {
+                    if ((i.key.toString()).contains("song")) {
+                        var name = i.child("Artist").value.toString().toLowerCase()
+                        if (name.contains(insertedText)) {
+                            songs.add(i.key.toString())
+                        }
+                    }
+                }
+
+                for (i in songs) {
+                    var songName = snapshot.child(i).child("Name").value.toString()
+                    var songArtist = snapshot.child(i).child("Artist").value.toString()
+                    var caption: String = "$songName - $songArtist"
+                    posts.add(caption)
+                    var image = snapshot.child(i).child("ImageURL").value.toString()
+                    imageurl.add(image)
+                }
+
+                val mRecyclerView: RecyclerView
+                mRecyclerView = view.findViewById(R.id.recyclerView_results_artists)
+                mRecyclerView.layoutManager = LinearLayoutManager(activity as MainActivity, RecyclerView.VERTICAL, false)
+                mRecyclerView.adapter= Playlist_page_adapter(songs, posts, imageurl, activity as MainActivity)
+            }
         }
-val deleteme: ArrayList<String> = ArrayList()
-        val mRecyclerView: RecyclerView
-        mRecyclerView = view.findViewById(R.id.recyclerView_results_artists)
-        mRecyclerView.layoutManager = LinearLayoutManager(activity as MainActivity, RecyclerView.VERTICAL, false)
-        mRecyclerView.adapter= Playlist_page_adapter(deleteme, posts, deleteme, activity as MainActivity)
-        // Inflate the layout for this fragment
+        database.addValueEventListener(getdata)
 
         val editText = view.findViewById<EditText>(R.id.searchbar_artists)
 
@@ -67,16 +101,31 @@ val deleteme: ArrayList<String> = ArrayList()
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        var helpbundle = arguments
+        var txt = helpbundle?.getString("searched").toString()
+
         view.findViewById<Button>(R.id.song_button2).setOnClickListener {
-            (activity as MainActivity).makeCurrentFragment(Search_results())
+            var bundle = Bundle()
+            bundle.putString("searched", txt)
+            val search = Search_results()
+            search.arguments = bundle
+            (activity as MainActivity).makeCurrentFragment(search)
         }
 
         view.findViewById<Button>(R.id.artists_button2).setOnClickListener {
-            (activity as MainActivity).makeCurrentFragment(search_artists())
+            var bundle = Bundle()
+            bundle.putString("searched", txt)
+            val search = search_artists()
+            search.arguments = bundle
+            (activity as MainActivity).makeCurrentFragment(search)
         }
 
         view.findViewById<Button>(R.id.playlists_button2).setOnClickListener {
-            (activity as MainActivity).makeCurrentFragment(search_playlists())
+            var bundle = Bundle()
+            bundle.putString("searched", txt)
+            val search = search_playlists()
+            search.arguments = bundle
+            (activity as MainActivity).makeCurrentFragment(search)
         }
 
         val showButton = view.findViewById<Button>(R.id.search_icon_artists)
@@ -87,9 +136,16 @@ val deleteme: ArrayList<String> = ArrayList()
             // Getting the user input
             val txt = editText.text
 
-            // (activity as MainActivity).print((activity as MainActivity).searchtext)
-
             (activity as MainActivity).searchtext = txt.toString()
+
+            var mytext = txt.toString()
+
+            var bundle = Bundle()
+            bundle.putString("searched", mytext)
+            val results = search_artists()
+            results.arguments = bundle
+
+            (activity as MainActivity).makeCurrentFragment(results)
         }
     }
     companion object {
