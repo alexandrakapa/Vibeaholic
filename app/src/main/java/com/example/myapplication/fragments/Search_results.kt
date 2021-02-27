@@ -52,7 +52,7 @@ class Search_results : Fragment() {
         // Inflate the layout for this fragment
         val view =inflater.inflate(R.layout.search_results, container, false)
 
-
+val deleteit: ArrayList<String> = ArrayList()
         val posts: ArrayList<String> = ArrayList() //this will change
         for (i in 1..100){
             posts.add("Song # $i")
@@ -60,7 +60,7 @@ class Search_results : Fragment() {
         val mRecyclerView: RecyclerView
         mRecyclerView = view.findViewById(R.id.recyclerView_results)
         mRecyclerView.layoutManager = LinearLayoutManager(activity as MainActivity, RecyclerView.VERTICAL, false)
-        mRecyclerView.adapter= Playlist_page_adapter(posts, activity as MainActivity)
+        mRecyclerView.adapter= Playlist_page_adapter(deleteit, posts, deleteit, activity as MainActivity)
         // Inflate the layout for this fragment
 
 

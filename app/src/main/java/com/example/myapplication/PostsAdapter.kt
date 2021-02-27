@@ -14,7 +14,7 @@ import com.example.myapplication.fragments.Playing_now
 import com.example.myapplication.fragments.Playlist
 import com.squareup.picasso.Picasso
 
-class PostsAdapter(val posts: ArrayList<String>, val imageurl: ArrayList<String>,  val activity: MainActivity) :  RecyclerView.Adapter<PostsAdapter.Viewholder>(){
+class PostsAdapter(val songs: ArrayList<String>, val posts: ArrayList<String>, val imageurl: ArrayList<String>,  val activity: MainActivity) :  RecyclerView.Adapter<PostsAdapter.Viewholder>(){
 
     class Viewholder(itemView: View, activity: MainActivity) : RecyclerView.ViewHolder(itemView){
         val txt : TextView = itemView.findViewById(R.id.firstName)
@@ -41,6 +41,7 @@ class PostsAdapter(val posts: ArrayList<String>, val imageurl: ArrayList<String>
 
             bundle.putString("song", posts[position])
             bundle.putString("image", imageurl[position])
+            bundle.putString("songID", songs[position])
 
             val playing = Playing_now()
             playing.arguments = bundle

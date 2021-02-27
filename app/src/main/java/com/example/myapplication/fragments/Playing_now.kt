@@ -51,7 +51,7 @@ class Playing_now : Fragment() {
         val sngtxt=vw.findViewById<TextView>(R.id.song_title_playing)
         val img = vw.findViewById<ImageView>(R.id.song_Image)
         val url = bundle?.getString("image")
-        val picasso = Picasso.get().load(url).into(img)
+        Picasso.get().load(url).into(img)
         sngtxt.text = bundle?.getString("song")
 
         return vw
@@ -67,7 +67,13 @@ class Playing_now : Fragment() {
 
 
         view.findViewById<Button>(R.id.button5).setOnClickListener {
-            (activity as MainActivity).makeCurrentFragment(Song_details())
+            val bundle=arguments
+            val id = bundle?.getString("songID")
+            val newbundle = Bundle()
+            newbundle.putString("songID", id)
+            val details = Song_details()
+            details.arguments = newbundle
+            (activity as MainActivity).makeCurrentFragment(details)
         }
 
         view.findViewById<Button>(R.id.play_button).setOnClickListener {

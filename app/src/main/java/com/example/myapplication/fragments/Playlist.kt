@@ -53,7 +53,7 @@ class Playlist : Fragment() {
         val sngtxt=view.findViewById<TextView>(R.id.playlist_title)
         val bundle=arguments
         val title = bundle?.getString("title")
-        val playlistID = bundle?.getString("playlistID")
+        val playlistID = bundle?.getString("playlistID").toString()
         sngtxt.text = title
 
         val posts: ArrayList<String> = ArrayList()
@@ -67,7 +67,7 @@ class Playlist : Fragment() {
 
             override fun onDataChange(snapshot: DataSnapshot) {
                 val songs: ArrayList<String> = ArrayList()
-                for (i in playlistID?.let {snapshot.child(it).child("SongArray").children}!!) {
+                for (i in snapshot.child(playlistID).child("SongArray").children ) {
                     songs.add(i.value.toString())
                 }
 
@@ -83,7 +83,7 @@ class Playlist : Fragment() {
                 val mRecyclerView: RecyclerView
                 mRecyclerView = view.findViewById(R.id.recyclerView_playlist)
                 mRecyclerView.layoutManager = LinearLayoutManager(activity as MainActivity, RecyclerView.VERTICAL, false)
-                mRecyclerView.adapter= Playlist_page_adapter(posts, imageurl, activity as MainActivity)
+                mRecyclerView.adapter= Playlist_page_adapter(songs, posts, imageurl, activity as MainActivity)
             }
         }
         database.addValueEventListener(getdata)

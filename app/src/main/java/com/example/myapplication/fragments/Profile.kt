@@ -39,6 +39,7 @@ class Profile : Fragment() {
         }
     }
 
+val deleteit: ArrayList<String> = ArrayList()
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -53,7 +54,7 @@ class Profile : Fragment() {
         val mRecyclerView2: RecyclerView
         mRecyclerView2 = view.findViewById(R.id.recyclerView_profile)
         mRecyclerView2.layoutManager = LinearLayoutManager(activity as MainActivity, RecyclerView.HORIZONTAL, false)
-        mRecyclerView2.adapter= PlaylistAdapter(playlists, activity as MainActivity)
+        mRecyclerView2.adapter= PlaylistAdapter(playlists, playlists, deleteit, activity as MainActivity)
 
         return view
     }

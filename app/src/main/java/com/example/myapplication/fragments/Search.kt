@@ -49,8 +49,6 @@ class Search : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-
-
         view.findViewById<Button>(R.id.search_icon).setOnClickListener {
 
             //   view.findViewById<Button>(R.id.search_icon).setOnClickListener {
@@ -70,7 +68,6 @@ class Search : Fragment() {
                 //(activity as MainActivity).print(txt.toString())
 
                 (activity as MainActivity).searchtext = txt.toString()
-
 
                 (activity as MainActivity).makeCurrentFragment(Search_results())
             }

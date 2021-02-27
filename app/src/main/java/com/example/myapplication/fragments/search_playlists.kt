@@ -50,10 +50,11 @@ class search_playlists : Fragment() {
         for (i in 1..100){
             posts.add("Playlist # $i")
         }
+val deleteme : ArrayList<String> = ArrayList()
         val mRecyclerView: RecyclerView
         mRecyclerView = view.findViewById(R.id.recyclerView_results_playlists)
         mRecyclerView.layoutManager = LinearLayoutManager(activity as MainActivity, RecyclerView.VERTICAL, false)
-        mRecyclerView.adapter= Playlist_page_adapter(posts, activity as MainActivity)
+        mRecyclerView.adapter= Playlist_page_adapter(deleteme, posts, deleteme, activity as MainActivity)
         // Inflate the layout for this fragment
 
         val editText = view.findViewById<EditText>(R.id.searchbar_playlists)

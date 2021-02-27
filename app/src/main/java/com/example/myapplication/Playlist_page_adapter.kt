@@ -17,7 +17,7 @@ import com.squareup.picasso.Picasso
 
 //used for user playlist and for search with recommendations
 
-class Playlist_page_adapter(val posts: ArrayList<String>, val imageurl: ArrayList<String>, val activity: MainActivity) :  RecyclerView.Adapter<Playlist_page_adapter.Viewholder>(){
+class Playlist_page_adapter(val songs: ArrayList<String>, val posts: ArrayList<String>, val imageurl: ArrayList<String>, val activity: MainActivity) :  RecyclerView.Adapter<Playlist_page_adapter.Viewholder>(){
 
     class Viewholder(itemView: View, activity: MainActivity) : RecyclerView.ViewHolder(itemView){
         val txt : TextView = itemView.findViewById(R.id.song_title)
@@ -34,7 +34,7 @@ class Playlist_page_adapter(val posts: ArrayList<String>, val imageurl: ArrayLis
     override fun getItemCount()=posts.size
 
     override fun onBindViewHolder(holder:Playlist_page_adapter.Viewholder, position: Int) {
-        val picasso =Picasso.get().load(imageurl[position]).into(holder.image)
+        Picasso.get().load(imageurl[position]).into(holder.image)
         holder.txt.text = posts[position]
 
         val view2 : CardView
@@ -44,6 +44,7 @@ class Playlist_page_adapter(val posts: ArrayList<String>, val imageurl: ArrayLis
 
             bundle.putString("song", posts[position])
             bundle.putString("image", imageurl[position])
+            bundle.putString("songID", songs[position])
 
             val playing = Playing_now()
             playing.arguments = bundle

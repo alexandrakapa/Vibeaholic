@@ -66,7 +66,7 @@ class Homepage : Fragment() {
             }
 
             override fun onDataChange(snapshot: DataSnapshot) {
-                val recently: ArrayList<String> = ArrayList()
+                var recently: ArrayList<String> = ArrayList()
                 for (i in snapshot.child("user1").child("Playlists").child("1").child("SongArray").children){
                     recently.add(i.value.toString())
                 }
@@ -83,7 +83,7 @@ class Homepage : Fragment() {
                 val mRecyclerView: RecyclerView
                 mRecyclerView = view.findViewById(R.id.recyclerView)
                 mRecyclerView.layoutManager = LinearLayoutManager(activity as MainActivity, RecyclerView.HORIZONTAL, false)
-                mRecyclerView.adapter= PostsAdapter(posts, imageurl,  activity as MainActivity)
+                mRecyclerView.adapter= PostsAdapter(recently, posts, imageurl,  activity as MainActivity)
 
 
                 var suggested: ArrayList<String> = ArrayList()
@@ -120,7 +120,7 @@ class Homepage : Fragment() {
                 val mRecyclerView3: RecyclerView
                 mRecyclerView3 = view.findViewById(R.id.recyclerView3)
                 mRecyclerView3.layoutManager = LinearLayoutManager(activity as MainActivity, RecyclerView.HORIZONTAL, false)
-                mRecyclerView3.adapter= PostsAdapter(posts3, imageurl3, activity as MainActivity)
+                mRecyclerView3.adapter= PostsAdapter(suggestedsongs, posts3, imageurl3, activity as MainActivity)
 
 
                 var trending : ArrayList<String> = ArrayList()
@@ -139,7 +139,7 @@ class Homepage : Fragment() {
                 val mRecyclerView4: RecyclerView
                 mRecyclerView4 = view.findViewById(R.id.recyclerView4)
                 mRecyclerView4.layoutManager = LinearLayoutManager(activity as MainActivity, RecyclerView.HORIZONTAL, false)
-                mRecyclerView4.adapter= PostsAdapter(posts4, imageurl4, activity as MainActivity)
+                mRecyclerView4.adapter= PostsAdapter(trending, posts4, imageurl4, activity as MainActivity)
             }
         }
 
