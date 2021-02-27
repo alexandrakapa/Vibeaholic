@@ -34,8 +34,6 @@ class Search : Fragment() {
             param1 = it.getString(ARG_PARAM1)
             param2 = it.getString(ARG_PARAM2)
         }
-
-
     }
 
     override fun onCreateView(
@@ -57,7 +55,6 @@ class Search : Fragment() {
 
             val showButton = view.findViewById<Button>(R.id.search_icon)
             val editText = view.findViewById<EditText>(R.id.search_text)
-
 
             // Setting On Click Listener
             showButton.setOnClickListener {
