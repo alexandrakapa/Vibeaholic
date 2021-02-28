@@ -62,7 +62,7 @@ class Search : Fragment() {
 
 
             // Setting On Click Listener
-            showButton.setOnClickListener {
+
 
                 // Getting the user input
                 val txt = editText.text
@@ -73,7 +73,7 @@ class Search : Fragment() {
 
 
                 (activity as MainActivity).makeCurrentFragment(Search_results())
-            }
+
 
         }
     }
