@@ -16,6 +16,10 @@ import com.example.myapplication.Playlist_page_adapter
 import com.example.myapplication.R
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayout.OnTabSelectedListener
+import com.google.firebase.database.DataSnapshot
+import com.google.firebase.database.DatabaseError
+import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.database.ValueEventListener
 import kotlinx.android.synthetic.main.fragment_playing_now.*
 import java.util.ArrayList
 
@@ -52,18 +56,51 @@ class Search_results : Fragment() {
         // Inflate the layout for this fragment
         val view =inflater.inflate(R.layout.search_results, container, false)
 
-
+/*val deleteit: ArrayList<String> = ArrayList()
         val posts: ArrayList<String> = ArrayList() //this will change
         for (i in 1..100){
             posts.add("Song # $i")
+        }*/
+
+        val bundle = arguments
+        val insertedText = bundle?.getString("searched").toString().toLowerCase()
+
+        val posts: ArrayList<String> = ArrayList()
+        val imageurl: ArrayList<String> = ArrayList()
+
+        var database = FirebaseDatabase.getInstance().reference
+
+        var getdata = object : ValueEventListener {
+            override fun onCancelled(error: DatabaseError) {
+            }
+
+            override fun onDataChange(snapshot: DataSnapshot) {
+                val songs: ArrayList<String> = ArrayList()
+                for (i in snapshot.children ) {
+                    if ((i.key.toString()).contains("song")) {
+                        var name = i.child("Name").value.toString().toLowerCase()
+                        if (name.contains(insertedText)) {
+                            songs.add(i.key.toString())
+                        }
+                    }
+                }
+
+                for (i in songs) {
+                    var songName = snapshot.child(i).child("Name").value.toString()
+                    var songArtist = snapshot.child(i).child("Artist").value.toString()
+                    var caption: String = "$songName - $songArtist"
+                    posts.add(caption)
+                    var image = snapshot.child(i).child("ImageURL").value.toString()
+                    imageurl.add(image)
+                }
+
+                val mRecyclerView: RecyclerView
+                mRecyclerView = view.findViewById(R.id.recyclerView_results)
+                mRecyclerView.layoutManager = LinearLayoutManager(activity as MainActivity, RecyclerView.VERTICAL, false)
+                mRecyclerView.adapter= Playlist_page_adapter(songs, posts, imageurl, activity as MainActivity)
+            }
         }
-        val mRecyclerView: RecyclerView
-        mRecyclerView = view.findViewById(R.id.recyclerView_results)
-        mRecyclerView.layoutManager = LinearLayoutManager(activity as MainActivity, RecyclerView.VERTICAL, false)
-        mRecyclerView.adapter= Playlist_page_adapter(posts, activity as MainActivity)
-        // Inflate the layout for this fragment
-
-
+        database.addValueEventListener(getdata)
 
         val editText = view.findViewById<EditText>(R.id.searchbar_songs)
 
@@ -78,16 +115,31 @@ class Search_results : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         //var TabSong = view.findViewById<TabItem>(R.id.tabSongs)
 
+        var helpbundle = arguments
+        var txt = helpbundle?.getString("searched").toString()
+
         view.findViewById<Button>(R.id.song_button).setOnClickListener {
-            (activity as MainActivity).makeCurrentFragment(Search_results())
+            var bundle = Bundle()
+            bundle.putString("searched", txt)
+            val search = Search_results()
+            search.arguments = bundle
+            (activity as MainActivity).makeCurrentFragment(search)
         }
 
         view.findViewById<Button>(R.id.artists_button).setOnClickListener {
-            (activity as MainActivity).makeCurrentFragment(search_artists())
+            var bundle = Bundle()
+            bundle.putString("searched", txt)
+            val search = search_artists()
+            search.arguments = bundle
+            (activity as MainActivity).makeCurrentFragment(search)
         }
 
         view.findViewById<Button>(R.id.playlists_button).setOnClickListener {
-            (activity as MainActivity).makeCurrentFragment(search_playlists())
+            var bundle = Bundle()
+            bundle.putString("searched", txt)
+            val search = search_playlists()
+            search.arguments = bundle
+            (activity as MainActivity).makeCurrentFragment(search)
         }
 
         val showButton = view.findViewById<Button>(R.id.search_icon_songs)
@@ -101,11 +153,16 @@ class Search_results : Fragment() {
             // Getting the user input
             val txt = editText.text
 
-            //(activity as MainActivity).print(txt.toString())
-
             (activity as MainActivity).searchtext=txt.toString()
 
-            // Showing the user input
+            var mytext = txt.toString()
+
+            var bundle = Bundle()
+            bundle.putString("searched", mytext)
+            val results = Search_results()
+            results.arguments = bundle
+
+            (activity as MainActivity).makeCurrentFragment(results)
 
         }
 

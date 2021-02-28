@@ -1,37 +1,37 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".fragments.Profile"
+    android:layout_marginTop="30dp"
+    tools:context=".fragments.Party_playlist"
     android:background="@color/black">
 
     <!-- TODO: Update blank fragment layout -->
     <TextView
-        android:id="@+id/playlist_title"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginTop="70dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="25dp"
+        android:layout_marginTop="20dp"
         android:text="@string/playlist_title"
-        android:textColor="@color/white"
-        android:textSize="40sp" />
+        android:textColor="@color/white" />
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recyclerView_playlist"
+        android:id="@+id/recyclerView_search_playlist_list"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginLeft="10dp"
-        android:layout_marginTop="140dp" />
+        android:layout_marginTop="90dp" />
 
     <View
-        android:id="@+id/divider3"
+        android:id="@+id/divider_dj_list"
         android:layout_width="match_parent"
         android:layout_height="1dp"
-        android:layout_marginTop="125dp"
+        android:layout_marginTop="65dp"
         android:background="#03A9F4" />
 
 
 
-</RelativeLayout>
+
+</FrameLayout>

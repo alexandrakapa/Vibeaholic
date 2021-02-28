@@ -41,6 +41,14 @@ class side_menu : Fragment() {
     }
 
 
+
+
+      //  view.findViewById<TextView>(R.id.more).setOnClickListener {
+       //    (activity as MainActivity).makeCurrentFragment(More_about_party())
+      // }
+
+
+
     companion object {
         /**
          * Use this factory method to create a new instance of

@@ -9,8 +9,16 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.ImageButton
 import android.widget.SearchView
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.example.myapplication.MainActivity
+import com.example.myapplication.Playlist_page_adapter
 import com.example.myapplication.R
+import com.google.firebase.database.DataSnapshot
+import com.google.firebase.database.DatabaseError
+import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.database.ValueEventListener
+import java.util.ArrayList
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -34,13 +42,11 @@ class Search : Fragment() {
             param1 = it.getString(ARG_PARAM1)
             param2 = it.getString(ARG_PARAM2)
         }
-
-
     }
 
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
+            inflater: LayoutInflater, container: ViewGroup?,
+            savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_search, container, false)
@@ -49,20 +55,17 @@ class Search : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-
-
         view.findViewById<Button>(R.id.search_icon).setOnClickListener {
 
             //   view.findViewById<Button>(R.id.search_icon).setOnClickListener {
             //       (activity as MainActivity).makeCurrentFragment(Search_results())
             //  }
 
-            val showButton = view.findViewById<Button>(R.id.search_icon)
+            //val showButton = view.findViewById<Button>(R.id.search_icon)
             val editText = view.findViewById<EditText>(R.id.search_text)
 
-
             // Setting On Click Listener
-            showButton.setOnClickListener {
+
 
                 // Getting the user input
                 val txt = editText.text
@@ -70,10 +73,15 @@ class Search : Fragment() {
                 //(activity as MainActivity).print(txt.toString())
 
                 (activity as MainActivity).searchtext = txt.toString()
+                var mytext = txt.toString()
 
+                var bundle = Bundle()
+                bundle.putString("searched", mytext)
+                val results = Search_results()
+                results.arguments = bundle
 
-                (activity as MainActivity).makeCurrentFragment(Search_results())
-            }
+                (activity as MainActivity).makeCurrentFragment(results)
+
 
         }
     }
@@ -89,11 +97,12 @@ class Search : Fragment() {
         // TODO: Rename and change types and number of parameters
         @JvmStatic
         fun newInstance(param1: String, param2: String) =
-            Search().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
+                Search().apply {
+                    arguments = Bundle().apply {
+                        putString(ARG_PARAM1, param1)
+                        putString(ARG_PARAM2, param2)
+                    }
                 }
-            }
     }
+
 }

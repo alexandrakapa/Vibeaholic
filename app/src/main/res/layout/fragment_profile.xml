@@ -12,17 +12,23 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerView_profile"
+            android:layout_width="match_parent"
+            android:layout_height="120dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="485dp" />
+
         <TextView
-            android:id="@+id/editTextTextPersonName5"
+            android:id="@+id/PersonName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="5dp"
             android:layout_marginLeft="5dp"
             android:layout_marginTop="40dp"
-            android:text="@string/profile"
+            android:textColor="#F1EEEE"
             android:textSize="40sp"
-            android:textStyle="bold"
-            android:textColor="#F1EEEE" />
+            android:textStyle="bold" />
 
         <ImageView
             android:id="@+id/profile_image"
@@ -41,7 +47,7 @@
             android:layout_marginTop="90dp"
             android:background="#03A9F4" />
 
-        <ImageView
+        <com.anychart.AnyChartView
             android:id="@+id/mood_stats_1"
             android:layout_width="184dp"
             android:layout_height="188dp"
@@ -51,7 +57,7 @@
             app:srcCompat="@android:drawable/gallery_thumb"
             tools:src="@tools:sample/backgrounds/scenic" />
 
-        <ImageView
+        <com.anychart.AnyChartView
             android:id="@+id/mood_stats_2"
             android:layout_width="184dp"
             android:layout_height="188dp"
@@ -60,45 +66,6 @@
             android:layout_marginTop="870dp"
             app:srcCompat="@android:drawable/gallery_thumb"
             tools:src="@tools:sample/backgrounds/scenic" />
-
-        <ImageView
-            android:id="@+id/profile_image1"
-            android:layout_width="95dp"
-            android:layout_height="95dp"
-            android:layout_marginStart="10dp"
-            android:layout_marginLeft="10dp"
-            android:layout_marginTop="365dp"
-            android:clickable="true"
-            app:srcCompat="@android:drawable/gallery_thumb"
-            tools:src="@tools:sample/backgrounds/scenic" />
-
-
-
-        <ImageView
-            android:id="@+id/profile_image2"
-            android:layout_width="95dp"
-            android:layout_height="95dp"
-            android:layout_marginStart="125dp"
-            android:layout_marginLeft="125dp"
-            android:layout_marginTop="365dp"
-            android:clickable="true"
-            app:srcCompat="@android:drawable/gallery_thumb"
-            tools:src="@tools:sample/backgrounds/scenic" />
-
-
-
-        <ImageView
-            android:id="@+id/profile_image3"
-            android:layout_width="95dp"
-            android:layout_height="95dp"
-            android:layout_marginStart="240dp"
-            android:layout_marginLeft="240dp"
-            android:layout_marginTop="365dp"
-            android:clickable="true"
-            app:srcCompat="@android:drawable/gallery_thumb"
-            tools:src="@tools:sample/backgrounds/scenic" />
-
-
 
         <TextView
             android:id="@+id/my_playlists"
@@ -119,33 +86,6 @@
             android:layout_marginTop="345dp"
             android:background="#03A9F4" />
 
-        <TextView
-            android:id="@+id/favourites"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="10dp"
-            android:layout_marginTop="460dp"
-            android:text="@string/favourites"
-            android:textColor="#FBF8F8" />
-
-        <TextView
-            android:id="@+id/listen_later"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="125dp"
-            android:layout_marginTop="460dp"
-            android:text="@string/listen_later"
-            android:textColor="#FBF8F8" />
-
-
-        <TextView
-            android:id="@+id/recently_played"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="240dp"
-            android:layout_marginTop="460dp"
-            android:text="@string/recently_played"
-            android:textColor="#FBF8F8" />
 
         <TextView
             android:id="@+id/editTextTextPersonName7"
@@ -173,9 +113,10 @@
             android:layout_marginStart="220dp"
             android:layout_marginLeft="220dp"
             android:layout_marginTop="660dp"
-
-            android:text="Last week:"
-            android:textColor="#FFFFFF" />
+            android:text="Last week"
+            android:textColor="#FFFFFF"
+            android:textSize="19sp"
+            android:textStyle="bold"/>
 
         <TextView
             android:id="@+id/last_month_title"
@@ -184,16 +125,81 @@
             android:layout_marginStart="220dp"
             android:layout_marginLeft="220dp"
             android:layout_marginTop="870dp"
-            android:text="Last month:"
-            android:textColor="#FFFFFF" />
+            android:text="Last month"
+            android:textColor="#FFFFFF"
+            android:textSize="19sp"
+            android:textStyle="bold"/>
 
 
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/recyclerView_profile"
+            android:id="@+id/standard_playlists_profile"
             android:layout_width="match_parent"
             android:layout_height="120dp"
             android:layout_marginLeft="10dp"
-            android:layout_marginTop="485dp" />
+            android:layout_marginTop="355dp" />
+
+        <TableLayout
+            android:layout_width="190dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="215dp"
+            android:layout_marginTop="110dp">
+
+            <TextView
+                android:layout_width="190dp"
+                android:layout_height="wrap_content"
+                android:text="E-mail:"
+                android:textColor="#03A9F4"
+                android:textSize="19sp"
+                android:textStyle="bold"/>
+
+            <TextView
+                android:id="@+id/profile_email"
+                android:layout_width="190dp"
+                android:layout_height="wrap_content"
+                android:textColor="@color/white"
+                android:textSize="15sp"
+                android:textStyle="bold"/>
+
+            <TextView
+                android:layout_width="190dp"
+                android:layout_height="wrap_content"
+                android:text="Birthday:"
+                android:textColor="#03A9F4"
+                android:textSize="19sp"
+                android:textStyle="bold"/>
+
+            <TextView
+                android:id="@+id/profile_birthday"
+                android:layout_width="190dp"
+                android:layout_height="wrap_content"
+                android:textColor="@color/white"
+                android:textSize="15sp"
+                android:textStyle="bold"/>
+
+            <TextView
+                android:layout_width="190dp"
+                android:layout_height="wrap_content"
+                android:text="Social Media:"
+                android:textColor="#03A9F4"
+                android:textSize="19sp"
+                android:textStyle="bold"/>
+
+            <TextView
+                android:id="@+id/profile_fb"
+                android:layout_width="190dp"
+                android:layout_height="wrap_content"
+                android:textColor="@color/white"
+                android:textSize="15sp"
+                android:textStyle="bold"/>
+
+            <TextView
+                android:id="@+id/profile_insta"
+                android:layout_width="190dp"
+                android:layout_height="wrap_content"
+                android:textColor="@color/white"
+                android:textSize="15sp"
+                android:textStyle="bold"/>
+        </TableLayout>
 
 
     </RelativeLayout>

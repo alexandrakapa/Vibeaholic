@@ -5,12 +5,19 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
+import android.widget.TextView
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.myapplication.MainActivity
 import com.example.myapplication.Playlist_page_adapter
 import com.example.myapplication.PostsAdapter
 import com.example.myapplication.R
+import com.google.firebase.database.DataSnapshot
+import com.google.firebase.database.DatabaseError
+import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.database.ValueEventListener
+import com.squareup.picasso.Picasso
 import java.util.ArrayList
 
 // TODO: Rename parameter arguments, choose names that match
@@ -43,15 +50,59 @@ class Playlist : Fragment() {
         // Inflate the layout for this fragment
 
         val view = inflater.inflate(R.layout.fragment_playlist, container, false)
+        val sngtxt=view.findViewById<TextView>(R.id.playlist_title)
+        val bundle=arguments
+        val title = bundle?.getString("title").toString()
+        val playlistID = bundle?.getString("playlistID").toString()
 
-        val posts: ArrayList<String> = ArrayList() //this will change
-        for (i in 1..100){
-            posts.add("Song # $i")
+        val swipeUp = (activity as MainActivity).swipeUpBoolean
+        val songId = bundle?.getString("playingNowSong").toString()
+        (activity as MainActivity).bundleForPlayingSong.putString("playlistID", playlistID)
+
+        sngtxt.text = title
+
+        val posts: ArrayList<String> = ArrayList()
+        val imageurl: ArrayList<String> = ArrayList()
+
+        var database = FirebaseDatabase.getInstance().reference
+
+        var getdata = object : ValueEventListener {
+            override fun onCancelled(error: DatabaseError) {
+            }
+
+            override fun onDataChange(snapshot: DataSnapshot) {
+                val songs: ArrayList<String> = ArrayList()
+                if (swipeUp) {
+                    for (i in snapshot.child(playlistID).child("SongArray").children) {
+                        if (i.value.toString() != songId) {
+                            songs.add(i.value.toString())
+                        }
+                    }
+                }
+                else {
+                    for (i in snapshot.child(playlistID).child("SongArray").children) {
+                        songs.add(i.value.toString())
+                    }
+                }
+
+                for (i in songs) {
+                    var songName = snapshot.child(i).child("Name").value.toString()
+                    var songArtist = snapshot.child(i).child("Artist").value.toString()
+                    var caption: String = "$songName - $songArtist"
+                    posts.add(caption)
+                    var image = snapshot.child(i).child("ImageURL").value.toString()
+                    imageurl.add(image)
+                }
+
+                (activity as MainActivity).swipeUpBoolean = false
+
+                val mRecyclerView: RecyclerView
+                mRecyclerView = view.findViewById(R.id.recyclerView_playlist)
+                mRecyclerView.layoutManager = LinearLayoutManager(activity as MainActivity, RecyclerView.VERTICAL, false)
+                mRecyclerView.adapter= Playlist_page_adapter(songs, posts, imageurl, activity as MainActivity)
+            }
         }
-        val mRecyclerView: RecyclerView
-        mRecyclerView = view.findViewById(R.id.recyclerView_playlist)
-        mRecyclerView.layoutManager = LinearLayoutManager(activity as MainActivity, RecyclerView.VERTICAL, false)
-        mRecyclerView.adapter= Playlist_page_adapter(posts, activity as MainActivity)
+        database.addValueEventListener(getdata)
 
         return view
     }
