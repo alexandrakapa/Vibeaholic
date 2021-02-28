@@ -59,7 +59,7 @@ class Playing_now : Fragment() {
         val id = bundle?.getString("songID")
         Picasso.get().load(url).into(img)
         sngtxt.text = song
-        val FromPlaylist= (activity as MainActivity).bundleForPlayingSong?.getBoolean("playlist")
+        //val FromPlaylist= (activity as MainActivity).bundleForPlayingSong?.getBoolean("playlist")
         (activity as MainActivity).bundleForPlayingSong.putString("song", song)
         (activity as MainActivity).bundleForPlayingSong.putString("image", url)
         (activity as MainActivity).bundleForPlayingSong.putString("songID", id)
