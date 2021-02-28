@@ -21,29 +21,30 @@
 
         <TextView
             android:id="@+id/song_title"
-            android:layout_width="wrap_content"
+            android:layout_width="260dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="25dp"
             android:layout_marginLeft="100dp"
+            android:layout_marginTop="25dp"
             android:text="TextView"
             android:textColor="@color/white" />
-
 
         <Button
             android:id="@+id/button_favourites_playlistsong"
             android:layout_width="48dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="15dp"
-            android:layout_marginLeft="300dp"
+            android:layout_marginLeft="290dp"
             android:backgroundTint="@color/black"
             android:visibility="gone"
             app:icon="@android:drawable/star_off" />
+
+
 
         <Button
             android:id="@+id/button_delete_playlistsong"
             android:layout_width="48dp"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="345dp"
+            android:layout_marginLeft="335dp"
             android:layout_marginTop="15dp"
             android:backgroundTint="@color/black"
             android:visibility="gone"

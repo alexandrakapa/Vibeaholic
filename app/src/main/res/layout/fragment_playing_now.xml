@@ -15,7 +15,7 @@
 
 
         <ImageView
-            android:id="@+id/imageView"
+            android:id="@+id/song_Image"
             android:layout_width="322dp"
             android:layout_height="294dp"
             android:layout_marginStart="50dp"
@@ -65,23 +65,13 @@
 
         <TextView
             android:id="@+id/song_title_playing"
-            android:layout_width="56dp"
+            android:layout_width="298dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="60dp"
             android:layout_marginLeft="60dp"
             android:layout_marginTop="390dp"
             android:text="@string/song_title"
             android:textColor="#EEF4F6" />
-
-        <TextView
-            android:id="@+id/editTextTextPersonName3"
-            android:layout_width="wrap_content"
-            android:layout_height="13dp"
-            android:layout_marginStart="60dp"
-            android:layout_marginLeft="60dp"
-            android:layout_marginTop="420dp"
-            android:text="@string/artist"
-            android:textColor="#FBF3F3" />
 
         <Button
             android:id="@+id/button5"
