@@ -5,6 +5,7 @@ import android.content.Intent
 import android.os.Build
 import android.os.Bundle
 import android.provider.MediaStore
+import android.util.Log
 import android.view.GestureDetector
 import android.view.MotionEvent
 import android.view.View
@@ -17,10 +18,17 @@ import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.GestureDetectorCompat
 import androidx.fragment.app.Fragment
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.example.myapplication.fragments.*
+import com.google.firebase.database.DataSnapshot
+import com.google.firebase.database.DatabaseError
+import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.database.ValueEventListener
 import kotlinx.android.synthetic.main.activity_main.*
 
 import kotlinx.android.synthetic.main.search_results.*
+import java.util.ArrayList
 
 class MainActivity : AppCompatActivity(){
     val REQUEST_IMAGE_CAPTURE = 1
@@ -43,7 +51,7 @@ class MainActivity : AppCompatActivity(){
 
     var searchtext = "Search song here"
     var bundleForPlayingSong = Bundle()
-
+    var swipeUpBoolean = false
 
     private lateinit var detector: GestureDetectorCompat
 
@@ -345,12 +353,82 @@ class MainActivity : AppCompatActivity(){
             return
         }
         if (!onDj) {
-            makeCurrentFragment(Playlist())
-        }
-        else if (onDj && onCreate) {
+            var bundle = Bundle()
+            var checker = bundleForPlayingSong.getBoolean("playlist")
+            var songId = bundleForPlayingSong.getString("songID").toString()
+            var playId: String = String()
+
+            if (checker) {
+                playId = bundleForPlayingSong.getString("playlistID").toString()
+                var ref = FirebaseDatabase.getInstance().reference
+
+                var getsongs = object : ValueEventListener {
+                    override fun onCancelled(error: DatabaseError) {
+                    }
+
+                    override fun onDataChange(snapshot: DataSnapshot) {
+                        var title = snapshot.child(playId).child("PlaylistName").value.toString()
+                        bundle.putString("title", title)
+
+                        bundle.putString("playlistID", playId)
+                        bundle.putString("playingNowSong", songId)
+                        swipeUpBoolean = true
+
+                        val pl = Playlist()
+                        pl.arguments = bundle
+
+                        makeCurrentFragment(pl)
+                    }
+                }
+                ref.addValueEventListener(getsongs)
+
+            } else {
+                var database = FirebaseDatabase.getInstance().reference
+
+                var getPlaylistid = object : ValueEventListener {
+
+                    override fun onCancelled(error: DatabaseError) {
+                    }
+
+                    override fun onDataChange(snapshot: DataSnapshot) {
+
+                        for (i in snapshot.children) {
+                            if ((i.key.toString()).contains("playlist")) {
+                                for (j in i.child("SongArray").children) {
+                                    if (j.value.toString() == songId) {
+                                        playId = i.key.toString()
+                                        break
+                                    }
+                                }
+                            }
+                            if (!playId.isEmpty()) {
+                                break
+                            }
+                        }
+
+                        if (playId.isEmpty()) {
+                            playId = "playlist3"
+                        }
+
+                        var title = snapshot.child(playId).child("PlaylistName").value.toString()
+                        bundle.putString("title", title)
+                        bundle.putString("playlistID", playId)
+                        bundle.putString("playingNowSong", songId)
+                        swipeUpBoolean = true
+
+                        val pl = Playlist()
+                        pl.arguments = bundle
+
+                        makeCurrentFragment(pl)
+                    }
+                }
+                database.addValueEventListener(getPlaylistid)
+            }
+            Log.d("mytag", playId)
+
+        } else if (onDj && onCreate) {
             makeCurrentFragment(Party_playlist())
-        }
-        else {
+        } else {
             makeCurrentFragment(Party_playlist_suggestion())
         }
     }

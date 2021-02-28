@@ -52,8 +52,13 @@ class Playlist : Fragment() {
         val view = inflater.inflate(R.layout.fragment_playlist, container, false)
         val sngtxt=view.findViewById<TextView>(R.id.playlist_title)
         val bundle=arguments
-        val title = bundle?.getString("title")
+        val title = bundle?.getString("title").toString()
         val playlistID = bundle?.getString("playlistID").toString()
+
+        val swipeUp = (activity as MainActivity).swipeUpBoolean
+        val songId = bundle?.getString("playingNowSong").toString()
+        (activity as MainActivity).bundleForPlayingSong.putString("playlistID", playlistID)
+
         sngtxt.text = title
 
         val posts: ArrayList<String> = ArrayList()
@@ -67,8 +72,17 @@ class Playlist : Fragment() {
 
             override fun onDataChange(snapshot: DataSnapshot) {
                 val songs: ArrayList<String> = ArrayList()
-                for (i in snapshot.child(playlistID).child("SongArray").children ) {
-                    songs.add(i.value.toString())
+                if (swipeUp) {
+                    for (i in snapshot.child(playlistID).child("SongArray").children) {
+                        if (i.value.toString() != songId) {
+                            songs.add(i.value.toString())
+                        }
+                    }
+                }
+                else {
+                    for (i in snapshot.child(playlistID).child("SongArray").children) {
+                        songs.add(i.value.toString())
+                    }
                 }
 
                 for (i in songs) {
@@ -79,6 +93,8 @@ class Playlist : Fragment() {
                     var image = snapshot.child(i).child("ImageURL").value.toString()
                     imageurl.add(image)
                 }
+
+                (activity as MainActivity).swipeUpBoolean = false
 
                 val mRecyclerView: RecyclerView
                 mRecyclerView = view.findViewById(R.id.recyclerView_playlist)

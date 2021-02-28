@@ -70,12 +70,12 @@ class Search_with_recommendations : Fragment() {
             //       (activity as MainActivity).makeCurrentFragment(Search_results())
             //  }
 
-            val showButton = view.findViewById<Button>(R.id.search_icon_dj)
+            //val showButton = view.findViewById<Button>(R.id.search_icon_dj)
             val editText = view.findViewById<EditText>(R.id.search_text_dj)
 
 
             // Setting On Click Listener
-            showButton.setOnClickListener {
+
 
                 // Getting the user input
                 val txt = editText.text
@@ -86,7 +86,7 @@ class Search_with_recommendations : Fragment() {
 
 
                 (activity as MainActivity).makeCurrentFragment(dj_create_search_songs())
-            }
+
 
         }
     }

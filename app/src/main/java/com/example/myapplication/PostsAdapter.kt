@@ -42,6 +42,7 @@ class PostsAdapter(val songs: ArrayList<String>, val posts: ArrayList<String>, v
             bundle.putString("song", posts[position])
             bundle.putString("image", imageurl[position])
             bundle.putString("songID", songs[position])
+            activity.bundleForPlayingSong.putBoolean("playlist", false)
 
             val playing = Playing_now()
             playing.arguments = bundle

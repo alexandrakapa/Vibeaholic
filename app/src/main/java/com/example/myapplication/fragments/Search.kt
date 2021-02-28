@@ -61,11 +61,11 @@ class Search : Fragment() {
             //       (activity as MainActivity).makeCurrentFragment(Search_results())
             //  }
 
-            val showButton = view.findViewById<Button>(R.id.search_icon)
+            //val showButton = view.findViewById<Button>(R.id.search_icon)
             val editText = view.findViewById<EditText>(R.id.search_text)
 
             // Setting On Click Listener
-            showButton.setOnClickListener {
+
 
                 // Getting the user input
                 val txt = editText.text
@@ -81,7 +81,7 @@ class Search : Fragment() {
                 results.arguments = bundle
 
                 (activity as MainActivity).makeCurrentFragment(results)
-            }
+
 
         }
     }

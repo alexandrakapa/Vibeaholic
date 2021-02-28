@@ -13,6 +13,7 @@ import androidx.annotation.RequiresApi
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.anychart.APIlib
 import com.anychart.AnyChart
 import com.anychart.AnyChartView
 import com.anychart.chart.common.dataentry.DataEntry
@@ -78,6 +79,7 @@ val deleteit: ArrayList<String> = ArrayList()
         val emotions = listOf<String>("Happy", "Sad", "Relaxed", "Stressed", "Neutral")
 
         val chartWeek = view.findViewById<AnyChartView>(R.id.mood_stats_1)
+        APIlib.getInstance().setActiveAnyChartView(chartWeek)
         var pieWeek = AnyChart.pie()
         val Week = listOf<Int>(1, 0, 2, 0, 1)
         val dataentry: ArrayList<DataEntry> = ArrayList()
@@ -90,6 +92,7 @@ val deleteit: ArrayList<String> = ArrayList()
         chartWeek.setChart(pieWeek)
 
         val chartMonth= view.findViewById<AnyChartView>(R.id.mood_stats_2)
+        APIlib.getInstance().setActiveAnyChartView(chartMonth)
         var pieMonth = AnyChart.pie()
         val Month = listOf<Int>(1, 1, 2, 0, 1)
         val dataentry2: ArrayList<DataEntry> = ArrayList()

@@ -42,16 +42,13 @@ class PlaylistAdapter(val playlists: ArrayList<String>,val posts: ArrayList<Stri
             val picasso = Picasso.get().load(imageurl[position]).into(holder.image)
             holder.txt.text = posts[position]
 
-            val view1 : ImageView
-            view1=holder.view1.findViewById((R.id.home_image))
-            view1.setOnClickListener {
-                val bundle = Bundle()
-                bundle.putString("title", posts[position])
-                bundle.putString("playlistID", playlists[position])
-                val playlist = Playlist()
-                playlist.arguments = bundle
-                activity.makeCurrentFragment(playlist)
-            }
+            val bundle = Bundle()
+            bundle.putString("title", posts[position])
+            bundle.putString("playlistID", playlists[position])
+            val playlist = Playlist()
+            playlist.arguments = bundle
+            activity.makeCurrentFragment(playlist)
+
         }
     }
 }

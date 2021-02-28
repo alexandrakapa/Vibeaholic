@@ -51,7 +51,7 @@ class Song_details : Fragment() {
     ): View? {
         // Inflate the layout for this fragment
         val view = inflater.inflate(R.layout.fragment_song_details, container, false)
-        var detailsTitle = view.findViewById<TextView>(R.id.details_name)
+        var detailsTitle = view.findViewById<TextView>(R.id.songName)
         var officialName= view.findViewById<TextView>(R.id.details_name)
         var artist= view.findViewById<TextView>(R.id.details_artist)
         var album= view.findViewById<TextView>(R.id.details_album)
