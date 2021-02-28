@@ -42,6 +42,7 @@ class MainActivity : AppCompatActivity(){
     lateinit var prevfrag : Fragment
 
     var searchtext = "Search song here"
+    var bundleForPlayingSong = Bundle()
 
 
     private lateinit var detector: GestureDetectorCompat
@@ -102,7 +103,11 @@ class MainActivity : AppCompatActivity(){
                     else makeCurrentFragment(searchWithRecommendations)
                 }
                 R.id.ic_play_now -> {
-                    if (!onDj) makeCurrentFragment(playing)
+                    if (!onDj) {
+                        val playingnow = Playing_now()
+                        playingnow.arguments = bundleForPlayingSong
+                        makeCurrentFragment(playingnow)
+                    }
                     else makeCurrentFragment(partyPlaying)
                 }
                 R.id.ic_profile -> makeCurrentFragment(profile)

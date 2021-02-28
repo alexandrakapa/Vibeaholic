@@ -51,8 +51,13 @@ class Playing_now : Fragment() {
         val sngtxt=vw.findViewById<TextView>(R.id.song_title_playing)
         val img = vw.findViewById<ImageView>(R.id.song_Image)
         val url = bundle?.getString("image")
+        val song = bundle?.getString("song")
+        val id = bundle?.getString("songID")
         Picasso.get().load(url).into(img)
-        sngtxt.text = bundle?.getString("song")
+        sngtxt.text = song
+        (activity as MainActivity).bundleForPlayingSong.putString("song", song)
+        (activity as MainActivity).bundleForPlayingSong.putString("image", url)
+        (activity as MainActivity).bundleForPlayingSong.putString("songID", id)
 
         return vw
     }
