@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import android.widget.Toast
 import com.example.myapplication.MainActivity
 import com.example.myapplication.R
 
@@ -59,6 +60,10 @@ class Add_Suggest_song_page : Fragment() {
         view.findViewById<Button>(R.id.details_party).setOnClickListener {
             (activity as MainActivity).makeCurrentFragment(Song_details())
         }
+
+        view.findViewById<Button>(R.id.play_button_party).setOnClickListener {
+            if((activity as MainActivity).onDj)
+                Toast.makeText(activity, "You can't hear a song on DJ mode!", Toast.LENGTH_SHORT).show()
 
         view.findViewById<Button>(R.id.addorsuggestbutton).setOnClickListener {
             if ((activity as MainActivity).onCreate){
