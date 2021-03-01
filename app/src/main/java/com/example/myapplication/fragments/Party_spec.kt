@@ -38,8 +38,8 @@ class Party_spec : Fragment() {
 
 
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
+            inflater: LayoutInflater, container: ViewGroup?,
+            savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_party_spec, container, false)
@@ -55,12 +55,12 @@ class Party_spec : Fragment() {
         if (spinner != null) {
             val adapter = activity?.let {
                 ArrayAdapter(
-                    it,
-                    android.R.layout.simple_spinner_item, events)
+                        it,
+                        android.R.layout.simple_spinner_item, events)
             }
             spinner.adapter = adapter
             spinner.onItemSelectedListener = object :
-                AdapterView.OnItemSelectedListener {
+                    AdapterView.OnItemSelectedListener {
                 override fun onItemSelected(parent: AdapterView<*>,
                                             view: View, position: Int, id: Long) {
 
@@ -73,7 +73,7 @@ class Party_spec : Fragment() {
 
 
 
-    view.findViewById<Button>(R.id.button_start).setOnClickListener {
+        view.findViewById<Button>(R.id.button_start).setOnClickListener {
             (activity as MainActivity).makeCurrentFragment(Party_playlist())
             (activity as MainActivity).onDj = true
         }
@@ -92,11 +92,11 @@ class Party_spec : Fragment() {
         // TODO: Rename and change types and number of parameters
         @JvmStatic
         fun newInstance(param1: String, param2: String) =
-            Party_spec().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
+                Party_spec().apply {
+                    arguments = Bundle().apply {
+                        putString(ARG_PARAM1, param1)
+                        putString(ARG_PARAM2, param2)
+                    }
                 }
-            }
     }
 }

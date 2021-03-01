@@ -9,10 +9,7 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.example.myapplication.MainActivity
-import com.example.myapplication.Playlist_page_adapter
-import com.example.myapplication.PostsAdapter
-import com.example.myapplication.R
+import com.example.myapplication.*
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
@@ -96,10 +93,19 @@ class Playlist : Fragment() {
 
                 (activity as MainActivity).swipeUpBoolean = false
 
-                val mRecyclerView: RecyclerView
-                mRecyclerView = view.findViewById(R.id.recyclerView_playlist)
-                mRecyclerView.layoutManager = LinearLayoutManager(activity as MainActivity, RecyclerView.VERTICAL, false)
-                mRecyclerView.adapter= Playlist_page_adapter(songs, posts, imageurl, activity as MainActivity)
+                if ((activity as MainActivity).onDj) {
+                    val mRecyclerView: RecyclerView
+                    mRecyclerView = view.findViewById(R.id.recyclerView_playlist)
+                    mRecyclerView.layoutManager = LinearLayoutManager(activity as MainActivity, RecyclerView.VERTICAL, false)
+                    mRecyclerView.adapter = DJ_Playlist_page_adapter(songs, posts, imageurl, activity as MainActivity)
+                }
+                else {
+                    val mRecyclerView: RecyclerView
+                    mRecyclerView = view.findViewById(R.id.recyclerView_playlist)
+                    mRecyclerView.layoutManager = LinearLayoutManager(activity as MainActivity, RecyclerView.VERTICAL, false)
+                    mRecyclerView.adapter = Playlist_page_adapter(songs, posts, imageurl, activity as MainActivity)
+                }
+
             }
         }
         database.addValueEventListener(getdata)

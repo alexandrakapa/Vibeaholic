@@ -13,6 +13,10 @@ import com.example.myapplication.DJSearchSongsResultsAdapter
 import com.example.myapplication.MainActivity
 import com.example.myapplication.Playlist_page_adapter
 import com.example.myapplication.R
+import com.google.firebase.database.DataSnapshot
+import com.google.firebase.database.DatabaseError
+import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.database.ValueEventListener
 import java.util.ArrayList
 
 // TODO: Rename parameter arguments, choose names that match
@@ -47,17 +51,45 @@ class dj_create_search_songs : Fragment() {
         val view =inflater.inflate(R.layout.fragment_dj_create_search_songs, container, false)
 
 
-        val posts: ArrayList<String> = ArrayList() //this will change
-        for (i in 1..100){
-            posts.add("Song # $i")
+        val bundle = arguments
+        val insertedText = bundle?.getString("searched").toString().toLowerCase()
+
+        val posts: ArrayList<String> = ArrayList()
+        val imageurl: ArrayList<String> = ArrayList()
+
+        var database = FirebaseDatabase.getInstance().reference
+
+        var getdata = object : ValueEventListener {
+            override fun onCancelled(error: DatabaseError) {
+            }
+
+            override fun onDataChange(snapshot: DataSnapshot) {
+                val songs: ArrayList<String> = ArrayList()
+                for (i in snapshot.children ) {
+                    if ((i.key.toString()).contains("song")) {
+                        var name = i.child("Name").value.toString().toLowerCase()
+                        if (name.contains(insertedText)) {
+                            songs.add(i.key.toString())
+                        }
+                    }
+                }
+
+                for (i in songs) {
+                    var songName = snapshot.child(i).child("Name").value.toString()
+                    var songArtist = snapshot.child(i).child("Artist").value.toString()
+                    var caption: String = "$songName - $songArtist"
+                    posts.add(caption)
+                    var image = snapshot.child(i).child("ImageURL").value.toString()
+                    imageurl.add(image)
+                }
+
+                val mRecyclerView: RecyclerView
+                mRecyclerView = view.findViewById(R.id.recyclerView_results_dj)
+                mRecyclerView.layoutManager = LinearLayoutManager(activity as MainActivity, RecyclerView.VERTICAL, false)
+                mRecyclerView.adapter= DJSearchSongsResultsAdapter(songs, posts, imageurl, activity as MainActivity)
+            }
         }
-        val mRecyclerView: RecyclerView
-        mRecyclerView = view.findViewById(R.id.recyclerView_results_dj)
-        mRecyclerView.layoutManager = LinearLayoutManager(activity as MainActivity, RecyclerView.VERTICAL, false)
-        mRecyclerView.adapter= DJSearchSongsResultsAdapter(posts, activity as MainActivity)
-        // Inflate the layout for this fragment
-
-
+        database.addValueEventListener(getdata)
 
         val editText = view.findViewById<EditText>(R.id.searchbar_songs_dj)
 
@@ -73,16 +105,31 @@ class dj_create_search_songs : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         //var TabSong = view.findViewById<TabItem>(R.id.tabSongs)
 
+        var helpbundle = arguments
+        var txt = helpbundle?.getString("searched").toString()
+
         view.findViewById<Button>(R.id.song_button_dj).setOnClickListener {
-            (activity as MainActivity).makeCurrentFragment(dj_create_search_songs())
+            var bundle = Bundle()
+            bundle.putString("searched", txt)
+            val search = dj_create_search_songs()
+            search.arguments = bundle
+            (activity as MainActivity).makeCurrentFragment(search)
         }
 
         view.findViewById<Button>(R.id.artists_button_dj).setOnClickListener {
-            (activity as MainActivity).makeCurrentFragment(dj_create_search_artists())
+            var bundle = Bundle()
+            bundle.putString("searched", txt)
+            val search = dj_create_search_artists()
+            search.arguments = bundle
+            (activity as MainActivity).makeCurrentFragment(search)
         }
 
         view.findViewById<Button>(R.id.playlists_button_dj).setOnClickListener {
-            (activity as MainActivity).makeCurrentFragment(dj_create_search_playlists())
+            var bundle = Bundle()
+            bundle.putString("searched", txt)
+            val search = dj_create_search_playlists()
+            search.arguments = bundle
+            (activity as MainActivity).makeCurrentFragment(search)
         }
 
         val showButton = view.findViewById<Button>(R.id.search_icon_songs_dj)
@@ -93,14 +140,18 @@ class dj_create_search_songs : Fragment() {
         // Setting On Click Listener
         showButton.setOnClickListener {
 
-            // Getting the user input
             val txt = editText.text
-
-            //(activity as MainActivity).print(txt.toString())
 
             (activity as MainActivity).searchtext=txt.toString()
 
-            // Showing the user input
+            var mytext = txt.toString()
+
+            var bundle = Bundle()
+            bundle.putString("searched", mytext)
+            val results = dj_create_search_songs()
+            results.arguments = bundle
+
+            (activity as MainActivity).makeCurrentFragment(results)
 
         }
 

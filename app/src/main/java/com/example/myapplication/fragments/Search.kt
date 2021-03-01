@@ -57,30 +57,18 @@ class Search : Fragment() {
 
         view.findViewById<Button>(R.id.search_icon).setOnClickListener {
 
-            //   view.findViewById<Button>(R.id.search_icon).setOnClickListener {
-            //       (activity as MainActivity).makeCurrentFragment(Search_results())
-            //  }
-
-            //val showButton = view.findViewById<Button>(R.id.search_icon)
             val editText = view.findViewById<EditText>(R.id.search_text)
+            val txt = editText.text
 
-            // Setting On Click Listener
+            (activity as MainActivity).searchtext = txt.toString()
+            var mytext = txt.toString()
 
+            var bundle = Bundle()
+            bundle.putString("searched", mytext)
+            val results = Search_results()
+            results.arguments = bundle
 
-                // Getting the user input
-                val txt = editText.text
-
-                //(activity as MainActivity).print(txt.toString())
-
-                (activity as MainActivity).searchtext = txt.toString()
-                var mytext = txt.toString()
-
-                var bundle = Bundle()
-                bundle.putString("searched", mytext)
-                val results = Search_results()
-                results.arguments = bundle
-
-                (activity as MainActivity).makeCurrentFragment(results)
+            (activity as MainActivity).makeCurrentFragment(results)
 
 
         }

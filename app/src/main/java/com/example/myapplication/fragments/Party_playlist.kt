@@ -13,6 +13,10 @@ import com.example.myapplication.PartyHomepageAdapter
 import com.example.myapplication.Playlist_page_adapter
 import com.example.myapplication.R
 import com.google.android.material.floatingactionbutton.FloatingActionButton
+import com.google.firebase.database.DataSnapshot
+import com.google.firebase.database.DatabaseError
+import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.database.ValueEventListener
 import java.util.ArrayList
 
 // TODO: Rename parameter arguments, choose names that match
@@ -43,14 +47,37 @@ class Party_playlist : Fragment() {
         // Inflate the layout for this fragment
         val view = inflater.inflate(R.layout.fragment_party_playlist, container, false)
 
-        val posts: ArrayList<String> = ArrayList() //this will change
-        for (i in 1..100){
-            posts.add("Song # $i")
+
+        val posts: ArrayList<String> = ArrayList()
+        val imageurl: ArrayList<String> = ArrayList()
+
+        var database = FirebaseDatabase.getInstance().reference
+
+        var getdata = object : ValueEventListener {
+            override fun onCancelled(error: DatabaseError) {
+            }
+
+            override fun onDataChange(snapshot: DataSnapshot) {
+                val helper = listOf<String>("song9", "song10", "song11", "song8", "song12", "song15", "song13", "song14")
+                val songs: ArrayList<String> = ArrayList()
+                songs.addAll(helper)
+
+                for (i in songs) {
+                    var songName = snapshot.child(i).child("Name").value.toString()
+                    var songArtist = snapshot.child(i).child("Artist").value.toString()
+                    var caption: String = "$songName - $songArtist"
+                    posts.add(caption)
+                    var image = snapshot.child(i).child("ImageURL").value.toString()
+                    imageurl.add(image)
+                }
+
+                val mRecyclerViewParty: RecyclerView
+                mRecyclerViewParty = view.findViewById(R.id.recyclerView_party_playlist)
+                mRecyclerViewParty.layoutManager = LinearLayoutManager(activity as MainActivity, RecyclerView.VERTICAL, false)
+                mRecyclerViewParty.adapter= PartyHomepageAdapter(songs, posts, imageurl, activity as MainActivity)
+            }
         }
-        val mRecyclerViewParty: RecyclerView
-        mRecyclerViewParty = view.findViewById(R.id.recyclerView_party_playlist)
-        mRecyclerViewParty.layoutManager = LinearLayoutManager(activity as MainActivity, RecyclerView.VERTICAL, false)
-        mRecyclerViewParty.adapter= PartyHomepageAdapter(posts, activity as MainActivity)
+        database.addValueEventListener(getdata)
 
         return view
     }

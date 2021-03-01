@@ -9,10 +9,11 @@ import android.widget.Button
 import android.widget.EditText
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.example.myapplication.MainActivity
-import com.example.myapplication.Playlist_page_adapter
-import com.example.myapplication.R
-import com.example.myapplication.SearchWithRecommendationsAdapter
+import com.example.myapplication.*
+import com.google.firebase.database.DataSnapshot
+import com.google.firebase.database.DatabaseError
+import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.database.ValueEventListener
 import java.util.ArrayList
 
 // TODO: Rename parameter arguments, choose names that match
@@ -46,14 +47,36 @@ class Search_with_recommendations : Fragment() {
 
         val view = inflater.inflate(R.layout.fragment_search_with_recommendations, container, false)
 
-        val posts: ArrayList<String> = ArrayList() //this will change
-        for (i in 1..20){
-            posts.add("Song # $i")
+        val helper = listOf<String>("song4", "song21", "song20", "song19", "song9", "song17", "song13", "song5", "song6", "song2")
+        val songs: ArrayList<String> = ArrayList()
+        songs.addAll(helper)
+
+        val posts: ArrayList<String> = ArrayList()
+        val imageurl: ArrayList<String> = ArrayList()
+
+        var database = FirebaseDatabase.getInstance().reference
+
+        var getdata = object : ValueEventListener {
+            override fun onCancelled(error: DatabaseError) {
+            }
+
+            override fun onDataChange(snapshot: DataSnapshot) {
+                for (i in songs) {
+                    var songName = snapshot.child(i).child("Name").value.toString()
+                    var songArtist = snapshot.child(i).child("Artist").value.toString()
+                    var caption: String = "$songName - $songArtist"
+                    posts.add(caption)
+                    var image = snapshot.child(i).child("ImageURL").value.toString()
+                    imageurl.add(image)
+                }
+
+                val mRecyclerViewParty: RecyclerView
+                mRecyclerViewParty = view.findViewById(R.id.recyclerView_recommendations)
+                mRecyclerViewParty.layoutManager = LinearLayoutManager(activity as MainActivity, RecyclerView.VERTICAL, false)
+                mRecyclerViewParty.adapter= SearchWithRecommendationsAdapter(songs, posts, imageurl, activity as MainActivity)
+            }
         }
-        val mRecyclerViewParty: RecyclerView
-        mRecyclerViewParty = view.findViewById(R.id.recyclerView_recommendations)
-        mRecyclerViewParty.layoutManager = LinearLayoutManager(activity as MainActivity, RecyclerView.VERTICAL, false)
-        mRecyclerViewParty.adapter= SearchWithRecommendationsAdapter(posts, activity as MainActivity)
+        database.addValueEventListener(getdata)
 
         return view
     }
@@ -66,26 +89,18 @@ class Search_with_recommendations : Fragment() {
 
         view.findViewById<Button>(R.id.search_icon_dj).setOnClickListener {
 
-            //   view.findViewById<Button>(R.id.search_icon).setOnClickListener {
-            //       (activity as MainActivity).makeCurrentFragment(Search_results())
-            //  }
-
-            //val showButton = view.findViewById<Button>(R.id.search_icon_dj)
             val editText = view.findViewById<EditText>(R.id.search_text_dj)
+            val txt = editText.text
 
+            (activity as MainActivity).searchtext = txt.toString()
+            var mytext = txt.toString()
 
-            // Setting On Click Listener
+            var bundle = Bundle()
+            bundle.putString("searched", mytext)
+            val results = dj_create_search_songs()
+            results.arguments = bundle
 
-
-                // Getting the user input
-                val txt = editText.text
-
-                //(activity as MainActivity).print(txt.toString())
-
-                (activity as MainActivity).searchtext = txt.toString()
-
-
-                (activity as MainActivity).makeCurrentFragment(dj_create_search_songs())
+            (activity as MainActivity).makeCurrentFragment(results)
 
 
         }

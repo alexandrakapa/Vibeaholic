@@ -13,11 +13,11 @@
         android:layout_height="match_parent">
 
         <TextView
+            android:id="@+id/playing_now_title"
             android:layout_width="300dp"
             android:layout_height="40dp"
-            android:text="@string/play_now_title"
             android:textColor="@color/teal_200"
-            android:layout_marginTop="30dp"
+            android:layout_marginTop="50dp"
             android:textSize="30dp"
             android:textStyle="bold"
             android:textAlignment="center"
@@ -29,7 +29,7 @@
             android:layout_height="294dp"
             android:layout_marginStart="50dp"
             android:layout_marginLeft="50dp"
-            android:layout_marginTop="90dp"
+            android:layout_marginTop="110dp"
             app:srcCompat="@android:drawable/gallery_thumb"
             tools:src="@tools:sample/backgrounds/scenic" />
 
@@ -43,19 +43,11 @@
             android:layout_marginTop="520dp"
             android:progressDrawable="@android:drawable/progress_horizontal" />
 
-        <TextView
-            android:id="@+id/editTextTextPersonName_party"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="580dp"
-            android:text="^^ Ultraviolence: Lana Del Ray"
-            android:textColor="@android:color/white" />
-
         <Button
             android:id="@+id/button3_party"
             android:layout_width="53dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="120dp"
+            android:layout_marginTop="140dp"
             android:background="#0B0A0A"
             android:clickable="false"
             app:backgroundTint="#100F0F"
@@ -74,29 +66,18 @@
 
         <TextView
             android:id="@+id/song_title_playing_party"
-            android:layout_width="wrap_content"
+            android:layout_width="300dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="60dp"
             android:layout_marginLeft="60dp"
-            android:layout_marginTop="390dp"
-            android:text="@string/song_title"
-            android:textColor="#EEF4F6" />
-
-        <TextView
-            android:id="@+id/editTextTextPersonName3_party"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="60dp"
-            android:layout_marginLeft="60dp"
-            android:layout_marginTop="420dp"
-            android:text="@string/artist"
-            android:textColor="#FBF3F3" />
+            android:layout_marginTop="410dp"
+            android:textColor="@color/white" />
 
         <Button
             android:id="@+id/button5_party"
             android:layout_width="55dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="75dp"
+            android:layout_marginTop="95dp"
             app:backgroundTint="#0C0C0C"
             app:icon="@android:drawable/ic_dialog_info" />
 
@@ -112,7 +93,7 @@
             android:id="@+id/button6_party"
             android:layout_width="57dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="165dp"
+            android:layout_marginTop="185dp"
             android:background="#1B1A1A"
             android:clickable="false"
             app:backgroundTint="#191818"
@@ -123,7 +104,7 @@
             android:id="@+id/button7_party"
             android:layout_width="53dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="210dp"
+            android:layout_marginTop="230dp"
             app:backgroundTint="#121111"
             app:icon="@android:drawable/star_off"
             />

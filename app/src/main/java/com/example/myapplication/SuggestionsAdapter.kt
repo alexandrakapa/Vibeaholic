@@ -15,13 +15,15 @@ import androidx.fragment.app.Fragment
 import com.example.myapplication.fragments.Add_Suggest_song_page
 import com.example.myapplication.fragments.Playing_now
 import com.example.myapplication.fragments.Playlist
+import com.squareup.picasso.Picasso
 
 //used for user playlist and for search with recommendations
 
-class SuggestionsAdapter(val posts: ArrayList<String>, val activity: MainActivity) :  RecyclerView.Adapter<SuggestionsAdapter.Viewholder>(){
+class SuggestionsAdapter(val songs: ArrayList<String>, val posts: ArrayList<String>, val imageurl: ArrayList<String>, val activity: MainActivity) :  RecyclerView.Adapter<SuggestionsAdapter.Viewholder>(){
 
     class Viewholder(itemView: View, activity: MainActivity) : RecyclerView.ViewHolder(itemView){
         val txt : TextView = itemView.findViewById(R.id.song_title_sug)
+        val image : ImageView = itemView.findViewById(R.id.song_image_sug)
         val view1= itemView
         val activity1 = activity
     }
@@ -37,6 +39,7 @@ class SuggestionsAdapter(val posts: ArrayList<String>, val activity: MainActivit
 
     override fun onBindViewHolder(holder:SuggestionsAdapter.Viewholder, position: Int) {
         holder.txt.text = posts[position]
+        Picasso.get().load(imageurl[position]).into(holder.image)
 
         val view2 : CardView
         view2=holder.view1.findViewById((R.id.song_area_sug))
@@ -44,14 +47,14 @@ class SuggestionsAdapter(val posts: ArrayList<String>, val activity: MainActivit
             val bundle = Bundle()
             //var details = Call.Details()
             bundle.putString("song", posts[position])
+            bundle.putString("image", imageurl[position])
+            bundle.putString("songID", songs[position])
 
             val partyplaying=Add_Suggest_song_page()
 
             partyplaying.arguments=bundle
 
             activity.makeCurrentFragment(partyplaying)
-
-
 
         }
     }

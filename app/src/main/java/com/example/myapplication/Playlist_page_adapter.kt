@@ -44,17 +44,29 @@ class Playlist_page_adapter(val songs: ArrayList<String>, val posts: ArrayList<S
 
         val view2 : CardView
         view2=holder.view1.findViewById((R.id.song_area))
-        view2.setOnClickListener {
-            val bundle = Bundle()
 
-            bundle.putString("song", posts[position])
-            bundle.putString("image", imageurl[position])
-            bundle.putString("songID", songs[position])
-            activity.bundleForPlayingSong.putBoolean("playlist", true)
+            view2.setOnClickListener {
+                if (activity.onDj) {
+                    val bundle = Bundle()
+                    bundle.putString("song", posts[position])
+                    bundle.putString("image", imageurl[position])
+                    bundle.putString("songID", songs[position])
+                    val playing = Add_Suggest_song_page()
+                    playing.arguments = bundle
+                    activity.makeCurrentFragment(playing)
+                }
+                else {
+                    val bundle = Bundle()
+                    bundle.putString("song", posts[position])
+                    bundle.putString("image", imageurl[position])
+                    bundle.putString("songID", songs[position])
+                    activity.bundleForPlayingSong.putBoolean("playlist", true)
+                    activity.firstTime = false
+                    val playing = Playing_now()
+                    playing.arguments = bundle
+                    activity.makeCurrentFragment(playing)
+                }
+            }
 
-            val playing = Playing_now()
-            playing.arguments = bundle
-            activity.makeCurrentFragment(playing)
-        }
     }
 }

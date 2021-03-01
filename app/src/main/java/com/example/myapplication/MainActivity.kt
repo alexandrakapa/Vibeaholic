@@ -51,7 +51,10 @@ class MainActivity : AppCompatActivity(){
 
     var searchtext = "Search song here"
     var bundleForPlayingSong = Bundle()
+    var bundleForPlayingSongParty = Bundle()
+    var firstTime = true
     var swipeUpBoolean = false
+    var JoinerPlayingNow = false
 
     private lateinit var detector: GestureDetectorCompat
 
@@ -90,8 +93,6 @@ class MainActivity : AppCompatActivity(){
 
         val homepage=Homepage()
         val search=Search()
-        val playing=Playing_now()
-        val partyPlaying = Party_playing_now()
         val profile=Profile()
         val dj=DJ()
         val searchWithRecommendations = Search_with_recommendations()
@@ -111,12 +112,37 @@ class MainActivity : AppCompatActivity(){
                     else makeCurrentFragment(searchWithRecommendations)
                 }
                 R.id.ic_play_now -> {
-                    if (!onDj) {
-                        val playingnow = Playing_now()
-                        playingnow.arguments = bundleForPlayingSong
-                        makeCurrentFragment(playingnow)
+                    if (firstTime || (onDj && !onCreate)) {
+                        firstTime = false
+                        if (onDj) {
+                            var bundle = Bundle()
+                            bundle.putString("song", "Physical - Dua Lipa")
+                            bundle.putString("image", "https://firebasestorage.googleapis.com/v0/b/hci-vibeaholic.appspot.com/o/Dua_Lipa_Physical.jpg?alt=media&token=469bb1a0-7603-4bb6-b6cd-affae2158962")
+                            bundle.putString("songID", "song9")
+                            if (!onCreate) {
+                                JoinerPlayingNow = true
+                            }
+                            val playingnow = Party_playing_now()
+                            playingnow.arguments = bundle
+                            makeCurrentFragment(playingnow)
+                        }
+                        else {
+                            val playingnow = Playing_now()
+                            playingnow.arguments = bundleForPlayingSong
+                            makeCurrentFragment(playingnow)
+                        }
                     }
-                    else makeCurrentFragment(partyPlaying)
+                    else {
+                        if (!onDj) {
+                            val playingnow = Playing_now()
+                            playingnow.arguments = bundleForPlayingSong
+                            makeCurrentFragment(playingnow)
+                        } else {
+                            val partyPlaying = Party_playing_now()
+                            partyPlaying.arguments = bundleForPlayingSongParty
+                            makeCurrentFragment(partyPlaying)
+                        }
+                    }
                 }
                 R.id.ic_profile -> makeCurrentFragment(profile)
                 R.id.ic_dj-> {
