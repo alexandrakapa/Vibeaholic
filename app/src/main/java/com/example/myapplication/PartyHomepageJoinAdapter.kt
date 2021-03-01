@@ -16,13 +16,15 @@ import com.example.myapplication.fragments.Add_Suggest_song_page
 import com.example.myapplication.fragments.Party_playing_now
 import com.example.myapplication.fragments.Playing_now
 import com.example.myapplication.fragments.Playlist
+import com.squareup.picasso.Picasso
 
 //used for user playlist and for search with recommendations
 
-class PartyHomepageJoinAdapter(val posts: ArrayList<String>, val activity: MainActivity) :  RecyclerView.Adapter<PartyHomepageJoinAdapter.Viewholder>(){
+class PartyHomepageJoinAdapter(val songs: ArrayList<String>, val posts: ArrayList<String>, val imageurl: ArrayList<String>, val activity: MainActivity) :  RecyclerView.Adapter<PartyHomepageJoinAdapter.Viewholder>(){
 
     class Viewholder(itemView: View, activity: MainActivity) : RecyclerView.ViewHolder(itemView){
         val txt : TextView = itemView.findViewById(R.id.song_title_home_join)
+        val image : ImageView = itemView.findViewById(R.id.song_image_home_join)
         val view1= itemView
         val activity1 = activity
     }
@@ -36,22 +38,23 @@ class PartyHomepageJoinAdapter(val posts: ArrayList<String>, val activity: MainA
 
     override fun getItemCount()=posts.size
 
-
-
     override fun onBindViewHolder(holder:PartyHomepageJoinAdapter.Viewholder, position: Int) {
         holder.txt.text = posts[position]
+        Picasso.get().load(imageurl[position]).into(holder.image)
 
         val view2 : CardView
         view2=holder.view1.findViewById((R.id.song_area_home_join))
         view2.setOnClickListener {
+
             val bundle = Bundle()
-            //var details = Call.Details()
             bundle.putString("song", posts[position])
+            bundle.putString("image", imageurl[position])
+            bundle.putString("songID", songs[position])
 
-            val partyplaying=Party_playing_now()
-            partyplaying.arguments=bundle
+            val seeSong=Party_playing_now()
+            seeSong.arguments=bundle
 
-            activity.makeCurrentFragment(partyplaying)
+            activity.makeCurrentFragment(seeSong)
 
         }
     }

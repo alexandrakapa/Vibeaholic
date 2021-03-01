@@ -7,10 +7,11 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.example.myapplication.MainActivity
-import com.example.myapplication.Playlist_page_adapter
-import com.example.myapplication.R
-import com.example.myapplication.SuggestionsAdapter
+import com.example.myapplication.*
+import com.google.firebase.database.DataSnapshot
+import com.google.firebase.database.DatabaseError
+import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.database.ValueEventListener
 import java.util.ArrayList
 
 // TODO: Rename parameter arguments, choose names that match
@@ -42,14 +43,35 @@ class Suggestions_page : Fragment() {
 
         val view = inflater.inflate(R.layout.fragment_suggestions_page, container, false)
 
-        val posts: ArrayList<String> = ArrayList() //this will change
-        for (i in 1..3){
-            posts.add("Song # $i")
+        val helper = listOf<String>("song21", "song17", "song5")
+        val songs: ArrayList<String> = ArrayList()
+        songs.addAll(helper)
+
+        val posts: ArrayList<String> = ArrayList()
+        val imageurl: ArrayList<String> = ArrayList()
+
+        var database = FirebaseDatabase.getInstance().reference
+
+        var getdata = object : ValueEventListener {
+            override fun onCancelled(error: DatabaseError) {
+            }
+
+            override fun onDataChange(snapshot: DataSnapshot) {
+                for (i in songs) {
+                    var songName = snapshot.child(i).child("Name").value.toString()
+                    var songArtist = snapshot.child(i).child("Artist").value.toString()
+                    var caption: String = "$songName - $songArtist"
+                    posts.add(caption)
+                    var image = snapshot.child(i).child("ImageURL").value.toString()
+                    imageurl.add(image)
+                }
+
+                val mRecyclerViewParty: RecyclerView
+                mRecyclerViewParty = view.findViewById(R.id.recyclerView_suggestion_playlist)
+                mRecyclerViewParty.layoutManager = LinearLayoutManager(activity as MainActivity, RecyclerView.VERTICAL, false)
+                mRecyclerViewParty.adapter= SuggestionsAdapter(songs, posts, imageurl, activity as MainActivity)            }
         }
-        val mRecyclerViewParty: RecyclerView
-        mRecyclerViewParty = view.findViewById(R.id.recyclerView_suggestion_playlist)
-        mRecyclerViewParty.layoutManager = LinearLayoutManager(activity as MainActivity, RecyclerView.VERTICAL, false)
-        mRecyclerViewParty.adapter= SuggestionsAdapter(posts, activity as MainActivity)
+        database.addValueEventListener(getdata)
 
         return view
     }

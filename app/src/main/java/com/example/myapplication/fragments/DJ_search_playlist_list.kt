@@ -41,7 +41,7 @@ class DJ_search_playlist_list : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
 
-
+        val deleteit: ArrayList<String> = ArrayList()
         val posts: ArrayList<String> = ArrayList() //this will change
         for (i in 1..100){
             posts.add("Song # $i")
@@ -51,7 +51,7 @@ class DJ_search_playlist_list : Fragment() {
         val mRecyclerView: RecyclerView
         mRecyclerView = view.findViewById(R.id.recyclerView_search_playlist_list)
         mRecyclerView.layoutManager = LinearLayoutManager(activity as MainActivity, RecyclerView.VERTICAL, false)
-        mRecyclerView.adapter= DJSearchSongsResultsAdapter(posts, activity as MainActivity)
+        mRecyclerView.adapter= DJSearchSongsResultsAdapter(posts, posts,deleteit, activity as MainActivity)
 
         // Inflate the layout for this fragment
         return view

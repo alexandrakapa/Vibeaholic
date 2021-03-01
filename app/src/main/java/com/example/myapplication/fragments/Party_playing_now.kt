@@ -9,10 +9,12 @@ import android.view.ViewGroup
 import android.widget.TextView
 
 import android.widget.Button
+import android.widget.ImageView
 import android.widget.Toast
 import com.example.myapplication.MainActivity
 
 import com.example.myapplication.R
+import com.squareup.picasso.Picasso
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -42,9 +44,27 @@ class Party_playing_now : Fragment() {
         // Inflate the layout for this fragment
 
         val vw=inflater.inflate(R.layout.fragment_party_playing_now, container, false)
+
+        val myTitle = vw.findViewById<TextView>(R.id.playing_now_title)
+        if ((activity as MainActivity).onCreate || (activity as MainActivity).JoinerPlayingNow) {
+            myTitle.text = "Playing now in party:"
+            (activity as MainActivity).JoinerPlayingNow = false
+        }
+        else {
+            myTitle.text = ""
+        }
+
         val bundle=arguments
         val sngtxt=vw.findViewById<TextView>(R.id.song_title_playing_party)
-        sngtxt.text = bundle?.getString("song")
+        val  img = vw.findViewById<ImageView>(R.id.imageView_party)
+
+        val url = bundle?.getString("image")
+        val song = bundle?.getString("song")
+        //val id = bundle?.getString("songID")
+        sngtxt.text = song
+        Picasso.get().load(url).into(img)
+
+        //(activity as MainActivity).bundleForPlayingSong.putString("partySongID", id)
 
         return vw
     }
@@ -54,7 +74,15 @@ class Party_playing_now : Fragment() {
 
 
         view.findViewById<Button>(R.id.button5_party).setOnClickListener {
-            (activity as MainActivity).makeCurrentFragment(Song_details())
+            val b=arguments
+            val songid = b?.getString("songID")
+            var bundle = Bundle()
+
+            bundle.putString("songID", songid)
+            val details = Song_details()
+            details.arguments = bundle
+
+            (activity as MainActivity).makeCurrentFragment(details)
         }
 
     }

@@ -59,12 +59,10 @@ class Song_details : Fragment() {
         var released= view.findViewById<TextView>(R.id.details_released)
         var image= view.findViewById<ImageView>(R.id.details_image)
 
-        val deleteit: ArrayList<String> = ArrayList()
         val bundle = arguments
         val id = bundle?.getString("songID").toString()
 
         var songDetails: ArrayList<String> = ArrayList()
-        var songsBelow:ArrayList<String> = ArrayList()
         var imgurl: ArrayList<String> = ArrayList()
         var database = FirebaseDatabase.getInstance().reference
         var getdata = object : ValueEventListener {
