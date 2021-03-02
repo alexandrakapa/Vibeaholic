@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
+import android.widget.Toast
 import com.example.myapplication.MainActivity
 import com.example.myapplication.R
 import com.squareup.picasso.Picasso
@@ -65,6 +66,7 @@ class Add_Suggest_song_page : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+
         view.findViewById<Button>(R.id.addorsuggestbutton).setOnClickListener {
             if ((activity as MainActivity).onCreate) {
                 val but = view.findViewById<Button>(R.id.addorsuggestbutton)
@@ -83,6 +85,11 @@ class Add_Suggest_song_page : Fragment() {
             }
         }
 
+        view.findViewById<Button>(R.id.play_button_party).setOnClickListener {
+            if ((activity as MainActivity).onDj)
+                Toast.makeText(activity, "You can't hear a song on DJ mode!", Toast.LENGTH_SHORT).show()
+                }
+
         view.findViewById<Button>(R.id.details_party).setOnClickListener {
             val bundle=arguments
             val id = bundle?.getString("songID")
@@ -92,7 +99,6 @@ class Add_Suggest_song_page : Fragment() {
             details.arguments = newbundle
             (activity as MainActivity).makeCurrentFragment(details)
         }
-
     }
 
     companion object {

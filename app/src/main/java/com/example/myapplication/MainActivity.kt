@@ -88,6 +88,11 @@ class MainActivity : AppCompatActivity(){
                     else Toast.makeText(this@MainActivity, "Smart-watch is not connected", Toast.LENGTH_SHORT).show()
                 }
             }
+            if(!btnSwitch.isChecked) {
+                Toast.makeText(this@MainActivity, "Camera is off", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this@MainActivity, "Microphone is off", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this@MainActivity, "Smart-watch is not connected", Toast.LENGTH_SHORT).show()
+            }
         }
 
 
