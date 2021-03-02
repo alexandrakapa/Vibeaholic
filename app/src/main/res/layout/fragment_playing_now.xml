@@ -34,14 +34,6 @@
             android:layout_marginTop="520dp"
             android:progressDrawable="@android:drawable/progress_horizontal" />
 
-        <TextView
-            android:id="@+id/editTextTextPersonName"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="580dp"
-            android:text="^^ Ultraviolence: Lana Del Ray"
-            android:textColor="@android:color/white" />
-
         <Button
             android:id="@+id/button3"
             android:layout_width="53dp"

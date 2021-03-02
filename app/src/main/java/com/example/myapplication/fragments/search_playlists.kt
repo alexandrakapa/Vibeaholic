@@ -11,9 +11,7 @@ import android.widget.ImageButton
 import android.widget.SearchView
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.example.myapplication.MainActivity
-import com.example.myapplication.Playlist_page_adapter
-import com.example.myapplication.R
+import com.example.myapplication.*
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
@@ -64,6 +62,7 @@ class search_playlists : Fragment() {
             }
 
             override fun onDataChange(snapshot: DataSnapshot) {
+                val playlist: ArrayList<String> = ArrayList()
                 val songs: ArrayList<String> = ArrayList()
                 for (i in snapshot.children ) {
                     if ((i.key.toString()).contains("playlist")) {
@@ -85,7 +84,7 @@ class search_playlists : Fragment() {
                 val mRecyclerView: RecyclerView
                 mRecyclerView = view.findViewById(R.id.recyclerView_results_playlists)
                 mRecyclerView.layoutManager = LinearLayoutManager(activity as MainActivity, RecyclerView.VERTICAL, false)
-                mRecyclerView.adapter= Playlist_page_adapter(songs, posts, imageurl, activity as MainActivity)
+                mRecyclerView.adapter= SearchPlaylistAdapter(songs, posts, imageurl, activity as MainActivity)
 
             }
         }

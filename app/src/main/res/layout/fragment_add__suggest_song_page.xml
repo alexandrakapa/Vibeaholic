@@ -55,23 +55,12 @@
 
         <TextView
             android:id="@+id/song_title_playing_party"
-            android:layout_width="wrap_content"
+            android:layout_width="300dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="60dp"
             android:layout_marginLeft="60dp"
-            android:layout_marginTop="390dp"
-            android:text="@string/song_title"
+            android:layout_marginTop="400dp"
             android:textColor="#EEF4F6" />
-
-        <TextView
-            android:id="@+id/editTextTextPersonName3_party"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="60dp"
-            android:layout_marginLeft="60dp"
-            android:layout_marginTop="420dp"
-            android:text="@string/artist"
-            android:textColor="#FBF3F3" />
 
         <Button
             android:id="@+id/details_party"
@@ -105,7 +94,6 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="550dp"
-            android:text="@string/add"
             android:layout_gravity="center_horizontal"
            />
 

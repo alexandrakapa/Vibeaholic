@@ -47,7 +47,8 @@ class DJ : Fragment() {
 
 
         view.findViewById<Button>(R.id.button_create).setOnClickListener {
-            (activity as MainActivity).onCreate=true
+            (activity as MainActivity).firstTime = true
+            (activity as MainActivity).onCreate = true
             (activity as MainActivity).makeCurrentFragment(Party_spec())
             (activity as MainActivity).onDj = true
             (activity as MainActivity).isUserDJ = true

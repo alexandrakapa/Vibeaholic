@@ -5,6 +5,11 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import com.anychart.APIlib
+import com.anychart.AnyChart
+import com.anychart.AnyChartView
+import com.anychart.chart.common.dataentry.DataEntry
+import com.anychart.chart.common.dataentry.ValueDataEntry
 import com.example.myapplication.R
 
 // TODO: Rename parameter arguments, choose names that match
@@ -35,7 +40,23 @@ class More_about_party : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_more_about_party, container, false)
+        val view = inflater.inflate(R.layout.fragment_more_about_party, container, false)
+
+        val chart = view.findViewById<AnyChartView>(R.id.party_pie)
+        val states = listOf<String>("Everyone is having a great time", "Some stress in the atmosphere", "Mixed feelings", "Crazy dancing")
+        APIlib.getInstance().setActiveAnyChartView(chart)
+        var pieWeek = AnyChart.pie()
+        val stats = listOf<Int>(19, 4, 25, 50)
+        val dataentry: ArrayList<DataEntry> = ArrayList()
+
+        for (i in 0..3) {
+            var m = ValueDataEntry(states[i], stats[i])
+            dataentry.add(m)
+        }
+        pieWeek.data(dataentry)
+        chart.setChart(pieWeek)
+
+        return view
     }
 
     companion object {

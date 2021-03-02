@@ -6,9 +6,12 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import android.widget.ImageView
+import android.widget.TextView
 import android.widget.Toast
 import com.example.myapplication.MainActivity
 import com.example.myapplication.R
+import com.squareup.picasso.Picasso
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -40,15 +43,21 @@ class Add_Suggest_song_page : Fragment() {
         // Inflate the layout for this fragment
         val view = inflater.inflate(R.layout.fragment_add__suggest_song_page, container, false)
 
+        val bundle=arguments
+        val sngtxt=view.findViewById<TextView>(R.id.song_title_playing_party)
+        val img = view.findViewById<ImageView>(R.id.imageView_party)
+        val url = bundle?.getString("image")
+        val song = bundle?.getString("song")
+        Picasso.get().load(url).into(img)
+        sngtxt.text = song
+
         if ((activity as MainActivity).onCreate){
             val but=view.findViewById<Button>(R.id.addorsuggestbutton)
-            but.text="Add "
-
+            but.text="Add"
         }
         else {
             val but=view.findViewById<Button>(R.id.addorsuggestbutton)
             but.text="Suggest"
-
         }
 
         return view
@@ -57,42 +66,40 @@ class Add_Suggest_song_page : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        view.findViewById<Button>(R.id.details_party).setOnClickListener {
-            (activity as MainActivity).makeCurrentFragment(Song_details())
+
+        view.findViewById<Button>(R.id.addorsuggestbutton).setOnClickListener {
+            if ((activity as MainActivity).onCreate) {
+                val but = view.findViewById<Button>(R.id.addorsuggestbutton)
+                if (but.text == "Add") {
+                    but.text = "Cancel"
+                } else {
+                    but.text = "Add"
+                }
+            } else {
+                val but = view.findViewById<Button>(R.id.addorsuggestbutton)
+                if (but.text == "Suggest") {
+                    but.text = "Cancel"
+                } else {
+                    but.text = "Suggest"
+                }
+            }
         }
 
         view.findViewById<Button>(R.id.play_button_party).setOnClickListener {
             if ((activity as MainActivity).onDj)
                 Toast.makeText(activity, "You can't hear a song on DJ mode!", Toast.LENGTH_SHORT).show()
-
-            view.findViewById<Button>(R.id.addorsuggestbutton).setOnClickListener {
-                if ((activity as MainActivity).onCreate) {
-                    val but = view.findViewById<Button>(R.id.addorsuggestbutton)
-                    if (but.text == "Add ") {
-                        but.text = "Cancel"
-                    } else {
-                        but.text = "Add "
-                    }
-                } else {
-                    val but = view.findViewById<Button>(R.id.addorsuggestbutton)
-                    if (but.text == "Suggest") {
-                        but.text = "Cancel"
-                    } else {
-                        but.text = "Suggest"
-                    }
                 }
 
-            }
-
+        view.findViewById<Button>(R.id.details_party).setOnClickListener {
+            val bundle=arguments
+            val id = bundle?.getString("songID")
+            val newbundle = Bundle()
+            newbundle.putString("songID", id.toString())
+            val details = Song_details()
+            details.arguments = newbundle
+            (activity as MainActivity).makeCurrentFragment(details)
         }
     }
-
-
-
-
-
-
-
 
     companion object {
         /**

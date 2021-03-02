@@ -56,12 +56,6 @@ class Search_results : Fragment() {
         // Inflate the layout for this fragment
         val view =inflater.inflate(R.layout.search_results, container, false)
 
-/*val deleteit: ArrayList<String> = ArrayList()
-        val posts: ArrayList<String> = ArrayList() //this will change
-        for (i in 1..100){
-            posts.add("Song # $i")
-        }*/
-
         val bundle = arguments
         val insertedText = bundle?.getString("searched").toString().toLowerCase()
 

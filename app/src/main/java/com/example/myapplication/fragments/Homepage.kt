@@ -50,6 +50,12 @@ class Homepage : Fragment() {
         // Inflate the layout for this fragment
         val view = inflater.inflate(R.layout.fragment_homepage, container, false)
 
+        if ((activity as MainActivity).firstTime == true) {
+            (activity as MainActivity).bundleForPlayingSong.putString("song", "Physical - Dua Lipa")
+            (activity as MainActivity).bundleForPlayingSong.putString("image", "https://firebasestorage.googleapis.com/v0/b/hci-vibeaholic.appspot.com/o/Dua_Lipa_Physical.jpg?alt=media&token=469bb1a0-7603-4bb6-b6cd-affae2158962")
+            (activity as MainActivity).bundleForPlayingSong.putString("songID", "song9")
+        }
+
         val posts: ArrayList<String> = ArrayList()
         val posts2: ArrayList<String> = ArrayList()
         val posts3: ArrayList<String> = ArrayList()

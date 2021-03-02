@@ -16,13 +16,15 @@ import com.example.myapplication.fragments.Add_Suggest_song_page
 import com.example.myapplication.fragments.Party_playing_now
 import com.example.myapplication.fragments.Playing_now
 import com.example.myapplication.fragments.Playlist
+import com.squareup.picasso.Picasso
 
 //used for party create homepage playlist
 
-class PartyHomepageAdapter(val posts: ArrayList<String>, val activity: MainActivity) :  RecyclerView.Adapter<PartyHomepageAdapter.Viewholder>(){
+class PartyHomepageAdapter(val songs: ArrayList<String>,val posts: ArrayList<String>, val imageurl: ArrayList<String>, val activity: MainActivity) :  RecyclerView.Adapter<PartyHomepageAdapter.Viewholder>(){
 
     class Viewholder(itemView: View, activity: MainActivity) : RecyclerView.ViewHolder(itemView){
         val txt : TextView = itemView.findViewById(R.id.song_title_home_create)
+        val image : ImageView = itemView.findViewById(R.id.song_image_home_create)
         val view1= itemView
         val activity1 = activity
     }
@@ -39,14 +41,21 @@ class PartyHomepageAdapter(val posts: ArrayList<String>, val activity: MainActiv
 
 
     override fun onBindViewHolder(holder:PartyHomepageAdapter.Viewholder, position: Int) {
+        Picasso.get().load(imageurl[position]).into(holder.image)
         holder.txt.text = posts[position]
 
         val view2 : CardView
         view2=holder.view1.findViewById((R.id.song_area_home_create))
         view2.setOnClickListener {
+            activity.bundleForPlayingSongParty.putString("song", posts[position])
+            activity.bundleForPlayingSongParty.putString("image", imageurl[position])
+            activity.bundleForPlayingSongParty.putString("songID", songs[position])
+            activity.firstTime = false
+
             val bundle = Bundle()
-            //var details = Call.Details()
             bundle.putString("song", posts[position])
+            bundle.putString("image", imageurl[position])
+            bundle.putString("songID", songs[position])
 
             val partyplaying=Party_playing_now()
             partyplaying.arguments=bundle
