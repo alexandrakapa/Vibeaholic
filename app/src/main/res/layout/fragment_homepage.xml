@@ -7,7 +7,7 @@
     android:background="@color/black"
     tools:context=".fragments.Homepage">
 
-    <RelativeLayout
+    <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
@@ -16,8 +16,10 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="178dp"
+            android:textSize="25sp"
+            android:textStyle="bold"
             android:layout_marginTop="35dp"
+            android:layout_gravity="center_horizontal"
             android:text="@string/welcome"
             android:textColor="@color/white" />
 
@@ -26,14 +28,17 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="80dp"
+            android:layout_marginLeft="10dp"
+            android:textStyle="bold"
+            android:textSize="15sp"
             android:text="@string/recently_played"
             android:textColor="@color/white" />
 
         <View
             android:id="@+id/divider2"
             android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:layout_marginTop="98dp"
+            android:layout_height="2dp"
+            android:layout_marginTop="100dp"
             android:background="#03A9F4" />
 
         <TextView
@@ -42,13 +47,16 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="235dp"
             android:text="@string/suggested_albums"
+            android:textStyle="bold"
+            android:textSize="15sp"
+            android:layout_marginLeft="10dp"
             android:textColor="@color/white" />
 
         <View
             android:id="@+id/divider3"
             android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:layout_marginTop="253dp"
+            android:layout_height="2dp"
+            android:layout_marginTop="258dp"
             android:background="#03A9F4" />
 
         <TextView
@@ -57,13 +65,16 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="390dp"
             android:text="@string/suggested_songs"
+            android:textStyle="bold"
+            android:layout_marginLeft="10dp"
+            android:textSize="15sp"
             android:textColor="@color/white" />
 
         <View
             android:id="@+id/divider4"
             android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:layout_marginTop="408dp"
+            android:layout_height="2dp"
+            android:layout_marginTop="412dp"
             android:background="#03A9F4"  />
 
         <TextView
@@ -72,42 +83,49 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="545dp"
             android:text="@string/trending_now"
+            android:textSize="15sp"
+            android:textStyle="bold"
+            android:layout_marginLeft="10dp"
             android:textColor="@color/white" />
 
 
         <View
             android:id="@+id/divider5"
             android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:layout_marginTop="563dp"
+            android:layout_height="2dp"
+            android:layout_marginTop="567dp"
             android:background="#03A9F4"/>
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recyclerView"
             android:layout_width="match_parent"
             android:layout_marginTop="110dp"
+            android:layout_marginLeft="10px"
             android:layout_height="120dp" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recyclerView2"
             android:layout_width="match_parent"
             android:layout_marginTop="265dp"
+            android:layout_marginLeft="10px"
             android:layout_height="120dp" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recyclerView3"
             android:layout_width="match_parent"
             android:layout_height="120dp"
+            android:layout_marginLeft="10px"
             android:layout_marginTop="420dp" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recyclerView4"
             android:layout_width="match_parent"
             android:layout_marginTop="575dp"
+            android:layout_marginLeft="10px"
             android:layout_height="120dp" />
 
 
-    </RelativeLayout>
+    </FrameLayout>
 
 
 </ScrollView>

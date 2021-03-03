@@ -17,7 +17,7 @@
         android:layout_height="70dp"
         app:srcCompat="@android:drawable/gallery_thumb" />
 
-    <RelativeLayout
+    <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
@@ -34,7 +34,8 @@
             android:id="@+id/button_fav_home_join"
             android:layout_width="48dp"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="345dp"
+            android:layout_gravity="end"
+            android:layout_marginRight="10dp"
             android:layout_marginTop="15dp"
             android:backgroundTint="@color/black"
             app:icon="@android:drawable/star_off" />
@@ -43,7 +44,8 @@
             android:id="@+id/upvote_home_join"
             android:layout_width="48dp"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="270dp"
+            android:layout_gravity="end"
+            android:layout_marginRight="100dp"
             android:layout_marginTop="15dp"
             android:backgroundTint="@color/black"
             app:icon="@android:drawable/arrow_up_float" />
@@ -52,13 +54,14 @@
             android:id="@+id/downvote_home_join"
             android:layout_width="48dp"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="310dp"
+            android:layout_gravity="end"
+            android:layout_marginRight="50dp"
             android:layout_marginTop="15dp"
             android:backgroundTint="@color/black"
             app:icon="@android:drawable/arrow_down_float" />
 
 
 
-    </RelativeLayout>
+    </FrameLayout>
 
 </androidx.cardview.widget.CardView>

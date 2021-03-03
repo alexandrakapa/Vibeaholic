@@ -7,12 +7,12 @@
     android:background="@color/black">
 
     <TextView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_marginTop="65dp"
-        android:layout_marginLeft="20dp"
+        android:layout_marginLeft="10dp"
         android:text="@string/suggestion_title"
-        android:textSize="25sp"
+        android:textSize="30sp"
         android:textStyle="bold"
         android:textColor="@color/white" />
 
@@ -21,7 +21,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginLeft="10dp"
-        android:layout_marginTop="105dp" />
+        android:layout_marginTop="125dp" />
 
     <Button
         android:layout_width="90dp"
@@ -36,7 +36,7 @@
     <View
         android:layout_width="match_parent"
         android:layout_height="1dp"
-        android:layout_marginTop="98dp"
+        android:layout_marginTop="110dp"
         android:background="@color/teal_200" />
 
 </FrameLayout>

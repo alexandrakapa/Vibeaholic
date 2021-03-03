@@ -337,11 +337,11 @@ class MainActivity : AppCompatActivity(){
                 if (Math.abs(diffX)>SWIPE_THESHOLD && Math.abs(velocityX)>SWIPE_VELOVITY_THRESHOLD){
                     if (diffX>0) {
                         //right swipe
-                        this@MainActivity.onSwipeRight()
+                     //   this@MainActivity.onSwipeRight()
                     }
                     else {
                         //right swipe
-                        this@MainActivity.onSwipeLeft()
+                      //  this@MainActivity.onSwipeLeft()
                     }
                     true
                 }
@@ -354,7 +354,7 @@ class MainActivity : AppCompatActivity(){
                 if (Math.abs(diffY)>SWIPE_THESHOLD && Math.abs(velocityY)>SWIPE_VELOVITY_THRESHOLD){
                     if (diffY>0) {
                         //swipe down
-                        this@MainActivity.onSwipeTop()
+                     //   this@MainActivity.onSwipeTop()
                     }
                     else {
                         //swipe up
@@ -379,7 +379,7 @@ class MainActivity : AppCompatActivity(){
 
 
     private fun onSwipeBottom() {
-        Toast.makeText(this, "Bottom swipe", Toast.LENGTH_LONG).show()
+        //Toast.makeText(this, "Bottom swipe", Toast.LENGTH_LONG).show()
         if (prevfrag !is Playing_now && prevfrag !is Party_playing_now) {
             return
         }

@@ -17,7 +17,7 @@
         android:layout_height="70dp"
         app:srcCompat="@android:drawable/gallery_thumb" />
 
-    <RelativeLayout
+    <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
@@ -34,7 +34,8 @@
             android:id="@+id/button_fav_sug"
             android:layout_width="48dp"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="345dp"
+            android:layout_gravity="end"
+            android:layout_marginRight="10dp"
             android:layout_marginTop="15dp"
             android:backgroundTint="@color/black"
             app:icon="@android:drawable/ic_menu_close_clear_cancel" />
@@ -44,13 +45,15 @@
             android:id="@+id/downvote_sug"
             android:layout_width="48dp"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="300dp"
+            android:layout_gravity="end"
+            android:layout_marginRight="60dp"
             android:layout_marginTop="15dp"
             android:backgroundTint="@color/black"
-            app:icon="@drawable/ic_add" />
+            app:icon="@drawable/ic_add"
+            android:layout_marginEnd="60dp" />
 
 
 
-    </RelativeLayout>
+    </FrameLayout>
 
 </androidx.cardview.widget.CardView>
