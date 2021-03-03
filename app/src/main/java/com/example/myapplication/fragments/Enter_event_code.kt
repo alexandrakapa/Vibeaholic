@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import android.widget.Button
 import com.example.myapplication.MainActivity
 import com.example.myapplication.R
+import kotlin.concurrent.fixedRateTimer
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -43,6 +44,9 @@ class Enter_event_code : Fragment() {
 
 
         view.findViewById<Button>(R.id.button_lets_go).setOnClickListener {
+            while (!(activity as MainActivity).fragmentStack.empty()) {
+                (activity as MainActivity).fragmentStack.pop()
+            }
             (activity as MainActivity).makeCurrentFragment(Party_playlist_suggestion())
             (activity as MainActivity).onDj = true
         }

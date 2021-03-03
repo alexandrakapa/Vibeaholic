@@ -21,6 +21,7 @@ import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
 import kotlinx.android.synthetic.main.activity_main.*
+import java.util.*
 
 class MainActivity : AppCompatActivity() {
     val REQUEST_IMAGE_CAPTURE = 1
@@ -40,13 +41,17 @@ class MainActivity : AppCompatActivity() {
     var ismenuopen = false
     var isUserDJ = false
     lateinit var prevfrag: Fragment
-    lateinit var prevprevfrag : Fragment
-    lateinit var prevprevprevfrag: Fragment
-    var first = true
-    var second = true
-    var third = true
+    //lateinit var prevprevfrag : Fragment
+    //lateinit var prevprevprevfrag: Fragment
+    var fragmentStack: Stack<Fragment> = Stack()
+    //var first = true
+    //var second = true
+    //var third = true
     var inplayingnow=false
-
+    var fromBackButton = false
+    var fromMenuBack = false
+    var firstBack = true
+    var notAgain = false
 
     var searchtext = "Search song here"
     var bundleForPlayingSong = Bundle()
@@ -123,6 +128,9 @@ class MainActivity : AppCompatActivity() {
                             bundle.putString("song", "Physical - Dua Lipa")
                             bundle.putString("image", "https://firebasestorage.googleapis.com/v0/b/hci-vibeaholic.appspot.com/o/Dua_Lipa_Physical.jpg?alt=media&token=469bb1a0-7603-4bb6-b6cd-affae2158962")
                             bundle.putString("songID", "song9")
+                            bundleForPlayingSongParty.putString("song", "Physical - Dua Lipa")
+                            bundleForPlayingSongParty.putString("image", "https://firebasestorage.googleapis.com/v0/b/hci-vibeaholic.appspot.com/o/Dua_Lipa_Physical.jpg?alt=media&token=469bb1a0-7603-4bb6-b6cd-affae2158962")
+                            bundleForPlayingSongParty.putString("songID", "song9")
                             if (!onCreate) {
                                 JoinerPlayingNow = true
                             }
@@ -301,7 +309,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     public fun makeCurrentFragment(fragment: Fragment) {
-        if (!first && !second) {
+        /*if (!first && !second) {
             prevprevprevfrag=prevprevfrag
             prevprevfrag = prevfrag
             third=false
@@ -313,7 +321,70 @@ class MainActivity : AppCompatActivity() {
         else{
             second=false
             prevprevfrag = prevfrag
+        }*/
+
+        if (fromBackButton) {
+            fromBackButton = false
+            firstBack = false
+            if (!onDj && fragment is Homepage) {
+                if (prevfrag != fragment)
+                    fragmentStack.push(fragment)
+            }
+            else if (onDj && onCreate && fragment is Party_playlist) {
+                if (prevfrag != fragment)
+                    fragmentStack.push(fragment)
+            }
+            else if (onDj && !onCreate && fragment is Party_playlist_suggestion){
+                if (prevfrag != fragment)
+                    fragmentStack.push(fragment)
+            }
+            else {
+                if (fragmentStack.empty())
+                    fragmentStack.push(fragment)
+            }
         }
+        else {
+            firstBack = true
+            if (fragment is Homepage && !onDj) {
+                while (!fragmentStack.empty()) {
+                    fragmentStack.pop()
+                }
+            }
+            if (fragment is Party_playlist && onDj && onCreate) {
+                while (!fragmentStack.empty()) {
+                    fragmentStack.pop()
+                }
+            }
+            if (fragment is Party_playlist_suggestion && onDj && !onCreate) {
+                while (!fragmentStack.empty()) {
+                    fragmentStack.pop()
+                }
+            }
+
+
+            if (fragment is side_menu
+                    || fragment is Side_menu_dj_mode
+                    || fragment is DJ
+                    || fragment is Profile
+                    || fragment is Search
+                    || fragment is Search_with_recommendations
+                    || fragment is Enter_event_code
+                    || fragment is Party_spec
+                    ||(fragment is Party_playing_now && inplayingnow)
+                    ||(fragment is Playing_now && inplayingnow)
+                    //|| fragment is search_artists
+                    //|| fragment is search_playlists
+                    //|| fragment is dj_create_search_artists
+                    //|| fragment is dj_create_search_playlists
+            ) {}
+            else if (fromMenuBack) {
+                fromMenuBack = false
+            }
+            else {
+                fragmentStack.push(fragment)
+            }
+        }
+
         prevfrag = fragment
         supportFragmentManager.beginTransaction().apply {
             replace(R.id.fl_wrapper, fragment)
@@ -480,12 +551,52 @@ class MainActivity : AppCompatActivity() {
     override fun onKeyDown(keyCode: Int, event: KeyEvent?): Boolean {
         if (keyCode == KeyEvent.KEYCODE_BACK) {
             //do your stuff
+            if ((prevfrag is Homepage && !onDj) || (prevfrag is Party_playlist_suggestion && onDj && !onCreate) || (prevfrag is Party_playlist && onDj && onCreate))
+                return super.onKeyDown(keyCode, event)
+
+            if (fragmentStack.empty())
+                return super.onKeyDown(keyCode, event)
+
             if (ismenuopen){
                 ismenuopen=false
+                fromMenuBack = true
                 makeCurrentFragment(prevfrag)
                 return true
             }
-            if (prevfrag is Homepage || prevfrag is Party_playlist || prevfrag is Party_playlist_suggestion || prevfrag is DJ || prevfrag is Profile || prevfrag is Search || (prevfrag is Party_playing_now && inplayingnow) || ( prevfrag is Playing_now && inplayingnow) || prevfrag is Search_with_recommendations)
+            else {
+                if (firstBack) {
+                    if (prevfrag is side_menu
+                            || prevfrag is Side_menu_dj_mode
+                            || prevfrag is Party_playlist_suggestion
+                            || prevfrag is DJ
+                            || prevfrag is Profile
+                            || prevfrag is Search
+                            || prevfrag is Search_with_recommendations
+                            || prevfrag is Enter_event_code
+                            || prevfrag is Party_spec
+                            ||(prevfrag is Party_playing_now && inplayingnow)
+                            ||(prevfrag is Playing_now && inplayingnow)
+                    //|| fragment is search_artists
+                    //|| fragment is search_playlists
+                    //|| fragment is dj_create_search_artists
+                    //|| fragment is dj_create_search_playlists
+                    ) {}
+                    else {
+                        var home = fragmentStack.pop()
+                        if (fragmentStack.empty()) {
+                            fromBackButton = true
+                            makeCurrentFragment(home)
+                            return true
+                        }
+                    }
+                }
+                    var prev = fragmentStack.pop()
+                    fromBackButton = true
+                    makeCurrentFragment(prev)
+                    return true
+
+            }
+            /*if (prevfrag is Homepage || prevfrag is Party_playlist || prevfrag is Party_playlist_suggestion || prevfrag is DJ || prevfrag is Profile || prevfrag is Search || (prevfrag is Party_playing_now && inplayingnow) || ( prevfrag is Playing_now && inplayingnow) || prevfrag is Search_with_recommendations)
                 return super.onKeyDown(keyCode, event)
 
             if (!first and !second and !third) {
@@ -493,14 +604,9 @@ class MainActivity : AppCompatActivity() {
                     makeCurrentFragment(prevprevfrag)
                     return true
                 }
-            }
-
-
-
+            }*/
         }
             return super.onKeyDown(keyCode, event)
-
-
     }
 
 

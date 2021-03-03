@@ -45,7 +45,6 @@ class DJ : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-
         view.findViewById<Button>(R.id.button_create).setOnClickListener {
             (activity as MainActivity).firstTime = true
             (activity as MainActivity).onCreate = true

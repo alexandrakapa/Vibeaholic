@@ -74,6 +74,9 @@ class Party_spec : Fragment() {
 
 
         view.findViewById<Button>(R.id.button_start).setOnClickListener {
+            while (!(activity as MainActivity).fragmentStack.empty()) {
+                (activity as MainActivity).fragmentStack.pop()
+            }
             (activity as MainActivity).makeCurrentFragment(Party_playlist())
             (activity as MainActivity).onDj = true
         }

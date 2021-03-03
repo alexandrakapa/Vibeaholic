@@ -44,6 +44,9 @@ class Side_menu_dj_mode : Fragment() {
 
 
         view.findViewById<Button>(R.id.exit).setOnClickListener {
+            while (!(activity as MainActivity).fragmentStack.empty()) {
+                (activity as MainActivity).fragmentStack.pop()
+            }
             (activity as MainActivity).onDj = false
             (activity as MainActivity).ismenuopen = false
 
