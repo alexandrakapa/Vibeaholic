@@ -82,7 +82,7 @@ class search_artists : Fragment() {
                     var image = snapshot.child(i).child("ImageURL").value.toString()
                     imageurl.add(image)
                 }
-
+                (activity as MainActivity).bundleForPlayingSong.putBoolean("fromSearch", true)
                 val mRecyclerView: RecyclerView
                 mRecyclerView = view.findViewById(R.id.recyclerView_results_artists)
                 mRecyclerView.layoutManager = LinearLayoutManager(activity as MainActivity, RecyclerView.VERTICAL, false)

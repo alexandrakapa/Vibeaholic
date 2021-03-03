@@ -88,6 +88,7 @@ class Search_results : Fragment() {
                     imageurl.add(image)
                 }
 
+                (activity as MainActivity).bundleForPlayingSong.putBoolean("fromSearch", true)
                 val mRecyclerView: RecyclerView
                 mRecyclerView = view.findViewById(R.id.recyclerView_results)
                 mRecyclerView.layoutManager = LinearLayoutManager(activity as MainActivity, RecyclerView.VERTICAL, false)

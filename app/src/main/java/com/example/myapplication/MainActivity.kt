@@ -385,10 +385,11 @@ class MainActivity : AppCompatActivity() {
         if (!onDj) {
             var bundle = Bundle()
             var checker = bundleForPlayingSong.getBoolean("playlist")
+            var FromSearch = bundleForPlayingSong.getBoolean("fromSearch")
             var songId = bundleForPlayingSong.getString("songID").toString()
             var playId: String = String()
 
-            if (checker) {
+            if (checker && !FromSearch) {
                 playId = bundleForPlayingSong.getString("playlistID").toString()
                 var ref = FirebaseDatabase.getInstance().reference
 

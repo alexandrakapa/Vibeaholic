@@ -103,7 +103,7 @@ class Homepage : Fragment() {
                     var image =  snapshot.child(firstSong).child("ImageURL").value.toString()
                     imageurl2.add(image)
                 }
-
+                (activity as MainActivity).bundleForPlayingSong.putBoolean("fromSearch", false)
                 val mRecyclerView2: RecyclerView
                 mRecyclerView2 = view.findViewById(R.id.recyclerView2)
                 mRecyclerView2.layoutManager = LinearLayoutManager(activity as MainActivity, RecyclerView.HORIZONTAL, false)
