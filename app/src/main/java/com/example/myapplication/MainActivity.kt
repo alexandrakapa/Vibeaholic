@@ -6,10 +6,7 @@ import android.os.Build
 import android.os.Bundle
 import android.provider.MediaStore
 import android.util.Log
-import android.view.GestureDetector
-import android.view.MotionEvent
-import android.view.View
-import android.view.Window
+import android.view.*
 import android.widget.Button
 import android.widget.Switch
 import android.widget.TextView
@@ -18,8 +15,6 @@ import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.GestureDetectorCompat
 import androidx.fragment.app.Fragment
-import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import com.example.myapplication.fragments.*
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
@@ -27,27 +22,31 @@ import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
 import kotlinx.android.synthetic.main.activity_main.*
 
-import kotlinx.android.synthetic.main.search_results.*
-import java.util.ArrayList
-
-class MainActivity : AppCompatActivity(){
+class MainActivity : AppCompatActivity() {
     val REQUEST_IMAGE_CAPTURE = 1
     var isItFirstTime = true
     var cameraOn = false
     var micOn = false
     var smartCon = false
-    internal lateinit var myDialog : Dialog
-    internal lateinit var txt : TextView
-    internal lateinit var btnSwitch : Switch
-    internal lateinit var btnSwitch2 : Switch
-    internal lateinit var btnSwitch3 : Switch
-    internal lateinit var btnSwitch4 : Switch
-    internal lateinit var btnmenu : Button
+    internal lateinit var myDialog: Dialog
+    internal lateinit var txt: TextView
+    internal lateinit var btnSwitch: Switch
+    internal lateinit var btnSwitch2: Switch
+    internal lateinit var btnSwitch3: Switch
+    internal lateinit var btnSwitch4: Switch
+    internal lateinit var btnmenu: Button
     var onDj = false
-    var onCreate=false
-    var ismenuopen=false
+    var onCreate = false
+    var ismenuopen = false
     var isUserDJ = false
-    lateinit var prevfrag : Fragment
+    lateinit var prevfrag: Fragment
+    lateinit var prevprevfrag : Fragment
+    lateinit var prevprevprevfrag: Fragment
+    var first = true
+    var second = true
+    var third = true
+    var inplayingnow=false
+
 
     var searchtext = "Search song here"
     var bundleForPlayingSong = Bundle()
@@ -63,32 +62,29 @@ class MainActivity : AppCompatActivity(){
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-
-        btnmenu=findViewById<View>(R.id.homepage_menu) as Button
+        btnmenu = findViewById<View>(R.id.homepage_menu) as Button
 
 
         btnSwitch = findViewById<View>(R.id.switch1) as Switch
         btnSwitch.setOnClickListener {
-            if(btnSwitch.isChecked) {
+            if (btnSwitch.isChecked) {
                 if (isItFirstTime) {
                     isItFirstTime = false
                     ShowDialog()
-                }
-                else {
+                } else {
                     if (cameraOn) {
                         val takePicture = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
                         startActivityForResult(takePicture, REQUEST_IMAGE_CAPTURE)
 
                         Toast.makeText(this@MainActivity, "Camera is on", Toast.LENGTH_SHORT).show()
-                    }
-                    else Toast.makeText(this@MainActivity, "Camera is off", Toast.LENGTH_SHORT).show()
+                    } else Toast.makeText(this@MainActivity, "Camera is off", Toast.LENGTH_SHORT).show()
                     if (micOn) Toast.makeText(this@MainActivity, "Microphone is on", Toast.LENGTH_SHORT).show()
                     else Toast.makeText(this@MainActivity, "Microphone is off", Toast.LENGTH_SHORT).show()
                     if (smartCon) Toast.makeText(this@MainActivity, "Smart-watch is connected", Toast.LENGTH_SHORT).show()
                     else Toast.makeText(this@MainActivity, "Smart-watch is not connected", Toast.LENGTH_SHORT).show()
                 }
             }
-            if(!btnSwitch.isChecked) {
+            if (!btnSwitch.isChecked) {
                 Toast.makeText(this@MainActivity, "Camera is off", Toast.LENGTH_SHORT).show()
                 Toast.makeText(this@MainActivity, "Microphone is off", Toast.LENGTH_SHORT).show()
                 Toast.makeText(this@MainActivity, "Smart-watch is not connected", Toast.LENGTH_SHORT).show()
@@ -96,10 +92,10 @@ class MainActivity : AppCompatActivity(){
         }
 
 
-        val homepage=Homepage()
-        val search=Search()
-        val profile=Profile()
-        val dj=DJ()
+        val homepage = Homepage()
+        val search = Search()
+        val profile = Profile()
+        val dj = DJ()
         val searchWithRecommendations = Search_with_recommendations()
         val partyPlaylistSuggestion = Party_playlist_suggestion()
         val partyPlaylist = Party_playlist()
@@ -108,15 +104,18 @@ class MainActivity : AppCompatActivity(){
 
 
         bottom_navigation.setOnNavigationItemSelectedListener {
-            when (it.itemId){
+            when (it.itemId) {
                 R.id.ic_home -> {
                     makeCurrentFragment(homepage)
+                    inplayingnow=false
                 }
                 R.id.ic_search -> {
                     if (!onDj) makeCurrentFragment(search)
                     else makeCurrentFragment(searchWithRecommendations)
+                    inplayingnow=false
                 }
                 R.id.ic_play_now -> {
+                    inplayingnow=true
                     if (firstTime || (onDj && !onCreate)) {
                         firstTime = false
                         if (onDj) {
@@ -130,14 +129,12 @@ class MainActivity : AppCompatActivity(){
                             val playingnow = Party_playing_now()
                             playingnow.arguments = bundle
                             makeCurrentFragment(playingnow)
-                        }
-                        else {
+                        } else {
                             val playingnow = Playing_now()
                             playingnow.arguments = bundleForPlayingSong
                             makeCurrentFragment(playingnow)
                         }
-                    }
-                    else {
+                    } else {
                         if (!onDj) {
                             val playingnow = Playing_now()
                             playingnow.arguments = bundleForPlayingSong
@@ -149,8 +146,12 @@ class MainActivity : AppCompatActivity(){
                         }
                     }
                 }
-                R.id.ic_profile -> makeCurrentFragment(profile)
-                R.id.ic_dj-> {
+                R.id.ic_profile -> {
+                    makeCurrentFragment(profile)
+                    inplayingnow=false
+                }
+                R.id.ic_dj -> {
+                    inplayingnow=false
                     if (!onDj) makeCurrentFragment(dj)
                     else {
                         if (isUserDJ) makeCurrentFragment(partyPlaylist)
@@ -161,29 +162,28 @@ class MainActivity : AppCompatActivity(){
             true
         }
 
-    detector = GestureDetectorCompat(this, GestureListener())
+        detector = GestureDetectorCompat(this, GestureListener())
 
-       // val posts: ArrayList<String> = ArrayList()
-       // for (i in 1..100){
-       //     posts.add("Post # $i")
-       // }
-      // val mRecyclerView: RecyclerView
+        // val posts: ArrayList<String> = ArrayList()
+        // for (i in 1..100){
+        //     posts.add("Post # $i")
+        // }
+        // val mRecyclerView: RecyclerView
 
-       // val view : View
+        // val view : View
         //view = View.inflate(R.layout.fragment_homepage, this, false)
         //mRecyclerView = view.findViewById(R.id.recyclerView)
-      // mRecyclerView = findViewById<RecyclerView> (R.id.recyclerView);
+        // mRecyclerView = findViewById<RecyclerView> (R.id.recyclerView);
         //mRecyclerView.layoutManager = LinearLayoutManager(this)
         //mRecyclerView.adapter= PostsAdapter(posts)
         //recyclerView.layoutManager = LinearLayoutManager(this)
         //recyclerView.adapter=PostsAdapter(posts)
         findViewById<Button>(R.id.homepage_menu).setOnClickListener {
-            if (!ismenuopen){
-                ismenuopen=true
+            if (!ismenuopen) {
+                ismenuopen = true
                 openmenu()
-            }
-            else{
-                ismenuopen=false
+            } else {
+                ismenuopen = false
                 makeCurrentFragment(prevfrag)
             }
         }
@@ -191,22 +191,21 @@ class MainActivity : AppCompatActivity(){
 
     }
 
-   // @RequiresApi(Build.VERSION_CODES.LOLLIPOP)
-    fun openmenu( ) {
-       if (!onDj) {
-           val frag = side_menu()
-           //frag.enterTransition = android.R.transition.slide_bottom;
-           supportFragmentManager.beginTransaction()
-               .add(R.id.fl_wrapper, frag)
-               .commit()
-       }
-       else {
-           val frag = Side_menu_dj_mode()
-           //frag.enterTransition = android.R.transition.slide_bottom;
-           supportFragmentManager.beginTransaction()
-               .add(R.id.fl_wrapper, frag)
-               .commit()
-       }
+    // @RequiresApi(Build.VERSION_CODES.LOLLIPOP)
+    fun openmenu() {
+        if (!onDj) {
+            val frag = side_menu()
+            //frag.enterTransition = android.R.transition.slide_bottom;
+            supportFragmentManager.beginTransaction()
+                    .add(R.id.fl_wrapper, frag)
+                    .commit()
+        } else {
+            val frag = Side_menu_dj_mode()
+            //frag.enterTransition = android.R.transition.slide_bottom;
+            supportFragmentManager.beginTransaction()
+                    .add(R.id.fl_wrapper, frag)
+                    .commit()
+        }
     }
 
 /*
@@ -236,8 +235,7 @@ class MainActivity : AppCompatActivity(){
             if (btnSwitch2.isChecked) {
                 btnSwitch2.text = "Yes"
                 cameraOn = true
-            }
-            else {
+            } else {
                 btnSwitch2.text = "No"
             }
         }
@@ -245,8 +243,7 @@ class MainActivity : AppCompatActivity(){
             if (btnSwitch3.isChecked) {
                 btnSwitch3.text = "Yes"
                 micOn = true
-            }
-            else {
+            } else {
                 btnSwitch3.text = "No"
             }
         }
@@ -254,37 +251,33 @@ class MainActivity : AppCompatActivity(){
             if (btnSwitch4.isChecked) {
                 btnSwitch4.text = "Yes"
                 smartCon = true
-            }
-            else {
+            } else {
                 btnSwitch4.text = "No"
             }
         }
         txt = myDialog.findViewById<View>(R.id.button_go) as TextView
         txt.isEnabled = true
-        txt.setOnClickListener{
-            if(btnSwitch2.isChecked) {
+        txt.setOnClickListener {
+            if (btnSwitch2.isChecked) {
                 val takePicture = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
                 startActivityForResult(takePicture, REQUEST_IMAGE_CAPTURE)
 
                 Toast.makeText(this@MainActivity, "Camera is on", Toast.LENGTH_SHORT).show()
 
-           }
-            else {
+            } else {
                 Toast.makeText(this@MainActivity, "Camera is off", Toast.LENGTH_SHORT).show()
             }
-            if(btnSwitch3.isChecked) {
+            if (btnSwitch3.isChecked) {
                 Toast.makeText(applicationContext, "Microphone is on", Toast.LENGTH_LONG).show()
-            }
-            else {
+            } else {
                 Toast.makeText(this@MainActivity, "Microphone is off", Toast.LENGTH_SHORT).show()
             }
-            if(btnSwitch4.isChecked) {
+            if (btnSwitch4.isChecked) {
                 Toast.makeText(applicationContext, "Smart-watch is connected", Toast.LENGTH_LONG).show()
-            }
-            else {
+            } else {
                 Toast.makeText(this@MainActivity, "Smart-watch is not connected", Toast.LENGTH_SHORT).show()
             }
-                myDialog.cancel()
+            myDialog.cancel()
         }
         myDialog.show()
     }
@@ -293,23 +286,34 @@ class MainActivity : AppCompatActivity(){
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
 
-       // if (requestCode == REQUEST_IMAGE_CAPTURE && resultCode == RESULT_OK) {
-            //val imageBitmap = data!!.extras!!.get("data") as Bitmap
-            //findViewById<ImageView>(R.id.imageView).setImageBitmap(imageBitmap)
-       // }
+        // if (requestCode == REQUEST_IMAGE_CAPTURE && resultCode == RESULT_OK) {
+        //val imageBitmap = data!!.extras!!.get("data") as Bitmap
+        //findViewById<ImageView>(R.id.imageView).setImageBitmap(imageBitmap)
+        // }
     }
 
     override fun onTouchEvent(event: MotionEvent?): Boolean {
-        return if (detector.onTouchEvent(event)){
+        return if (detector.onTouchEvent(event)) {
             true
-        }
-        else {
+        } else {
             super.onTouchEvent(event)
         }
     }
 
     public fun makeCurrentFragment(fragment: Fragment) {
-
+        if (!first && !second) {
+            prevprevprevfrag=prevprevfrag
+            prevprevfrag = prevfrag
+            third=false
+           // Toast.makeText(this, "yo", Toast.LENGTH_SHORT).show()
+        }
+        else if (first and second){
+            first = false
+        }
+        else{
+            second=false
+            prevprevfrag = prevfrag
+        }
         prevfrag = fragment
         supportFragmentManager.beginTransaction().apply {
             replace(R.id.fl_wrapper, fragment)
@@ -317,52 +321,47 @@ class MainActivity : AppCompatActivity(){
         }
     }
 
-    inner class GestureListener : GestureDetector.SimpleOnGestureListener(){
+    inner class GestureListener : GestureDetector.SimpleOnGestureListener() {
 
         private val SWIPE_THESHOLD = 100
         private val SWIPE_VELOVITY_THRESHOLD = 100
 
         override fun onFling(
-            downEvent: MotionEvent?,
-            moveEvent: MotionEvent?,
-            velocityX: Float,
-            velocityY: Float
+                downEvent: MotionEvent?,
+                moveEvent: MotionEvent?,
+                velocityX: Float,
+                velocityY: Float
         ): Boolean {
 
-            var diffX=moveEvent?.x?.minus(downEvent!!.x) ?: 0.0F
-            var diffY=moveEvent?.y?.minus(downEvent!!.y) ?: 0.0F
+            var diffX = moveEvent?.x?.minus(downEvent!!.x) ?: 0.0F
+            var diffY = moveEvent?.y?.minus(downEvent!!.y) ?: 0.0F
 
-           return if (Math.abs(diffX)>Math.abs(diffY)){
-               //left or right swipe
-                if (Math.abs(diffX)>SWIPE_THESHOLD && Math.abs(velocityX)>SWIPE_VELOVITY_THRESHOLD){
-                    if (diffX>0) {
+            return if (Math.abs(diffX) > Math.abs(diffY)) {
+                //left or right swipe
+                if (Math.abs(diffX) > SWIPE_THESHOLD && Math.abs(velocityX) > SWIPE_VELOVITY_THRESHOLD) {
+                    if (diffX > 0) {
                         //right swipe
-                     //   this@MainActivity.onSwipeRight()
-                    }
-                    else {
+                        //   this@MainActivity.onSwipeRight()
+                    } else {
                         //right swipe
-                      //  this@MainActivity.onSwipeLeft()
+                        //  this@MainActivity.onSwipeLeft()
                     }
                     true
-                }
-                else {
+                } else {
                     super.onFling(downEvent, moveEvent, velocityX, velocityY)
                 }
-            }
-            else{
+            } else {
                 //up or down swipe
-                if (Math.abs(diffY)>SWIPE_THESHOLD && Math.abs(velocityY)>SWIPE_VELOVITY_THRESHOLD){
-                    if (diffY>0) {
+                if (Math.abs(diffY) > SWIPE_THESHOLD && Math.abs(velocityY) > SWIPE_VELOVITY_THRESHOLD) {
+                    if (diffY > 0) {
                         //swipe down
-                     //   this@MainActivity.onSwipeTop()
-                    }
-                    else {
+                        //   this@MainActivity.onSwipeTop()
+                    } else {
                         //swipe up
                         this@MainActivity.onSwipeBottom()
                     }
                     true
-                }
-                else {
+                } else {
                     super.onFling(downEvent, moveEvent, velocityX, velocityY)
                 }
 
@@ -373,7 +372,7 @@ class MainActivity : AppCompatActivity(){
     }
 
 
-    fun print (what : String){
+    fun print(what: String) {
         Toast.makeText(this, what, Toast.LENGTH_LONG).show()
     }
 
@@ -475,5 +474,35 @@ class MainActivity : AppCompatActivity(){
     private fun onSwipeRight() {
         Toast.makeText(this, "Right swipe", Toast.LENGTH_LONG).show()
     }
+
+
+    override fun onKeyDown(keyCode: Int, event: KeyEvent?): Boolean {
+        if (keyCode == KeyEvent.KEYCODE_BACK) {
+            //do your stuff
+            if (ismenuopen){
+                ismenuopen=false
+                makeCurrentFragment(prevfrag)
+                return true
+            }
+            if (prevfrag is Homepage || prevfrag is Party_playlist || prevfrag is Party_playlist_suggestion || prevfrag is DJ || prevfrag is Profile || prevfrag is Search || (prevfrag is Party_playing_now && inplayingnow) || ( prevfrag is Playing_now && inplayingnow) || prevfrag is Search_with_recommendations)
+                return super.onKeyDown(keyCode, event)
+
+            if (!first and !second and !third) {
+                if ( prevfrag != prevprevprevfrag) {
+                    makeCurrentFragment(prevprevfrag)
+                    return true
+                }
+            }
+
+
+
+        }
+            return super.onKeyDown(keyCode, event)
+
+
+    }
+
+
+
 
 }
