@@ -22,6 +22,7 @@ import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
 import kotlinx.android.synthetic.main.activity_main.*
 import java.util.*
+import kotlin.collections.ArrayList
 
 class MainActivity : AppCompatActivity() {
     val REQUEST_IMAGE_CAPTURE = 1
@@ -51,7 +52,10 @@ class MainActivity : AppCompatActivity() {
     var fromBackButton = false
     var fromMenuBack = false
     var firstBack = true
-    var notAgain = false
+    var moodArray:List<String> = listOf<String>("Relaxed", "Neutral", "Happy", "Sad")
+    var moodPlaylist : ArrayList<String> = ArrayList()
+    var pos = 0
+    var feelMe = false
 
     var searchtext = "Search song here"
     var bundleForPlayingSong = Bundle()
@@ -59,6 +63,11 @@ class MainActivity : AppCompatActivity() {
     var firstTime = true
     var swipeUpBoolean = false
     var JoinerPlayingNow = false
+
+    fun CreateTimer(): Timer {
+        val timer = Timer("timer", true)
+        return timer
+    }
 
     private lateinit var detector: GestureDetectorCompat
 
@@ -73,13 +82,14 @@ class MainActivity : AppCompatActivity() {
         btnSwitch = findViewById<View>(R.id.switch1) as Switch
         btnSwitch.setOnClickListener {
             if (btnSwitch.isChecked) {
+                feelMe = true
                 if (isItFirstTime) {
                     isItFirstTime = false
                     ShowDialog()
                 } else {
                     if (cameraOn) {
-                        val takePicture = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
-                        startActivityForResult(takePicture, REQUEST_IMAGE_CAPTURE)
+                        //val takePicture = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
+                        //startActivityForResult(takePicture, REQUEST_IMAGE_CAPTURE)
 
                         Toast.makeText(this@MainActivity, "Camera is on", Toast.LENGTH_SHORT).show()
                     } else Toast.makeText(this@MainActivity, "Camera is off", Toast.LENGTH_SHORT).show()
@@ -90,6 +100,7 @@ class MainActivity : AppCompatActivity() {
                 }
             }
             if (!btnSwitch.isChecked) {
+                feelMe = false
                 Toast.makeText(this@MainActivity, "Camera is off", Toast.LENGTH_SHORT).show()
                 Toast.makeText(this@MainActivity, "Microphone is off", Toast.LENGTH_SHORT).show()
                 Toast.makeText(this@MainActivity, "Smart-watch is not connected", Toast.LENGTH_SHORT).show()
@@ -372,6 +383,7 @@ class MainActivity : AppCompatActivity() {
                     || fragment is Party_spec
                     ||(fragment is Party_playing_now && inplayingnow)
                     ||(fragment is Playing_now && inplayingnow)
+                    ||(fragment is Playlist && feelMe)
                     //|| fragment is search_artists
                     //|| fragment is search_playlists
                     //|| fragment is dj_create_search_artists
@@ -460,6 +472,7 @@ class MainActivity : AppCompatActivity() {
             var songId = bundleForPlayingSong.getString("songID").toString()
             var playId: String = String()
 
+
             if (checker && !FromSearch) {
                 playId = bundleForPlayingSong.getString("playlistID").toString()
                 var ref = FirebaseDatabase.getInstance().reference
@@ -526,8 +539,6 @@ class MainActivity : AppCompatActivity() {
                 }
                 database.addValueEventListener(getPlaylistid)
             }
-            Log.d("mytag", playId)
-
         } else if (onDj && onCreate) {
             makeCurrentFragment(Party_playlist())
         } else {
@@ -551,7 +562,7 @@ class MainActivity : AppCompatActivity() {
     override fun onKeyDown(keyCode: Int, event: KeyEvent?): Boolean {
         if (keyCode == KeyEvent.KEYCODE_BACK) {
             //do your stuff
-            if ((prevfrag is Homepage && !onDj) || (prevfrag is Party_playlist_suggestion && onDj && !onCreate) || (prevfrag is Party_playlist && onDj && onCreate))
+            if ((prevfrag is Homepage && !onDj && !ismenuopen) || (prevfrag is Party_playlist_suggestion && onDj && !onCreate && !ismenuopen) || (prevfrag is Party_playlist && onDj && onCreate && !ismenuopen))
                 return super.onKeyDown(keyCode, event)
 
             if (fragmentStack.empty())
@@ -576,6 +587,7 @@ class MainActivity : AppCompatActivity() {
                             || prevfrag is Party_spec
                             ||(prevfrag is Party_playing_now && inplayingnow)
                             ||(prevfrag is Playing_now && inplayingnow)
+                            ||(prevfrag is Playlist && feelMe)
                     //|| fragment is search_artists
                     //|| fragment is search_playlists
                     //|| fragment is dj_create_search_artists

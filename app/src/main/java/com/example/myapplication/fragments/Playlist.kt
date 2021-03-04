@@ -15,7 +15,10 @@ import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
 import com.squareup.picasso.Picasso
-import java.util.ArrayList
+import java.util.*
+import kotlin.collections.ArrayList
+import kotlin.concurrent.schedule
+import kotlin.concurrent.scheduleAtFixedRate
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -49,66 +52,110 @@ class Playlist : Fragment() {
         val view = inflater.inflate(R.layout.fragment_playlist, container, false)
         val sngtxt=view.findViewById<TextView>(R.id.playlist_title)
         val bundle=arguments
-        val title = bundle?.getString("title").toString()
-        val playlistID = bundle?.getString("playlistID").toString()
-
         val swipeUp = (activity as MainActivity).swipeUpBoolean
-        val songId = bundle?.getString("playingNowSong").toString()
-        (activity as MainActivity).bundleForPlayingSong.putString("playlistID", playlistID)
-
-        sngtxt.text = title
 
         val posts: ArrayList<String> = ArrayList()
         val imageurl: ArrayList<String> = ArrayList()
 
         var database = FirebaseDatabase.getInstance().reference
 
-        var getdata = object : ValueEventListener {
-            override fun onCancelled(error: DatabaseError) {
-            }
+        if ( ((activity as MainActivity).cameraOn || (activity as MainActivity).micOn || (activity as MainActivity).smartCon) && (activity as MainActivity).btnSwitch.isChecked && swipeUp) {
+            sngtxt.text = "Feel me playlist"
+            val currTimer = (activity as MainActivity).CreateTimer()
+            currTimer.scheduleAtFixedRate(3000, 7000) {
+                var getdata = object : ValueEventListener {
+                    override fun onCancelled(error: DatabaseError) {
+                    }
 
-            override fun onDataChange(snapshot: DataSnapshot) {
-                val songs: ArrayList<String> = ArrayList()
-                if (swipeUp) {
-                    for (i in snapshot.child(playlistID).child("SongArray").children) {
-                        if (i.value.toString() != songId) {
+                    override fun onDataChange(snapshot: DataSnapshot) {
+                        val songs: ArrayList<String> = ArrayList()
+                        for (i in snapshot.children) {
+                            if (i.key.toString().contains("song")) {
+                                if (i.child("Mood").value.toString() == (activity as MainActivity).moodArray[(activity as MainActivity).pos])
+                                    songs.add(i.key.toString())
+                            }
+                        }
+
+                        (activity as MainActivity).moodPlaylist.addAll(songs)
+                        if ((activity as MainActivity).pos == 3) {
+                            currTimer.cancel()
+                            (activity as MainActivity).pos = 0
+                        }
+                        else {
+                            (activity as MainActivity).pos += 1
+                        }
+
+                        for (i in songs) {
+                            var songName = snapshot.child(i).child("Name").value.toString()
+                            var songArtist = snapshot.child(i).child("Artist").value.toString()
+                            var caption: String = "$songName - $songArtist"
+                            posts.add(caption)
+                            var image = snapshot.child(i).child("ImageURL").value.toString()
+                            imageurl.add(image)
+                        }
+
+                        val mRecyclerView: RecyclerView
+                        mRecyclerView = view.findViewById(R.id.recyclerView_playlist)
+                        mRecyclerView.layoutManager = LinearLayoutManager(activity as MainActivity, RecyclerView.VERTICAL, false)
+                        mRecyclerView.adapter = FeelMeAdapter(currTimer, songs, posts, imageurl, activity as MainActivity)
+
+                    }
+                }
+                database.addValueEventListener(getdata)
+            }
+        }
+        else {
+            val title = bundle?.getString("title").toString()
+            val playlistID = bundle?.getString("playlistID").toString()
+
+            val songId = bundle?.getString("playingNowSong").toString()
+            (activity as MainActivity).bundleForPlayingSong.putString("playlistID", playlistID)
+            sngtxt.text = title
+            var getdata = object : ValueEventListener {
+                override fun onCancelled(error: DatabaseError) {
+                }
+
+                override fun onDataChange(snapshot: DataSnapshot) {
+                    val songs: ArrayList<String> = ArrayList()
+                    if (swipeUp) {
+                        for (i in snapshot.child(playlistID).child("SongArray").children) {
+                            if (i.value.toString() != songId) {
+                                songs.add(i.value.toString())
+                            }
+                        }
+                    } else {
+                        for (i in snapshot.child(playlistID).child("SongArray").children) {
                             songs.add(i.value.toString())
                         }
                     }
-                }
-                else {
-                    for (i in snapshot.child(playlistID).child("SongArray").children) {
-                        songs.add(i.value.toString())
+
+                    for (i in songs) {
+                        var songName = snapshot.child(i).child("Name").value.toString()
+                        var songArtist = snapshot.child(i).child("Artist").value.toString()
+                        var caption: String = "$songName - $songArtist"
+                        posts.add(caption)
+                        var image = snapshot.child(i).child("ImageURL").value.toString()
+                        imageurl.add(image)
                     }
-                }
 
-                for (i in songs) {
-                    var songName = snapshot.child(i).child("Name").value.toString()
-                    var songArtist = snapshot.child(i).child("Artist").value.toString()
-                    var caption: String = "$songName - $songArtist"
-                    posts.add(caption)
-                    var image = snapshot.child(i).child("ImageURL").value.toString()
-                    imageurl.add(image)
-                }
+                    (activity as MainActivity).swipeUpBoolean = false
 
-                (activity as MainActivity).swipeUpBoolean = false
+                    if ((activity as MainActivity).onDj) {
+                        val mRecyclerView: RecyclerView
+                        mRecyclerView = view.findViewById(R.id.recyclerView_playlist)
+                        mRecyclerView.layoutManager = LinearLayoutManager(activity as MainActivity, RecyclerView.VERTICAL, false)
+                        mRecyclerView.adapter = DJ_Playlist_page_adapter(songs, posts, imageurl, activity as MainActivity)
+                    } else {
+                        val mRecyclerView: RecyclerView
+                        mRecyclerView = view.findViewById(R.id.recyclerView_playlist)
+                        mRecyclerView.layoutManager = LinearLayoutManager(activity as MainActivity, RecyclerView.VERTICAL, false)
+                        mRecyclerView.adapter = Playlist_page_adapter(songs, posts, imageurl, activity as MainActivity)
+                    }
 
-                if ((activity as MainActivity).onDj) {
-                    val mRecyclerView: RecyclerView
-                    mRecyclerView = view.findViewById(R.id.recyclerView_playlist)
-                    mRecyclerView.layoutManager = LinearLayoutManager(activity as MainActivity, RecyclerView.VERTICAL, false)
-                    mRecyclerView.adapter = DJ_Playlist_page_adapter(songs, posts, imageurl, activity as MainActivity)
                 }
-                else {
-                    val mRecyclerView: RecyclerView
-                    mRecyclerView = view.findViewById(R.id.recyclerView_playlist)
-                    mRecyclerView.layoutManager = LinearLayoutManager(activity as MainActivity, RecyclerView.VERTICAL, false)
-                    mRecyclerView.adapter = Playlist_page_adapter(songs, posts, imageurl, activity as MainActivity)
-                }
-
             }
+            database.addValueEventListener(getdata)
         }
-        database.addValueEventListener(getdata)
 
         return view
     }
