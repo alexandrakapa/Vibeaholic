@@ -38,7 +38,8 @@ class SearchWithRecommendationsAdapter(val songs: ArrayList<String>, val posts: 
     override fun onBindViewHolder(holder:SearchWithRecommendationsAdapter.Viewholder, position: Int) {
         Picasso.get().load(imageurl[position]).into(holder.image)
         holder.txt.text = posts[position]
-
+        val tv =holder.view1.findViewById<TextView>(R.id.song_title_recs);
+        tv.isSelected = true;
         val view2 : CardView
         view2=holder.view1.findViewById((R.id.song_area_recs))
         view2.setOnClickListener {

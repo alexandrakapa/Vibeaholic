@@ -41,7 +41,8 @@ class PartyHomepageJoinAdapter(val songs: ArrayList<String>, val posts: ArrayLis
     override fun onBindViewHolder(holder:PartyHomepageJoinAdapter.Viewholder, position: Int) {
         holder.txt.text = posts[position]
         Picasso.get().load(imageurl[position]).into(holder.image)
-
+        val tv =holder.view1.findViewById<TextView>(R.id.song_title_home_join);
+        tv.isSelected = true;
         val view2 : CardView
         view2=holder.view1.findViewById((R.id.song_area_home_join))
         view2.setOnClickListener {

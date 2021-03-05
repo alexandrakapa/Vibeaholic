@@ -38,6 +38,8 @@ class SearchPlaylistAdapter(val playlists: ArrayList<String>, val posts: ArrayLi
         holder.txt.text = posts[position]
 
         val view1 : CardView
+        val tv =holder.view1.findViewById<TextView>(R.id.song_title);
+        tv.isSelected = true;
         view1=holder.view1.findViewById((R.id.song_area))
         view1.setOnClickListener {
             Picasso.get().load(imageurl[position]).into(holder.image)

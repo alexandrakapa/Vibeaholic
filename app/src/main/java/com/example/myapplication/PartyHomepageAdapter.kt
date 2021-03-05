@@ -43,7 +43,8 @@ class PartyHomepageAdapter(val songs: ArrayList<String>,val posts: ArrayList<Str
     override fun onBindViewHolder(holder:PartyHomepageAdapter.Viewholder, position: Int) {
         Picasso.get().load(imageurl[position]).into(holder.image)
         holder.txt.text = posts[position]
-
+        val tv =holder.view1.findViewById<TextView>(R.id.song_title_home_create);
+        tv.isSelected = true;
         val view2 : CardView
         view2=holder.view1.findViewById((R.id.song_area_home_create))
         view2.setOnClickListener {

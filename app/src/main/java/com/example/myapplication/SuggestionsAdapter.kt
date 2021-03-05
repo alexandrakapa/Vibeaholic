@@ -41,6 +41,8 @@ class SuggestionsAdapter(val songs: ArrayList<String>, val posts: ArrayList<Stri
         holder.txt.text = posts[position]
         Picasso.get().load(imageurl[position]).into(holder.image)
 
+        val tv =holder.view1.findViewById<TextView>(R.id.song_title_sug);
+        tv.isSelected = true;
         val view2 : CardView
         view2=holder.view1.findViewById((R.id.song_area_sug))
         view2.setOnClickListener {

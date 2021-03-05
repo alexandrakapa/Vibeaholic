@@ -44,7 +44,9 @@ class FeelMeAdapter(var timer: Timer, val songs: ArrayList<String>, val posts: A
     override fun onBindViewHolder(holder:FeelMeAdapter.Viewholder, position: Int) {
         Picasso.get().load(imageurl[position]).into(holder.image)
         holder.txt.text = posts[position]
-
+        holder.txt.text = posts[position]
+        val tv =holder.view1.findViewById<TextView>(R.id.song_title);
+        tv.isSelected = true;
         val view2 : CardView
         view2=holder.view1.findViewById((R.id.song_area))
 

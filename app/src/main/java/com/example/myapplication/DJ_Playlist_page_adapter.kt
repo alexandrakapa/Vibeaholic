@@ -37,7 +37,8 @@ class DJ_Playlist_page_adapter(val songs: ArrayList<String>, val posts: ArrayLis
     override fun onBindViewHolder(holder: DJ_Playlist_page_adapter.Viewholder, position: Int) {
         Picasso.get().load(imageurl[position]).into(holder.image)
         holder.txt.text = posts[position]
-
+        val tv =holder.view1.findViewById<TextView>(R.id.song_title_dj_search);
+        tv.isSelected = true;
         val but1 : Button
         val but2 : Button
         val but3 : Button

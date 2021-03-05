@@ -11,7 +11,7 @@
 
     <ImageView
         android:id="@+id/touch_area"
-        android:layout_width="298dp"
+        android:layout_width="290dp"
         android:layout_height="match_parent">
 
 
@@ -29,12 +29,17 @@
 
         <TextView
             android:id="@+id/song_title_dj_search"
-            android:layout_width="wrap_content"
+            android:layout_width="165dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="25dp"
             android:layout_marginLeft="100dp"
             android:text="@string/textview"
-            android:textColor="@color/white" />
+            android:singleLine="true"
+            android:ellipsize="marquee"
+            android:marqueeRepeatLimit="marquee_forever"
+            android:scrollHorizontally="true"
+            android:textColor="@color/white"
+            android:layout_marginStart="100dp" />
 
         <Button
             android:id="@+id/button_addsuggest"
@@ -44,23 +49,26 @@
             android:layout_marginRight="20dp"
             android:layout_marginTop="15dp"
             android:backgroundTint="@color/black"
-            app:icon="@drawable/ic_add" />
+            app:icon="@drawable/ic_add"
+            android:layout_marginEnd="20dp" />
 
         <Button
             android:id="@+id/button_favourites"
             android:layout_width="48dp"
+            android:singleLine="true"
             android:layout_height="wrap_content"
             android:layout_marginTop="15dp"
             android:layout_gravity="end"
             android:layout_marginRight="70dp"
             android:backgroundTint="@color/black"
-            app:icon="@android:drawable/star_off" />
+            app:icon="@android:drawable/star_off"
+            android:layout_marginEnd="70dp" />
 
         <Button
             android:id="@+id/button_cancel"
-            android:layout_width="wrap_content"
+            android:layout_width="145dp"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="300dp"
+            android:layout_gravity="end"
             android:layout_marginTop="15dp"
             android:backgroundTint="@color/black"
             android:visibility="gone"

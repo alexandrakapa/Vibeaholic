@@ -37,7 +37,8 @@ class PostsAdapter(val songs: ArrayList<String>, val posts: ArrayList<String>, v
     override fun onBindViewHolder(holder: PostsAdapter.Viewholder, position: Int) {
         Picasso.get().load(imageurl[position]).into(holder.image)
         holder.txt.text = posts[position]
-
+        val tv =holder.view1.findViewById<TextView>(R.id.firstName);
+        tv.isSelected = true;
         val view1 : ImageView
         view1=holder.view1.findViewById((R.id.home_image))
             view1.setOnClickListener {

@@ -6,6 +6,7 @@ import android.telecom.Call
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.ViewGroup.LayoutParams.WRAP_CONTENT
 import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
@@ -33,6 +34,10 @@ class Playlist_page_adapter(val songs: ArrayList<String>, val posts: ArrayList<S
             view.findViewById<Button>(R.id.button_favourites_playlistsong).visibility = View.VISIBLE
             view.findViewById<Button>(R.id.button_delete_playlistsong).visibility = View.VISIBLE
         }
+       // val tv =view.findViewById<TextView>(R.id.song_title);
+        //if (!(activity.prevfrag is Playlist)){
+        //    tv.width = ViewGroup.LayoutParams.WRAP_CONTENT
+       // }
         return Viewholder(view , activity)
     }
 
@@ -41,6 +46,10 @@ class Playlist_page_adapter(val songs: ArrayList<String>, val posts: ArrayList<S
     override fun onBindViewHolder(holder:Playlist_page_adapter.Viewholder, position: Int) {
         Picasso.get().load(imageurl[position]).into(holder.image)
         holder.txt.text = posts[position]
+
+        val tv =holder.view1.findViewById<TextView>(R.id.song_title);
+        tv.isSelected = true;
+
 
         val view2 : CardView
         view2=holder.view1.findViewById((R.id.song_area))
