@@ -1,16 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.cardview.widget.CardView
-    android:id="@+id/song_area_dj_search"
+    android:id="@+id/song_area_dj_search_new"
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="80dp"
     android:layout_marginTop="0dp"
     app:cardBackgroundColor="@color/black">
 
     <ImageView
-        android:id="@+id/touch_area"
+        android:id="@+id/touch_area_new"
         android:layout_width="290dp"
         android:layout_height="match_parent">
 
@@ -18,7 +17,7 @@
     </ImageView>
 
     <ImageView
-        android:id="@+id/song_image_dj_search"
+        android:id="@+id/song_image_dj_search_new"
         android:layout_width="70dp"
         android:layout_height="70dp"
         app:srcCompat="@android:drawable/gallery_thumb" />
@@ -28,7 +27,7 @@
         android:layout_height="match_parent">
 
         <TextView
-            android:id="@+id/song_title_dj_search"
+            android:id="@+id/song_title_dj_search_new"
             android:layout_width="165dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="25dp"
@@ -42,7 +41,7 @@
             android:layout_marginStart="100dp" />
 
         <Button
-            android:id="@+id/button_addsuggest"
+            android:id="@+id/button_addsuggest_new"
             android:layout_width="48dp"
             android:layout_height="wrap_content"
             android:layout_gravity="end"
@@ -53,7 +52,7 @@
             android:layout_marginEnd="20dp" />
 
         <Button
-            android:id="@+id/button_favourites"
+            android:id="@+id/button_favourites_new"
             android:layout_width="48dp"
             android:singleLine="true"
             android:layout_height="wrap_content"
@@ -65,7 +64,7 @@
             android:layout_marginEnd="70dp" />
 
         <Button
-            android:id="@+id/button_cancel"
+            android:id="@+id/button_cancel_new"
             android:layout_width="145dp"
             android:layout_height="wrap_content"
             android:layout_gravity="end"

@@ -21,14 +21,14 @@ import com.squareup.picasso.Picasso
 class DJ_Playlist_page_adapter(val songs: ArrayList<String>, val posts: ArrayList<String>, val imageurl: ArrayList<String>, val activity: MainActivity) :  RecyclerView.Adapter<DJ_Playlist_page_adapter.Viewholder>() {
 
     class Viewholder(itemView: View, activity: MainActivity) : RecyclerView.ViewHolder(itemView) {
-        val txt: TextView = itemView.findViewById(R.id.song_title_dj_search)
-        val image: ImageView = itemView.findViewById(R.id.song_image_dj_search)
+        val txt: TextView = itemView.findViewById(R.id.song_title_dj_search_new)
+        val image: ImageView = itemView.findViewById(R.id.song_image_dj_search_new)
         val view1 = itemView
         val activity1 = activity
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): DJ_Playlist_page_adapter.Viewholder {
-        val view: View = LayoutInflater.from(parent.context).inflate(R.layout.dj_playlist_search_song, parent, false)
+        val view: View = LayoutInflater.from(parent.context).inflate(R.layout.dj_playlist_search_song_new, parent, false)
         return Viewholder(view, activity)
     }
 
@@ -37,21 +37,21 @@ class DJ_Playlist_page_adapter(val songs: ArrayList<String>, val posts: ArrayLis
     override fun onBindViewHolder(holder: DJ_Playlist_page_adapter.Viewholder, position: Int) {
         Picasso.get().load(imageurl[position]).into(holder.image)
         holder.txt.text = posts[position]
-        val tv =holder.view1.findViewById<TextView>(R.id.song_title_dj_search);
+        val tv =holder.view1.findViewById<TextView>(R.id.song_title_dj_search_new);
         tv.isSelected = true;
         val but1 : Button
         val but2 : Button
         val but3 : Button
-        but1=holder.view1.findViewById<Button>(R.id.button_addsuggest)
-        but2=holder.view1.findViewById<Button>(R.id.button_favourites)
-        but3=holder.view1.findViewById<Button>(R.id.button_cancel)
+        but1=holder.view1.findViewById<Button>(R.id.button_addsuggest_new)
+        but2=holder.view1.findViewById<Button>(R.id.button_favourites_new)
+        but3=holder.view1.findViewById<Button>(R.id.button_cancel_new)
 
         but1.visibility = View.VISIBLE
         but2.visibility = View.VISIBLE
         but3.visibility = View.GONE
 
         val view2: CardView
-        view2 = holder.view1.findViewById((R.id.song_area_dj_search))
+        view2 = holder.view1.findViewById((R.id.song_area_dj_search_new))
         view2.setOnClickListener {
             if (activity.onDj) {
                 val bundle = Bundle()
