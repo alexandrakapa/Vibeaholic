@@ -71,24 +71,48 @@
             android:id="@+id/people"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="265dp"
-            android:layout_marginTop="280dp"
+            android:layout_marginLeft="270dp"
+            android:layout_marginTop="295dp"
             android:text="98"
+            android:textColor="@color/white"
             android:textSize="60sp"
-            android:textStyle="bold"
-            android:textColor="@color/white" />
+            android:textStyle="bold" />
 
-        <TableLayout
-            android:layout_width="match_parent"
-            android:layout_height="100dp"
-            android:layout_marginTop="330dp">
+        <ImageView
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="300dp"
+            android:background="@drawable/abc_vector_test"
+            android:backgroundTint="@android:color/holo_green_dark"
+            android:rotation="90" />
 
-            <TableRow
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="90dp"
+            android:layout_marginTop="315dp"
+            android:text="47"
+            android:textColor="@android:color/holo_green_dark"
+            android:textSize="40sp" />
 
+        <ImageView
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="380dp"
+            android:background="@drawable/abc_vector_test"
+            android:backgroundTint="@android:color/holo_red_dark"
+            android:rotation="-90" />
 
-        </TableLayout>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="90dp"
+            android:layout_marginTop="390dp"
+            android:text="11"
+            android:textColor="@android:color/holo_red_dark"
+            android:textSize="40sp" />
 
         <TextView
             android:layout_width="300dp"
