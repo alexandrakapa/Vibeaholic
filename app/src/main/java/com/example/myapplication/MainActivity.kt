@@ -173,8 +173,10 @@ class MainActivity : AppCompatActivity() {
                     inplayingnow=false
                     if (!onDj) makeCurrentFragment(dj)
                     else {
-                        if (isUserDJ) makeCurrentFragment(partyPlaylist)
-                        else makeCurrentFragment(partyPlaylistSuggestion)
+                        if (onCreate)
+                            makeCurrentFragment(partyPlaylist)
+                        else
+                            makeCurrentFragment(partyPlaylistSuggestion)
                     }
                 }
             }

@@ -38,7 +38,7 @@
             android:shape="rectangle"
             android:text="@string/let_me"
             android:textColor="@android:color/black"
-            android:textSize="22sp"
+            android:textSize="21sp"
             android:textStyle="bold"
             app:cornerRadius="300dp" />
 
