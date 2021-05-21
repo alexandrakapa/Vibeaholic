@@ -1,3 +1,6 @@
+
+https://user-images.githubusercontent.com/63066416/119129202-43e94880-ba3f-11eb-832d-fea7a7c6c5bd.mp4
+
 # Vibeaholic
 
 A project for Human Computer Interaction course of NTUA ECE (2020-2021)
