@@ -1,9 +1,12 @@
-
-https://user-images.githubusercontent.com/63066416/119129202-43e94880-ba3f-11eb-832d-fea7a7c6c5bd.mp4
-
 # Vibeaholic
 
 A project for Human Computer Interaction course of NTUA ECE (2020-2021)
+
+Η παρουσίαση της εφαρμογής φαίνεται παρακάτω:
+
+
+https://user-images.githubusercontent.com/63066416/119129202-43e94880-ba3f-11eb-832d-fea7a7c6c5bd.mp4
+
 
 Our project is an android music app called Vibeaholic that consists of two parts:
 * **Everyday mode**: The user can listen to songs,search for songs etc like an ordinary music app but also activate "Feel me" mode
